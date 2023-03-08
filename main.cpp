@@ -32,6 +32,13 @@ int main() {
 		std::cout << camera->getPosition().x << ", " << camera->getPosition().y << ", " << camera->getPosition().z << std::endl;
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.4f, 5.0f, 0.75f, 1.0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); 
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		for (GameObject* gameObject : *gameEngine->getGameObjects()) {
 			gameObject->update();
 		}
