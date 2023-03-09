@@ -13,8 +13,19 @@ RenderEngine::RenderEngine()
 		return; 
 	}
 	glfwMakeContextCurrent(window); 
+
 	glewInit(); 
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_BLEND);
+	glCullFace(GL_FRONT);
+	glEnable(GL_DEPTH_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 }
 
 RenderEngine::~RenderEngine()
@@ -51,10 +62,6 @@ GLuint RenderEngine::getTextureID(const std::string TexturePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	// Set texture filtering parameters
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -70,6 +77,16 @@ GLuint RenderEngine::getTextureID(const std::string TexturePath)
 
 void RenderEngine::renderScene()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.4f, 5.0f, 0.75f, 1.0);
+
+
+	
+	//Meter aqui todas las meshes a renderizar
+
+
+
+	glfwSwapBuffers(window);
 
 }	
 

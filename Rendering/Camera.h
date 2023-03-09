@@ -2,7 +2,7 @@
 #include "../Thirdparty/glm/glm/glm.hpp"
 #include "../Thirdparty/glm/glm/gtc/matrix_transform.hpp"
 #include <GL/glew.h>
-#include "../Core/Component.h"
+
 
 enum Direction {
 	FRONT,
