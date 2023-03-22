@@ -8,7 +8,7 @@ std::vector<Block>* Generator::genChunk(glm::vec2 posXY)
 
 	for (u32 i = 0; i < CHUNK_VOLUME; i++)
 	{
-		blocks->push_back( i > 1264 ? Block::AIR : Block::STONE); 
+		blocks->push_back( i > 24576 ? Block::AIR : Block::STONE); 
 	}
 	return blocks; 
 }

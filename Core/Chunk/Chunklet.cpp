@@ -57,7 +57,7 @@ void Chunklet::addBlock(glm::vec3 blockPos, u32 index)
 
 void Chunklet::addFace(glm::vec3 blockPos, Vertex face[4],u32 index)
 {
-	std::cout << position.x + blockPos.x << ", " << position.y + blockPos.y << ", " << position.z + blockPos.z << std::endl; 
+	//std::cout << position.x + blockPos.x << ", " << position.y + blockPos.y << ", " << position.z + blockPos.z << std::endl; 
 	for (size_t i = 0; i < 4; i++)
 	{
 		face[i].position += position + blockPos;

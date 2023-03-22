@@ -18,16 +18,16 @@ RenderEngine::RenderEngine()
 
 	glewInit(); 
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glCullFace(GL_FRONT);
-	glEnable(GL_DEPTH_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	solidRenderer = new SolidRenderer( getTextureID("Assets/Textures/Stone.jpg"), createProgram("Assets/Shaders/SolidStatic.vs", "Assets/Shaders/SolidStatic.fs"));
+
 }
 
 RenderEngine::~RenderEngine()

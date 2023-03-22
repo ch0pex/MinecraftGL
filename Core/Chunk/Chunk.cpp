@@ -9,7 +9,7 @@ Chunk::Chunk(glm::vec2 _position, std::vector<Block>* blocks) :
 	for (size_t i = 0; i < CHUNK_VOLUME; i += CHUNKLET_VOLUME)
 	{
 		std::vector<Block> chunkletMap(blocks->begin() + i, blocks->begin() + i + CHUNKLET_VOLUME);
-		std::cout << "hola: " << position.x << ", " << (i / 16) / 16 << ", " << position.y << std::endl;
+		//std::cout << "hola: " << position.x << ", " << (i / 16) / 16 << ", " << position.y << std::endl;
 		chunklets.push_back(new Chunklet(glm::vec3(position.x, (i / 16) / 16, position.y), chunkletMap));
 	}
 }

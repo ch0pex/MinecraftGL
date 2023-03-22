@@ -5,6 +5,7 @@ SolidRenderer::SolidRenderer(u32 _texture, u32 _shader) :
 	shader(_shader),
 	texture(_texture)
 {
+	std::cout << "Texture: " << texture << std::endl << "Shader: " << shader << std::endl; 
 }
 
 void SolidRenderer::add(Mesh* mesh)
