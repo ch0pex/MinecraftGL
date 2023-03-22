@@ -1,5 +1,7 @@
 #pragma once
+#include "../Common/CommonHeaders.h"
 #include "Chunk/ChunksManager.h"
+#include "../Rendering/Camera.h"
 #include <cstdint>
 #include <thread>
 #include <mutex>
@@ -7,16 +9,17 @@
 class World
 {
 private: 
-	const uint8_t chunksDistance; 
+	const u8 chunksDistance; 
 	ChunksManager* chunksManager; 
+	Camera& camera; 
 
-	std::thread loadThreads[16];
-	std::mutex mutex;
-	void updateChunks(); 
-	void loadChunks(); 
+
+
 
 public:
-	World(); 
+	World(Camera &camera); 
+	~World(); 
 	void update(); 
+	void prepareRender(RenderEngine &renderer, Camera &camera); 
 };
 

@@ -3,8 +3,10 @@
 #include "../Thirdparty/stb-master/stb_image.h"
 
 
-RenderEngine::RenderEngine()
-{
+RenderEngine::RenderEngine() 
+	
+{ 
+	
 	if (!glfwInit()) std::terminate();
 	window = glfwCreateWindow(1920, 1080, "MineCraftGL", NULL, NULL);
 	if (!window) {
@@ -25,7 +27,7 @@ RenderEngine::RenderEngine()
 	glEnable(GL_DEPTH_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
+	solidRenderer = new SolidRenderer( getTextureID("Assets/Textures/Stone.jpg"), createProgram("Assets/Shaders/SolidStatic.vs", "Assets/Shaders/SolidStatic.fs"));
 }
 
 RenderEngine::~RenderEngine()
@@ -43,7 +45,7 @@ bool RenderEngine::shouldClose()
 	return glfwWindowShouldClose(window);
 }
 
-GLuint RenderEngine::getTextureID(const std::string TexturePath)
+u32 RenderEngine::getTextureID(const std::string TexturePath)
 {
 	int width, height, channels;
 
@@ -51,7 +53,7 @@ GLuint RenderEngine::getTextureID(const std::string TexturePath)
 
 	printf("TextureLoader: fileName %s \n", TexturePath.c_str());
 
-	GLuint mtexture;
+	u32 mtexture;
 
 	//** load texture
 	glGenTextures(1, &mtexture);
@@ -66,7 +68,6 @@ GLuint RenderEngine::getTextureID(const std::string TexturePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	glBindTexture(GL_TEXTURE_2D, 0);
@@ -75,20 +76,33 @@ GLuint RenderEngine::getTextureID(const std::string TexturePath)
 	return mtexture;
 }
 
-void RenderEngine::renderScene()
+void RenderEngine::renderScene(Camera& camera)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.4f, 5.0f, 0.75f, 1.0);
-
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
 	
-	//Meter aqui todas las meshes a renderizar
-
-
+	//For each Renderer, render all respective meshes
+	//Currently just SolidRenderer ( then water Renderer) 
+	solidRenderer->render(camera); 
+	//waterRenderer.render(camera); 
+	//floraRenderer.render(camera); 
 
 	glfwSwapBuffers(window);
 
-}	
+}
+void RenderEngine::drawChunklet(Chunklet& chunklet)
+{
+
+	if (chunklet.getFaces() > 0) solidRenderer->add(chunklet.getSolidMesh());
+	//if (waterMesh.faces > 0) waterRenderer.addMesh(waterMesh); 
+	//if (floraMesh.faces > 0) floraRenderer.addMesh(floraMesh); 
+	
+
+}
+
 
 
 std::string RenderEngine::readShader(const char* shaderPath)
@@ -108,14 +122,14 @@ std::string RenderEngine::readShader(const char* shaderPath)
 	return code;
 }
 
-GLuint RenderEngine::createShader(GLenum shaderType, std::string source, const char* shaderName)
+u32 RenderEngine::createShader(GLenum shaderType, std::string source, const char* shaderName)
 {
 	int compile_result = 0;
 
 	GLuint shader = glCreateShader(shaderType);
 
 	const char* code_ptr = source.c_str();
-	const int code_size = source.size();
+	const s32 code_size = source.size();
 
 	glShaderSource(shader, 1, &code_ptr, &code_size);
 	glCompileShader(shader);
@@ -133,17 +147,17 @@ GLuint RenderEngine::createShader(GLenum shaderType, std::string source, const c
 	return shader;
 }
 
-GLuint RenderEngine::createProgram(const char* vertexShaderPath, const char* fragmentShaderPath)
+u32 RenderEngine::createProgram(const char* vertexShaderPath, const char* fragmentShaderPath)
 {
 	int link_result = 0;
 
 	std::string sourceVertexShader = readShader(vertexShaderPath);
 	std::string sourceFragmentShader = readShader(fragmentShaderPath);
 
-	GLuint vertexShader = createShader(GL_VERTEX_SHADER, sourceVertexShader, "VertexShader");
-	GLuint fragmentShader = createShader(GL_FRAGMENT_SHADER, sourceFragmentShader, "FragmentShader");
+	u32 vertexShader = createShader(GL_VERTEX_SHADER, sourceVertexShader, "VertexShader");
+	u32 fragmentShader = createShader(GL_FRAGMENT_SHADER, sourceFragmentShader, "FragmentShader");
 
-	GLuint program = glCreateProgram();
+	u32 program = glCreateProgram();
 	glAttachShader(program, vertexShader);
 	glAttachShader(program, fragmentShader);
 	glLinkProgram(program);

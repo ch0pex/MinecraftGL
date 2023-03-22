@@ -1,17 +1,23 @@
 #pragma once
-#include <vector>
-#include "ChunkRenderer.h"
-#include "Chunk.h"
+
+#include "../Generator/Generator.h"
 #include "../Block/Block.h"
+#include <unordered_map>
+#include <thread>
+#include <mutex>
+#include "Chunk.h"
 
 class ChunksManager
 {
 private: 
-	std::vector<Chunk*> chunks; 
-
+	Generator generator; 
+	std::vector<Chunk> chunks;
+	std::mutex mapLock; 
 public: 
-	Chunk getChunk(glm::vec2 xypos); 
-	Block getBlock(glm::vec3 position); 
+	ChunksManager();  
+	Chunk getChunk(glm::vec2 xypos);
+	void updateChunks(glm::vec3 playerPos);
+	std::vector<Chunk>& getChunks();
 
 };
 

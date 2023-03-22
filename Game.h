@@ -12,11 +12,15 @@
 class Game
 {
 private: 
-	World world; 
-	RenderEngine renderEngine; // Pass as arguemnt render config
+	static Camera camera;
+	
+	World* world; 
+	RenderEngine* renderEngine; // Pass as arguemnt render config
+
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 public: 
-	static Camera* camera;
 	Game(); 
 	~Game();
 	void loop(); 

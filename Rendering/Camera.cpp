@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 
-Camera::Camera(GLfloat _FOV, GLfloat _width, GLfloat _height, GLfloat _nearPlane, GLfloat _farPlane, glm::vec3 _position)
+Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position)
 {
 	FOV = _FOV; 
 	width = _width; 
@@ -21,21 +21,16 @@ Camera::~Camera()
 
 }
 
+glm::mat4 Camera::getViewProjection()
+{
+	return viewProjectionMatrix; 
+}
+
 void Camera::calculateViewProjection()
 {
-	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp);
-	projectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane);
+	viewProjectionMatrix = glm::lookAt(position, position + cameraFront, cameraUp) *  glm::perspective(FOV, width / height, nearPlane, farPlane);
 }
 
-glm::mat4 Camera::getView()
-{
-	return viewMatrix;
-}
-
-glm::mat4 Camera::getProjection()
-{
-	return	projectionMatrix;
-}
 
 glm::vec3 Camera::getPosition()
 {
@@ -86,7 +81,7 @@ void Camera::move(Direction direction)
 	calculateViewProjection();
 }
 
-void Camera::lookAt(double xpos, double ypos)
+void Camera::lookAt(f64 xpos, f64 ypos)
 {
 	if (firstMouse)
 	{
@@ -95,12 +90,12 @@ void Camera::lookAt(double xpos, double ypos)
 		firstMouse = false;
 	}
 
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos;
+	f32 xoffset = xpos - lastX;
+	f32 yoffset = lastY - ypos;
 	lastX = xpos;
 	lastY = ypos;
 
-	float sensitivity = 0.1f;
+	f32 sensitivity = 0.1f;
 	xoffset *= sensitivity;
 	yoffset *= sensitivity;
 

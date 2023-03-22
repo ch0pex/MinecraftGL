@@ -1,14 +1,8 @@
 #pragma once
 #include "../Thirdparty/glm/glm/glm.hpp"
 #include <vector>
+#include "../Common/CommonHeaders.h"
 
-enum class MeshType {
-	CUBE,
-	PLANE,
-	SPHERE,
-	TRIANGLE,
-	OBJ
-};
 
 struct Vertex {
 	glm::vec3 position;
@@ -17,10 +11,34 @@ struct Vertex {
 	glm::vec2 texCoords;
 };
 
-class Mesh {
-public: 
-	static void setCubeData(std::vector<Vertex>& _vertices, std::vector<uint32_t>& _indices);
-	static void setPlaneData(std::vector<Vertex>& _vertices, std::vector<uint32_t>& _indices);
-	static void setSphereData(std::vector<Vertex>& _vertices, std::vector<uint32_t>& _indices);
-	static void setOBJData(std::vector<Vertex>& _vertices, std::vector<uint32_t>& _indices, const char* OBJpath);
+
+/*
+std::vector<uint32_t> indices = {
+
+	0, 1, 2,
+	2, 3, 0,
+
+	4, 5, 6,
+	4, 6, 7,
+
+	8, 9, 10,
+	8, 10, 11,
+
+	12, 13, 14,
+	12, 14, 15,
+
+	16, 17, 18,
+	16, 18, 19,
+
+	20, 21, 22,
+	20, 22, 23
+
+};
+
+*/
+
+struct Mesh {
+	u32 vao, vbo, ebo; 
+	std::vector<Vertex> vertices;
+	std::vector<u32> indices;
 };

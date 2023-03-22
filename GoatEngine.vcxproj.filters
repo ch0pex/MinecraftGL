@@ -45,7 +45,19 @@
     <ClInclude Include="Core\Generator\Generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Chunk\ChunkRenderer.h">
+    <ClInclude Include="Rendering\SolidRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\CommonHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\PrimitiveTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rendering\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -80,7 +92,7 @@
     <ClCompile Include="Core\Generator\Generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Chunk\ChunkRenderer.cpp">
+    <ClCompile Include="Rendering\SolidRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,9 +101,14 @@
     <None Include="Assets\Shaders\TextureModel.fs" />
     <None Include="glew32.dll" />
     <None Include="glfw3.dll" />
+    <None Include="Assets\Shaders\SolidStatic.vs" />
+    <None Include="Assets\Shaders\SolidStatic.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\Blocks\Stone.jpg">
+    <Image Include="Assets\Textures\Atlas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Assets\Textures\Stone.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

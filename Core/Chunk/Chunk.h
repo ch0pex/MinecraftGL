@@ -3,19 +3,25 @@
 
 #include "../../ThirdParty/glm/glm/glm.hpp"
 #include "Chunklet.h"
-#include "ChunkRenderer.h"
+#include "../Block/Block.h"
+#include <vector>
+
+class RenderEngine; 
 
 class Chunk
 {
 private: 
-	glm::vec3 position; 
-	Chunklet* chunklets[16];
-	bool modified; 
+	glm::vec2 position; 
+	std::vector<Chunklet*> chunklets; 
+	bool buffered; 
+
 	
 public: 
-	Chunk(); 
+	Chunk(glm::vec2 _position, std::vector<Block>* blocks); 
 	~Chunk(); 
-	void drawChunks(); 
+	void drawChunklets(RenderEngine &renderer); 
+	inline bool isBuffered() { return buffered; }
+
 	
 };
 

@@ -131,7 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Chunk\ChunkRenderer.h" />
+    <ClInclude Include="Common\CommonHeaders.h" />
+    <ClInclude Include="Common\Constants.h" />
+    <ClInclude Include="Common\PrimitiveTypes.h" />
+    <ClInclude Include="Rendering\Mesh.h" />
+    <ClInclude Include="Rendering\SolidRenderer.h" />
     <ClInclude Include="Core\Chunk\ChunksManager.h" />
     <ClInclude Include="Core\Chunk\Chunk.h" />
     <ClInclude Include="Core\Block\Block.h" />
@@ -144,7 +148,7 @@
     <ClInclude Include="Core\World.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Chunk\ChunkRenderer.cpp" />
+    <ClCompile Include="Rendering\SolidRenderer.cpp" />
     <ClCompile Include="Core\Chunk\ChunksManager.cpp" />
     <ClCompile Include="Core\Chunk\Chunk.cpp" />
     <ClCompile Include="Core\Block\Block.cpp" />
@@ -157,13 +161,16 @@
     <ClCompile Include="Core\Chunk\Chunklet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\SolidStatic.fs" />
+    <None Include="Assets\Shaders\SolidStatic.vs" />
     <None Include="Assets\Shaders\TextureModel.fs" />
     <None Include="Assets\Shaders\TextureModel.vs" />
     <None Include="glew32.dll" />
     <None Include="glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Assets\Textures\Blocks\Stone.jpg" />
+    <Image Include="Assets\Textures\Atlas.png" />
+    <Image Include="Assets\Textures\Stone.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
