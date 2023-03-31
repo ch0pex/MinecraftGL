@@ -1,5 +1,5 @@
 #include "Camera.h"
-
+#include <iostream>
 
 Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position)
 {
@@ -14,6 +14,7 @@ Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane,
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
 	
 	calculateViewProjection(); 
+	
 }
 
 Camera::~Camera()
@@ -28,7 +29,9 @@ glm::mat4 Camera::getViewProjection()
 
 void Camera::calculateViewProjection()
 {
-	viewProjectionMatrix = glm::lookAt(position, position + cameraFront, cameraUp) *  glm::perspective(FOV, width / height, nearPlane, farPlane);
+	glm::mat4 view = glm::lookAt(position, position + cameraFront, cameraUp);
+	glm::mat4 projection = glm::perspective(FOV, width / height, nearPlane, farPlane);
+	viewProjectionMatrix = view * projection; 
 }
 
 

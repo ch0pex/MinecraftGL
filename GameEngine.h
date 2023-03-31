@@ -12,7 +12,7 @@
 class GameEngine
 {
 private: 
-	static Camera camera;
+	static Camera* camera;
 	
 	World* world; 
 	RenderEngine* renderEngine; // Pass as arguemnt render config

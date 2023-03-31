@@ -20,11 +20,11 @@ RenderEngine::RenderEngine()
 
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
-	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glCullFace(GL_FRONT);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glDepthFunc(GL_LESS);
+	//glEnable(GL_CULL_FACE);
+	//glEnable(GL_BLEND);
+	//glCullFace(GL_FRONT);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	solidRenderer = new SolidRenderer(getTextureID("Assets/Textures/Stone.jpg"), createProgram("Assets/Shaders/SolidStatic.vs", "Assets/Shaders/SolidStatic.fs"));
 
@@ -80,8 +80,8 @@ void RenderEngine::renderScene(Camera& camera)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(0.4f, 5.0f, 0.75f, 1.0);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	//glEnable(GL_DEPTH_TEST);
+	//glEnable(GL_CULL_FACE);
 
 	
 	//For each Renderer, render all respective meshes
