@@ -11,9 +11,12 @@ enum Direction {
 	RIGHT,
 	LEFT,
 	UP, 
-	DOWN
+	DOWN,
+	STATIC
 };
  
+
+
 
 class Camera 
 {
@@ -38,6 +41,7 @@ private:
 	f64 yaw;
 	f64 pitch;
 
+	Direction movementDir;
 	f32 movementSpeed;
 	void calculateViewProjection(); 
 
@@ -47,14 +51,16 @@ public:
 
 	glm::mat4 getViewProjection();
 	
-
+	void move(Direction dir);
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 _position);
 
 	float getSpeed(); 
 	void setSpeed(GLfloat speed);
 
-	void move(Direction direction); 
+	void setDir(Direction dir); 
+
+	void update(); 
 	void lookAt(f64 xpos, f64 ypos); 
 
 

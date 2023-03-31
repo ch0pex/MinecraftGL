@@ -134,12 +134,12 @@
     <ClInclude Include="Common\CommonHeaders.h" />
     <ClInclude Include="Common\Constants.h" />
     <ClInclude Include="Common\PrimitiveTypes.h" />
+    <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Rendering\Mesh.h" />
     <ClInclude Include="Rendering\SolidRenderer.h" />
     <ClInclude Include="Core\Chunk\ChunksManager.h" />
     <ClInclude Include="Core\Chunk\Chunk.h" />
     <ClInclude Include="Core\Block\Block.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Core\Generator\Generator.h" />
     <ClInclude Include="Rendering\RenderEngine.h" />
     <ClInclude Include="Rendering\Camera.h" />
@@ -148,13 +148,13 @@
     <ClInclude Include="Core\World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="minecraftGL.cpp" />
     <ClCompile Include="Rendering\SolidRenderer.cpp" />
     <ClCompile Include="Core\Chunk\ChunksManager.cpp" />
     <ClCompile Include="Core\Chunk\Chunk.cpp" />
     <ClCompile Include="Core\Block\Block.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="Core\Generator\Generator.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Rendering\RenderEngine.cpp" />
     <ClCompile Include="Rendering\Camera.cpp" />
     <ClCompile Include="Core\World.cpp" />

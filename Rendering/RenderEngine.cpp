@@ -26,7 +26,7 @@ RenderEngine::RenderEngine()
 	glCullFace(GL_FRONT);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	solidRenderer = new SolidRenderer( getTextureID("Assets/Textures/Stone.jpg"), createProgram("Assets/Shaders/SolidStatic.vs", "Assets/Shaders/SolidStatic.fs"));
+	solidRenderer = new SolidRenderer(getTextureID("Assets/Textures/Stone.jpg"), createProgram("Assets/Shaders/SolidStatic.vs", "Assets/Shaders/SolidStatic.fs"));
 
 }
 

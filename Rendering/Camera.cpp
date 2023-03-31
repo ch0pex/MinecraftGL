@@ -53,9 +53,9 @@ void Camera::setSpeed(GLfloat speed)
 		movementSpeed = speed; 
 }
 
-void Camera::move(Direction direction)
+void Camera::update()
 {
-	switch (direction)
+	switch (movementDir)
 	{
 	case FRONT:
 		position += movementSpeed * cameraFront;
@@ -76,8 +76,11 @@ void Camera::move(Direction direction)
 		position -= movementSpeed * cameraUp;
 		break;
 	default:
+		return; 
 		break;
 	}
+	movementDir = STATIC;
+	std::cout << "Position: " << position.x << " " << position.y << " " << position.z << std::endl;
 	calculateViewProjection();
 }
 
@@ -113,5 +116,10 @@ void Camera::lookAt(f64 xpos, f64 ypos)
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	cameraFront = glm::normalize(direction);
 	calculateViewProjection(); 
+
 }
 
+void Camera::setDir(Direction dir)
+{
+	movementDir = dir;
+}

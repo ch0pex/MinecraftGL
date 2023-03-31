@@ -9,7 +9,7 @@
 #include <iostream>
 #include <thread>
 
-class Game
+class GameEngine
 {
 private: 
 	static Camera camera;
@@ -21,8 +21,8 @@ private:
 	static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 public: 
-	Game(); 
-	~Game();
+	GameEngine();
+	~GameEngine();
 	void loop(); 
 
 };

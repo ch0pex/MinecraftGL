@@ -22,7 +22,6 @@ private:
 	// WaterRenderer waterRenderer; 
 	// VegetationRenderer vegRenderer; 
 
-
 	std::string readShader(const char* shaderPath);
 	u32 createShader(GLenum shaderType, std::string source, const char* shaderName);
 

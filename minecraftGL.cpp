@@ -1,7 +1,7 @@
-#include "Game.h"
+#include "GameEngine.h"
 
 int main() {
-	Game game; 
+	GameEngine game; 
 	game.loop(); 
 	return (0); 	
 }
@@ -9,4 +9,3 @@ int main() {
 
 
 
-//

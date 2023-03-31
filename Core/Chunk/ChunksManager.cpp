@@ -1,10 +1,12 @@
-
 #include "ChunksManager.h"
 
 ChunksManager::ChunksManager()
 {
+
+    
     //TODO: load with threads chunks 8 to every direction at pos 0,0,0
-  
+    
+    /*
     for (size_t x = 0; x < 4; x++)
     {
         for (size_t z = 0; z < 4; z++)
@@ -13,7 +15,7 @@ ChunksManager::ChunksManager()
             std::vector<Block>* blocks = generator.genChunk(pos); 
             chunks.push_back(Chunk(pos, blocks));
         }
-    }
+    }*/
 
 }
 
