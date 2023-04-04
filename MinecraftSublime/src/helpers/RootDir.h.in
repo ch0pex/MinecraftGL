@@ -1,0 +1,2 @@
+configure_file(src/helpers/RootDir.h.in src/helpers/RootDir.h)
+include_directories(${CMAKE_BINARY_DIR}/src)
