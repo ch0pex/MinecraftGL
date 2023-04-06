@@ -41,10 +41,11 @@ RenderEngine::~RenderEngine()
 }
 
 
-void RenderEngine::renderScene(/*camera*/)
+void RenderEngine::renderScene(Camera& camera)
 {
     	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.4f, 5.0f, 0.75f, 1.0);
+		
         glfwSwapBuffers(window);
 
 }

@@ -1,54 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.cpp">
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\GameEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\GLDebug.cpp">
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\common\private\GLDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\craftGL.cpp">
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\craftGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.cpp">
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\rendering\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp">
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\rendering\RenderEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Programacion\MinecraftGL\src\rendering\SolidRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\GameEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\CommonHeaders.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\common\public\CommonHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Constants.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\common\public\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\GLDebug.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\common\public\GLDebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\PrimitiveTypes.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\common\public\PrimitiveTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\rendering\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h">
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\rendering\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\rendering\RenderEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Programacion\MinecraftGL\src\rendering\SolidRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\Alvaro\Programacion\MinecraftSublime\CMakeLists.txt" />
+    <CustomBuild Include="D:\Programacion\MinecraftGL\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{3136EC30-00E8-3D0F-9939-4D1768F89628}</UniqueIdentifier>
+      <UniqueIdentifier>{945451A9-0270-3CBA-9954-A12CF0D4AC83}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{10C81A44-C510-333A-92A0-727061A03B34}</UniqueIdentifier>
+      <UniqueIdentifier>{43A430A4-BF13-3F8E-89B5-404CA4C60788}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

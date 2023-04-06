@@ -1,6 +1,6 @@
-^D:\ALVARO\PROGRAMACION\MINECRAFTSUBLIME\CMAKELISTS.TXT
+^D:\PROGRAMACION\MINECRAFTGL\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/Alvaro/Programacion/MinecraftSublime -BD:/Alvaro/Programacion/MinecraftSublime/build --check-stamp-file D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Programacion/MinecraftGL -BD:/Programacion/MinecraftGL/build --check-stamp-file D:/Programacion/MinecraftGL/build/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

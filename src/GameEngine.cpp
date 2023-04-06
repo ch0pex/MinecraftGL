@@ -35,7 +35,7 @@ void GameEngine::loop(void)
     while (!renderEngine.shouldClose())
     {
         // Lógica de la aplicación
-    	renderEngine.renderScene(); 
+    	renderEngine.renderScene(camera); 
         // Escucha los eventos de la ventana
         glfwPollEvents();
     }

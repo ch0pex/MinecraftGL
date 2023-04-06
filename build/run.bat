@@ -1,6 +1,5 @@
 @echo off
 
-
 if "%1"=="-re" (
     cmake ..
 ) 
