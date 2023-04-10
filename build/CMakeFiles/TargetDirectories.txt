@@ -1,0 +1,3 @@
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CraftGL.dir
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/ALL_BUILD.dir
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/ZERO_CHECK.dir

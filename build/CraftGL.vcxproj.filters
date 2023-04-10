@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\GLDebug.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\craftGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\CommonHeaders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\GLDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\PrimitiveTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Alvaro\Programacion\MinecraftSublime\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3136EC30-00E8-3D0F-9939-4D1768F89628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{10C81A44-C510-333A-92A0-727061A03B34}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
