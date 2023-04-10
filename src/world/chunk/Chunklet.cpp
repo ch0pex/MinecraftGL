@@ -1,7 +1,6 @@
 #include "Chunklet.h"
 
-Chunklet::Chunklet(glm::vec3 _position) : 
-	isBuffered(false)
+Chunklet::Chunklet(glm::vec3 _position) 
 {
 	mesh = new Mesh(); 
 	position.x = _position.x * CHUNK_SIZE; 
@@ -59,7 +58,6 @@ void Chunklet::addFace(glm::vec3 position, const Vertex face[])
 
 void Chunklet::bufferMesh()
 {
-	isBuffered = true; 
 	glGenVertexArrays(1, &mesh->vao);
 	glBindVertexArray(mesh->vao); 
 

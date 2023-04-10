@@ -53,7 +53,8 @@ void GameEngine::loop(void)
     while (!renderEngine.shouldClose())
     {
         // Lógica de la aplicación
-        camera.update(); 
+        camera.update();
+        world.update(camera); 
 
     	renderEngine.renderScene(camera); 
         // Escucha los eventos de la ventana

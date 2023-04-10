@@ -1,13 +1,14 @@
 #pragma once
 #include "../../rendering/Mesh.h"
 #include <GL/glew.h>
-
+#include "block.h"
 
 
 class Chunklet {
 
 private: 
-	bool isBuffered; 
+	Block blockMap[CHUNK_VOLUME];
+	 
 	glm::vec3 position; 
 	void addFace(glm::vec3 position, const Vertex face[]); 
 

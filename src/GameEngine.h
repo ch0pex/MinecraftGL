@@ -6,6 +6,7 @@
 
 #include "rendering/RenderEngine.h"
 #include "rendering/Camera.h"
+#include "world/World.h"
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
@@ -15,6 +16,8 @@ class GameEngine
 private: 
 	RenderEngine renderEngine; 
 	Camera camera; 
+	World world; 
+
 public: 
 	GameEngine();
 	~GameEngine();

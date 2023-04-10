@@ -25,7 +25,19 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -63,7 +75,22 @@
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.hpp">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\block.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

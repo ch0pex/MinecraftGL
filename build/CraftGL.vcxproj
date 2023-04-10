@@ -369,7 +369,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.cpp" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\CommonHeaders.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Constants.h" />
@@ -381,7 +385,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Mesh.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h" />
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.hpp" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\block.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\Alvaro\Programacion\MinecraftSublime\build\ZERO_CHECK.vcxproj">
