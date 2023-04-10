@@ -4,6 +4,9 @@
 #include <Windows.h>
 #include <iostream>
 
+#include "../common/public/CommonHeaders.h"
+#include "../loaders/TextureLoader.h"
+#include "../loaders/ShaderLoader.h"
 #include "Camera.h"
 #include "SolidRenderer.h"
 

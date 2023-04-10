@@ -2,10 +2,10 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\Programacion\MinecraftGL\build\x64\Debug\ZERO_CHECK</FullPath>
+      <FullPath>D:\Alvaro\Programacion\MinecraftSublime\build\x64\Debug\ZERO_CHECK</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>D:\Programacion\MinecraftGL\build\Debug\CraftGL.exe</FullPath>
+      <FullPath>D:\Alvaro\Programacion\MinecraftSublime\build\Debug\CraftGL.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

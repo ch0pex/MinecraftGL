@@ -20,8 +20,9 @@ C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC-CXX.cmake
 C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows-MSVC.cmake
 C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/Windows.cmake
 C:/Program Files/CMake/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake
-D:/Programacion/MinecraftGL/CMakeLists.txt
-D:/Programacion/MinecraftGL/build/CMakeFiles/3.26.2/CMakeCCompiler.cmake
-D:/Programacion/MinecraftGL/build/CMakeFiles/3.26.2/CMakeCXXCompiler.cmake
-D:/Programacion/MinecraftGL/build/CMakeFiles/3.26.2/CMakeRCCompiler.cmake
-D:/Programacion/MinecraftGL/build/CMakeFiles/3.26.2/CMakeSystem.cmake
+D:/Alvaro/Programacion/MinecraftSublime/CMakeLists.txt
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CMakeCCompiler.cmake
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CMakeCXXCompiler.cmake
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CMakeRCCompiler.cmake
+D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CMakeSystem.cmake
+D:/Alvaro/Programacion/MinecraftSublime/src/helpers/RootDir.h.in

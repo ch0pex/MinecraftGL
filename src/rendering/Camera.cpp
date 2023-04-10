@@ -10,8 +10,10 @@ Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane,
 	nearPlane = _nearPlane; 
 	farPlane = _farPlane; 
 	position = _position; 
+	movementSpeed = 0.5f; 
 	cameraFront = glm::vec3(0.0f, 0.0f, 0.0f); 
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
+
 
 	std::cout << "Fov: " << FOV << std::endl; 
 	std::cout << "Width: " << width << std::endl; 
@@ -20,9 +22,8 @@ Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane,
 	std::cout << "Far Plane: " << farPlane << std::endl; 
 	std::cout << "Position: " << position.x << ", " << position.y << ", " << position.z << std::endl; 
 
-
-
-	calculateViewProjection();
+	projectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane);
+	calculateView();
 }
 
 Camera::~Camera()
@@ -30,16 +31,20 @@ Camera::~Camera()
 
 }
 
-
-void Camera::calculateViewProjection()
+void Camera::calculateView()
 {
-	viewProjectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane) * glm::lookAt(position, position + cameraFront, cameraUp); 
+
+	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp); 
 }
 
-
-glm::mat4 Camera::getViewProjection()
+glm::mat4 Camera::getView()
 {
-	return viewProjectionMatrix; 
+	return viewMatrix; 
+}
+
+glm::mat4 Camera::getProjection()
+{
+	return projectionMatrix; 
 }
 
 
@@ -50,4 +55,69 @@ glm::vec3 Camera::getPosition(){
 void Camera::setPosition(glm::vec3 _position)
 {
 	position = _position; 
+}
+
+
+
+void Camera::move(Direction direction)
+{
+	switch (direction)
+	{
+	case FRONT:
+		position += movementSpeed * cameraFront;
+		break;
+	case BACK:
+		position -= movementSpeed * cameraFront;
+		break;
+	case RIGHT:
+		position += glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
+		break;
+	case LEFT:
+		position -= glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
+		break;
+	case UP:
+		position += movementSpeed * cameraUp;
+		break;
+	case DOWN:
+		position -= movementSpeed * cameraUp;
+		break;
+	default:
+		break;
+	}
+	calculateView();
+}
+
+void Camera::lookAt(double xpos, double ypos)
+{
+
+	if (firstMouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstMouse = false;
+	}
+
+	float xoffset = xpos - lastX;
+	float yoffset = lastY - ypos;
+	lastX = xpos;
+	lastY = ypos;
+
+	float sensitivity = 0.1f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.y = sin(glm::radians(pitch));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraFront = glm::normalize(direction);
+	calculateView();
 }

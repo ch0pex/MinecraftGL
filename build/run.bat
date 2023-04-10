@@ -1,6 +1,6 @@
 @echo off
 
-if "%1"=="-re" (
+if "%1"=="-f" (
     cmake ..
 ) 
     

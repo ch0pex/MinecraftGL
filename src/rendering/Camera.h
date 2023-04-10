@@ -2,7 +2,7 @@
 #include <GL/glew.h>
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
-#include "common/public/CommonHeaders.h"
+#include "../common/public/CommonHeaders.h"
 
 enum Direction {
 	FRONT,
@@ -19,10 +19,9 @@ class Camera
 {
 private:
 
-	glm::mat4 viewProjectionMatrix; 
-	glm::vec3 position;
-	glm::vec3 cameraFront; 
-	glm::vec3 cameraUp; 
+	glm::mat4 viewMatrix, projectionMatrix; 
+	glm::vec3 position, cameraFront, cameraUp; 
+
 
 
 	f32 FOV;
@@ -39,19 +38,19 @@ private:
 
 	Direction movementDir;
 	f32 movementSpeed;
-	void calculateViewProjection(); 
+	void calculateView(); 
 
 public:
 	Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
 	~Camera();
 
-	glm::mat4 getViewProjection();
-	
+	glm::mat4 getView();
+	glm::mat4 getProjection(); 
 
 	//void update(); 
-	//void lookAt(f64 xpos, f64 ypos); 
+	void lookAt(double xpos, double ypos); 
 
-	//void move(Direction dir);
+	void move(Direction direction);
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 _position);
 

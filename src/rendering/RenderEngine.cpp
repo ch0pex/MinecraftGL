@@ -3,7 +3,9 @@
 
 
 
-RenderEngine::RenderEngine()
+
+
+RenderEngine::RenderEngine() 
 {
 	if (!glfwInit())
 	{
@@ -33,6 +35,17 @@ RenderEngine::RenderEngine()
 	}
 
 	glEnable(GL_DEPTH_TEST);
+
+
+	u32 shader = ShaderLoader::createProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs"); 
+	u32 texture = TextureLoader::loadTexture("res/textures/stone.jpg"); 
+
+	solidRenderer.setTexture(texture);
+	solidRenderer.setShader(shader);
+	solidRenderer.addMesh();
+	std::cout << "Shader: " << shader << "\n"; 
+	std::cout << "Texture: " << texture << "\n"; 
+
 }
 
 RenderEngine::~RenderEngine()
@@ -45,7 +58,10 @@ void RenderEngine::renderScene(Camera& camera)
 {
     	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.4f, 5.0f, 0.75f, 1.0);
-		
+
+		solidRenderer.render(camera); 
+	
+
         glfwSwapBuffers(window);
 
 }
@@ -60,3 +76,5 @@ GLFWwindow* RenderEngine::getWindow()
 {
 	return window; 
 }
+
+
