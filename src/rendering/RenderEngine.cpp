@@ -14,7 +14,7 @@ RenderEngine::RenderEngine()
 	}
 
 	// Crea una ventana de GLFW
-	window = glfwCreateWindow(800, 600, "CraftGL", NULL, NULL);
+	window = glfwCreateWindow(1920, 1080, "CraftGL", NULL, NULL);
 
 	if (!window)
 	{
@@ -35,7 +35,8 @@ RenderEngine::RenderEngine()
 	}
 
 	glEnable(GL_DEPTH_TEST);
-
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 
 	u32 shader = ShaderLoader::createProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs"); 
 	u32 texture = TextureLoader::loadTexture("res/textures/stone.jpg"); 
@@ -45,6 +46,7 @@ RenderEngine::RenderEngine()
 	solidRenderer.addMesh();
 	std::cout << "Shader: " << shader << "\n"; 
 	std::cout << "Texture: " << texture << "\n"; 
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 }
 

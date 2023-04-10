@@ -5,6 +5,7 @@ Camera* cameraPointer;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
+    cameraPointer->move(STATIC);
 	// Cuando una tecla es presionada, registra que tecla fue presionada
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPointer->move(FRONT);
@@ -25,15 +26,16 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
-    cameraPointer->lookAt(xpos, ypos); 
+    cameraPointer->mousePosToFront(xpos, ypos); 
 }
 
 
 GameEngine::GameEngine(): 
-	camera(45.0f, 800, 600, 0.1f, 100.0f, glm::vec3(0.0f, 5.0f, 6.0f))
+	camera(45.0f, 1920, 1080, 0.1f, 100.0f, glm::vec3(0.0f, 5.0f, 6.0f)), 
+    renderEngine()
 {
     cameraPointer = &camera;
-    glfwSetInputMode(renderEngine.getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
 	glfwSetKeyCallback(renderEngine.getWindow(), key_callback);
 	glfwSetCursorPosCallback(renderEngine.getWindow(), mouse_callback);
 }
@@ -51,6 +53,8 @@ void GameEngine::loop(void)
     while (!renderEngine.shouldClose())
     {
         // Lógica de la aplicación
+        camera.update(); 
+
     	renderEngine.renderScene(camera); 
         // Escucha los eventos de la ventana
         glfwPollEvents();

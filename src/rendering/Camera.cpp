@@ -10,9 +10,11 @@ Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane,
 	nearPlane = _nearPlane; 
 	farPlane = _farPlane; 
 	position = _position; 
-	movementSpeed = 0.5f; 
-	cameraFront = glm::vec3(0.0f, 0.0f, 0.0f); 
+	movementSpeed = 0.15f; 
+	cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); 
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
+	yaw = 0; 
+	pitch = 0; 
 
 
 	std::cout << "Fov: " << FOV << std::endl; 
@@ -59,9 +61,9 @@ void Camera::setPosition(glm::vec3 _position)
 
 
 
-void Camera::move(Direction direction)
+void Camera::update()
 {
-	switch (direction)
+	switch (movementDir)
 	{
 	case FRONT:
 		position += movementSpeed * cameraFront;
@@ -87,22 +89,31 @@ void Camera::move(Direction direction)
 	calculateView();
 }
 
-void Camera::lookAt(double xpos, double ypos)
-{
 
+void Camera::move(Direction direction)
+{
+	movementDir = direction;
+}
+
+
+
+void Camera::mousePosToFront(double xpos, double ypos)
+{
+	
 	if (firstMouse)
 	{
+
 		lastX = xpos;
 		lastY = ypos;
 		firstMouse = false;
 	}
 
-	float xoffset = xpos - lastX;
-	float yoffset = lastY - ypos;
+	double xoffset = xpos - lastX;
+	double yoffset = lastY - ypos;
 	lastX = xpos;
 	lastY = ypos;
 
-	float sensitivity = 0.1f;
+	double sensitivity = 0.1f;
 	xoffset *= sensitivity;
 	yoffset *= sensitivity;
 
@@ -118,6 +129,8 @@ void Camera::lookAt(double xpos, double ypos)
 	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	
+
 	cameraFront = glm::normalize(direction);
 	calculateView();
 }

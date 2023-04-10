@@ -13,6 +13,8 @@ enum Direction {
 	DOWN,
 	STATIC
 };
+
+
  
 
 class Camera 
@@ -47,8 +49,8 @@ public:
 	glm::mat4 getView();
 	glm::mat4 getProjection(); 
 
-	//void update(); 
-	void lookAt(double xpos, double ypos); 
+	void update(); 
+	void mousePosToFront(double xpos, double ypos); 
 
 	void move(Direction direction);
 	glm::vec3 getPosition();
