@@ -44,7 +44,7 @@ RenderEngine::RenderEngine()
 
 	solidRenderer.setTexture(texture);
 	solidRenderer.setShader(shader);
-	solidRenderer.addMesh();
+	solidRenderer.addMesh(new Mesh());
 	std::cout << "Shader: " << shader << "\n"; 
 	std::cout << "Texture: " << texture << "\n"; 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -68,6 +68,13 @@ void RenderEngine::renderScene(Camera& camera)
         glfwSwapBuffers(window);
 
 }
+
+void RenderEngine::drawChunklet(Chunklet& chunklet)
+{
+	if (chunklet.getFaces()) solidRenderer.addMesh(chunklet.mesh); 
+}
+
+
 
 bool RenderEngine::shouldClose()
 {

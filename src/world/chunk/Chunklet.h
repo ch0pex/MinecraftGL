@@ -7,12 +7,13 @@
 class Chunklet {
 
 private: 
-	Block blockMap[CHUNK_VOLUME];
-	 
+	Block blockMap[CHUNKLET_VOLUME];
 	glm::vec3 position; 
 	void addFace(glm::vec3 position, const Vertex face[]); 
-
+	bool tryToAddFace(BlockFace blockFace, glm::vec3 position);
+	
 public:
+	u32 getFaces(); 
 	Mesh* mesh;
 	Chunklet(glm::vec3 _position);
 	~Chunklet();

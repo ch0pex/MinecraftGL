@@ -9,6 +9,7 @@
 #include "../loaders/ShaderLoader.h"
 #include "Camera.h"
 #include "SolidRenderer.h"
+#include "../world/chunk/Chunklet.h"
 
 
 class RenderEngine
@@ -24,6 +25,7 @@ public:
 	void renderScene(Camera& camera); 
 	bool shouldClose(); 
 
+	void drawChunklet(Chunklet& chunklet); 
 	GLFWwindow* getWindow();
 	
 };

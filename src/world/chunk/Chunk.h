@@ -7,6 +7,7 @@ class Chunk {
 
 private:
 	bool buffered;
+	std::vector<Chunklet*> chunklets;
 
 public:
 

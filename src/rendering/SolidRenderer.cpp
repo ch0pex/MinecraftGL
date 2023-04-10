@@ -13,7 +13,7 @@ SolidRenderer::~SolidRenderer()
 
 }
 
-void SolidRenderer::addMesh(/*Mesh* mesh*/)
+void SolidRenderer::addMesh(Mesh* mesh)
 {
 	/*
 	Mesh* mesh = new Mesh(); 
@@ -111,10 +111,10 @@ void SolidRenderer::addMesh(/*Mesh* mesh*/)
 
 	*/
 
-	Chunklet* chunk[16][16][4]; 
+	Chunklet* chunk[8][8][4]; 
 
-	for(int i = 0; i < 16 ; i++){
-		for(int j = 0; j < 16; j++){
+	for(int i = 0; i < 8 ; i++){
+		for(int j = 0; j < 8; j++){
 			for(int k = 0; k < 4; k++){
 				chunk[i][j][k] = new Chunklet(glm::vec3(j,k,i)); 
 				chunk[i][j][k]->bufferMesh(); 

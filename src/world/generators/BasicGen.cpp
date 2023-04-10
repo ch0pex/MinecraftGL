@@ -2,11 +2,18 @@
 
 std::vector<Block>* BasicGen::genChunk(glm::vec2 posXY)
 {
+	int x;
+	int y;
+	int z;
 	std::vector<Block>* blocks = new std::vector<Block>();
 
 	for (u32 i = 0; i < CHUNK_VOLUME; i++)
 	{
-		blocks->push_back( i > 24576 ? Block::AIR : Block::STONE); 
+		x = i % CHUNK_SIZE;
+		y = i / (CHUNK_SIZE * CHUNK_SIZE);
+		z = (i / CHUNK_SIZE) % CHUNK_SIZE;
+
+		blocks->push_back( y < 60 ? Block::STONE: Block::AIR); 
 	}
 	return blocks; 
 }

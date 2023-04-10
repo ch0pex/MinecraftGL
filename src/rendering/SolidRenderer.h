@@ -19,6 +19,6 @@ public:
 	void setTexture(u32 _texture); 
 	void setShader(u32 _shader); 
 
-	void addMesh(/*Mesh* mesh*/);
+	void addMesh(Mesh* mesh);
 	void render(Camera& camera);	
 };

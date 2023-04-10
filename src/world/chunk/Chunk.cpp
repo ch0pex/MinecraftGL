@@ -18,5 +18,8 @@ bool Chunk::isBuffered()
 
 void Chunk::drawChunklets(RenderEngine& renderer)
 {
+	for(const auto& chunklet : chunklets){
+		renderer.drawChunklet(*chunklet); 
 
+	}
 }
