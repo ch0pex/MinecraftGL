@@ -25,6 +25,9 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.h">
@@ -58,6 +61,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,9 +1,9 @@
 #include "SolidRenderer.h"
+#include "../world/chunk/chunklet.h"
 
 SolidRenderer::SolidRenderer() 
 {
 	
-
 
 
 }
@@ -15,8 +15,8 @@ SolidRenderer::~SolidRenderer()
 
 void SolidRenderer::addMesh(/*Mesh* mesh*/)
 {
+	/*
 	Mesh* mesh = new Mesh(); 
-
 	std::vector<Vertex> _vertices = {
 
 		//front
@@ -84,6 +84,8 @@ void SolidRenderer::addMesh(/*Mesh* mesh*/)
 	mesh->vertices.clear(); mesh->indices.clear();
 	mesh->vertices = _vertices;
 	mesh->indices = _indices;
+	std::cout << mesh->vertices.size() << std::endl; 
+	std::cout << mesh->indices.size() << std::endl; 
 
 	glGenVertexArrays(1, &mesh->vao);
 	glBindVertexArray(mesh->vao); 
@@ -104,7 +106,24 @@ void SolidRenderer::addMesh(/*Mesh* mesh*/)
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0); 
-	meshes.push_back(mesh);
+
+	meshes.push_back(mesh); 
+
+	*/
+
+	Chunklet* chunk[4][4][4]; 
+
+	for(int i = 0; i < 4 ; i++){
+		for(int j = 0; j < 4; j++){
+			for(int k = 0; k < 4; k++){
+				chunk[i][j][k] = new Chunklet(glm::vec3(j,k,i)); 
+				chunk[i][j][k]->bufferMesh(); 
+				meshes.push_back(chunk[i][j][k]->mesh);
+			}	
+		}
+
+	}
+
 }
 
 void SolidRenderer::render(Camera& camera)
