@@ -33,10 +33,11 @@ RenderEngine::RenderEngine()
 		glfwTerminate();
 		std::terminate();
 	}
-
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
+
 
 	u32 shader = ShaderLoader::createProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs"); 
 	u32 texture = TextureLoader::loadTexture("res/textures/stone.jpg"); 

@@ -111,10 +111,10 @@ void SolidRenderer::addMesh(/*Mesh* mesh*/)
 
 	*/
 
-	Chunklet* chunk[4][4][4]; 
+	Chunklet* chunk[16][16][4]; 
 
-	for(int i = 0; i < 4 ; i++){
-		for(int j = 0; j < 4; j++){
+	for(int i = 0; i < 16 ; i++){
+		for(int j = 0; j < 16; j++){
 			for(int k = 0; k < 4; k++){
 				chunk[i][j][k] = new Chunklet(glm::vec3(j,k,i)); 
 				chunk[i][j][k]->bufferMesh(); 
@@ -123,6 +123,8 @@ void SolidRenderer::addMesh(/*Mesh* mesh*/)
 		}
 
 	}
+
+	
 
 }
 
@@ -137,7 +139,6 @@ void SolidRenderer::render(Camera& camera)
 
 	glUniformMatrix4fv(vpLoc, 1, GL_FALSE, glm::value_ptr(vp));
 	glBindTexture(GL_TEXTURE_2D, texture);
-
 
 
 	for(const auto& mesh : meshes){
