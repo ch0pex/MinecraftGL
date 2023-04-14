@@ -23,4 +23,5 @@ public:
 	~Chunklet();
 	void addBlock(glm::vec3 position); 
 	void bufferMesh(); 
+	int getBlock(glm::vec3 absolutePosition); 
 };

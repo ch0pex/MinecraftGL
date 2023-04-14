@@ -5,10 +5,11 @@ ChunksManager::ChunksManager(World &_world) :
     world(&_world)
 {
 
-   
+    std::cout << "Chunks Loading... ";
     //TODO: load with threads chunks 8 to every direction at pos 0,0,0
     loadChunks(); 
-    
+    std::cout << "Done:" << chunks.size() << "loaded \n"; 
+
 
 }
 
@@ -31,11 +32,11 @@ Chunk& ChunksManager::getChunk(glm::vec2 xypos)
 
 void ChunksManager::loadChunks()
 {
-    for (size_t x = 0; x < 4; x++)
+    for (size_t x = 0; x < 1; x++)
     {
-        for (size_t z = 0; z < 4; z++)
+        for (size_t z = 0; z < 1; z++)
         {
-            glm::vec2 pos = glm::vec2(-32 + x * 16, -32 + z * 16);
+            glm::vec2 pos = glm::vec2(x, z);
             std::vector<Block>* blocks = generator.genChunk(pos); 
             chunks.push_back(Chunk(*world, pos, blocks));
         }

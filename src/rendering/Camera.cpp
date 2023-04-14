@@ -87,12 +87,14 @@ void Camera::update()
 		break;
 	}
 	calculateView();
+
 }
 
 
 void Camera::move(Direction direction)
 {
 	movementDir = direction;
+	std::cout << position.x << ", " << position.y << ", " << position.z << "\n"; 
 }
 
 

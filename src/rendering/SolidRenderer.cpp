@@ -80,12 +80,12 @@ void SolidRenderer::addMesh(Mesh* mesh)
 
 	};
 
-
 	mesh->vertices.clear(); mesh->indices.clear();
 	mesh->vertices = _vertices;
 	mesh->indices = _indices;
 	std::cout << mesh->vertices.size() << std::endl; 
 	std::cout << mesh->indices.size() << std::endl; 
+*/
 
 	glGenVertexArrays(1, &mesh->vao);
 	glBindVertexArray(mesh->vao); 
@@ -107,18 +107,14 @@ void SolidRenderer::addMesh(Mesh* mesh)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0); 
 
-	meshes.push_back(mesh); 
+	meshes.push_back(mesh);
 
-	*/
-
-
-	meshes.push_back(mesh); 
 
 }
 
 void SolidRenderer::addReferenceMesh(void)
 {
-		Mesh* test_mesh = new Mesh(); 
+	Mesh* test_mesh = new Mesh(); 
 	std::vector<Vertex> _vertices = {
 
 		//front

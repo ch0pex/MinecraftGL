@@ -8,6 +8,7 @@ Chunklet::Chunklet(World& world, glm::vec3 _position)
 	position.y = _position.y; 
 	position.z = _position.z; 
 
+
 	for(int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
 		blockMap[i] = Block(Block::STONE);
@@ -21,18 +22,31 @@ Chunklet::Chunklet(World& world, glm::vec3 _position)
 		int y = i / (CHUNK_SIZE * CHUNK_SIZE);
 		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
 		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
-
-		addBlock(glm::vec3(position.x + x, position.y + y, position.z + z));
+		if(blockMap[i] == Block::STONE) 
+			addBlock(glm::vec3(position.x + x, position.y + y, position.z + z));
 	}
 
-
-
+	for(int i = 0; i < CHUNKLET_VOLUME; i++)
+	{
+		int cube = 0; 
+		if (blockMap[i] == Block::STONE)
+			cube = 1; 
+		std::cout << cube << "\n";  
+	}
+	
 }
 
 Chunklet::~Chunklet() 
 {
 
 }
+
+
+int Chunklet::getBlock(glm::vec3 absolutePosition)
+{
+	return (int) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
+}
+
 
 
 void Chunklet::addBlock(glm::vec3 position)
@@ -85,7 +99,7 @@ bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 position)
 		break;
 	}
 
-
+	
 	return true;
 }
 
