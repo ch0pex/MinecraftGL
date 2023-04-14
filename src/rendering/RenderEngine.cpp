@@ -44,7 +44,7 @@ RenderEngine::RenderEngine()
 
 	solidRenderer.setTexture(texture);
 	solidRenderer.setShader(shader);
-	solidRenderer.addMesh(new Mesh());
+	solidRenderer.addReferenceMesh(); 
 	std::cout << "Shader: " << shader << "\n"; 
 	std::cout << "Texture: " << texture << "\n"; 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);

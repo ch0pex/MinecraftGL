@@ -2,7 +2,8 @@
 
 
 
-World::World() 
+World::World() : 
+	chunksManager(*this)
 {
 
 }

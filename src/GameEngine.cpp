@@ -31,7 +31,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 
 GameEngine::GameEngine(): 
-	camera(45.0f, 1920, 1080, 0.1f, 100.0f, glm::vec3(0.0f, 5.0f, 6.0f)), 
+	camera(45.0f, 1920, 1080, 0.1f, 100.0f, glm::vec3(0.0f, 60.0f, 6.0f)), 
     renderEngine()
 {
     cameraPointer = &camera;
@@ -54,8 +54,8 @@ void GameEngine::loop(void)
     {
         // Lógica de la aplicación
         camera.update();
-        //world.update(camera); 
-
+        world.update(camera); 
+        world.prepareRender(renderEngine,camera); 
     	renderEngine.renderScene(camera); 
         // Escucha los eventos de la ventana
         glfwPollEvents();

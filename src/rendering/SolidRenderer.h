@@ -12,6 +12,8 @@ class SolidRenderer {
 private:
 	std::vector<Mesh*> meshes; 
 	u32 texture, shader; 
+
+
 public:
 	SolidRenderer();
 	~SolidRenderer();
@@ -20,5 +22,9 @@ public:
 	void setShader(u32 _shader); 
 
 	void addMesh(Mesh* mesh);
-	void render(Camera& camera);	
+	void render(Camera& camera);
+
+
+	void addReferenceMesh();
+
 };

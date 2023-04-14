@@ -3,6 +3,9 @@
 #include <GLFW/glfw3.h>
 #include <Windows.h>
 #include <iostream>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 
 #include "rendering/RenderEngine.h"
 #include "rendering/Camera.h"

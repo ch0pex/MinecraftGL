@@ -1,11 +1,12 @@
 #include "Chunklet.h"
+#include "Chunk.h"
 
-Chunklet::Chunklet(glm::vec3 _position) 
+Chunklet::Chunklet(World& world, glm::vec3 _position) 
 {
 	mesh = new Mesh(); 
-	position.x = _position.x * CHUNK_SIZE; 
-	position.y = _position.y * CHUNK_SIZE; 
-	position.z = _position.z * CHUNK_SIZE; 
+	position.x = _position.x; 
+	position.y = _position.y; 
+	position.z = _position.z; 
 
 	for(int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
@@ -85,17 +86,14 @@ bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 position)
 	}
 
 
-
-	glm::vec3 pos = position + offset;
-	if (pos.x < position.x|| pos.x > position.x + CHUNK_SIZE || pos.y < position.y|| pos.y > position.y + CHUNK_SIZE || pos.z < position.z || pos.z > position.z + CHUNK_SIZE)
-		return true;
-	return blockMap[(int)pos.x + (int)pos.y * CHUNK_SIZE + (int)pos.z * CHUNK_SIZE * CHUNK_SIZE] == Block::AIR;
+	return true;
 }
 
 
 
 void Chunklet::addFace(glm::vec3 position, const Vertex face[])
 {
+	faces++; 
 	u32 index_offset = mesh->vertices.size(); 
 	for (int i = 0; i < 6; i++)
 	{
