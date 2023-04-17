@@ -13,7 +13,7 @@ private:
 	World *world; 
 	BasicGen generator; 
 	std::vector<Chunk> chunks;
-	Chunk& getChunk(glm::vec2 xypos);
+	Chunk* getChunk(glm::vec2 xzpos);
 
 public:
 
@@ -22,5 +22,5 @@ public:
 	void loadChunks(); 
 	void updateChunks(glm::vec3 playerPos);
 	std::vector<Chunk>& getChunks();
-	Block getBlock(glm::vec3 positions); 
+	Block getBlock(glm::vec3 position); 
 };

@@ -21,7 +21,6 @@ void World::update(Camera& camera)
 }
 
 
-
 // Render prepare, load all meshes in their respective renderer
 // Currently just solidrenderer
 void World::prepareRender(RenderEngine &renderer, Camera &camera)
@@ -32,5 +31,11 @@ void World::prepareRender(RenderEngine &renderer, Camera &camera)
 			chunk.drawChunklets(renderer); // Pass camera 
 		}
 	}
-
 }
+
+
+Block World::getBlock(glm::vec3 pos)
+{
+	return chunksManager.getBlock(pos); 
+}
+

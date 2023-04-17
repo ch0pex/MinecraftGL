@@ -7,6 +7,9 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\GLDebug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\craftGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +58,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\PrimitiveTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.h">

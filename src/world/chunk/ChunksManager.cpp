@@ -11,7 +11,9 @@ ChunksManager::ChunksManager(World &_world) :
     std::cout << "Done:" << chunks.size() << "loaded \n"; 
 
 
+
 }
+
 
 ChunksManager::~ChunksManager()
 {
@@ -19,30 +21,46 @@ ChunksManager::~ChunksManager()
 }
 
 
-
-
-Chunk& ChunksManager::getChunk(glm::vec2 xypos)
+Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 {
+
+    glm::vec2 chunkPos; 
+    chunkPos.x = ((int) xzpos.x / CHUNK_SIZE) * CHUNK_SIZE;
+    chunkPos.y = ((int) xzpos.y / CHUNK_SIZE) * CHUNK_SIZE;
+
+    //std::cout << chunkPos.x << ", " << chunkPos.y << "\n"; 
+    //std::cout << "Numero de chunks: " << chunks.size() << "\n"; 
     for(auto& chunk : chunks){ 
-        if(chunk.getPosition() == xypos)
-            return const_cast<Chunk&>(chunk); 
+        std::cout << chunk.getPosition().x << ", " << chunk.getPosition().y << "\n";
+        if(chunk.getPosition() == chunkPos){
+            return &chunk; 
+        }
     }
+    return nullptr; 
 }
 
 
 void ChunksManager::loadChunks()
 {
-    for (size_t x = 0; x < 1; x++)
+    Timer t; 
+    for (size_t x = 0; x < 10; x++)
     {
-        for (size_t z = 0; z < 1; z++)
+        for (size_t z = 0; z < 10; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
-            std::vector<Block>* blocks = generator.genChunk(pos); 
+            std::vector<Block>* blocks = generator.genChunk(pos);
             chunks.push_back(Chunk(*world, pos, blocks));
+            //chunk.loadChunklets(); 
+
         }
     }
 
+    for(auto& chunk : chunks)
+        chunk.loadChunklets();  
+    
+
 }
+
 
 void ChunksManager::updateChunks(glm::vec3 playerPos)
 {
@@ -50,15 +68,18 @@ void ChunksManager::updateChunks(glm::vec3 playerPos)
 
 }
 
+
 std::vector<Chunk>& ChunksManager::getChunks()
 {
     // TODO: insert return statement here
     return chunks; 
 }
 
+
 Block ChunksManager::getBlock(glm::vec3 position)
 {
-    Chunk& chunk = getChunk(glm::vec2(position.x, position.y)); 
-    return chunk.getBlock(position); 
+    Chunk* chunk = getChunk(glm::vec2(position.x, position.z));  
+    if(chunk == nullptr) return Block::AIR; 
+    return chunk->getBlock(position); 
 }
 

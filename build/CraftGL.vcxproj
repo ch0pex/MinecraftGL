@@ -363,6 +363,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\GLDebug.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\Timer.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\craftGL.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.cpp" />
@@ -379,6 +380,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Constants.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\GLDebug.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\PrimitiveTypes.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Timer.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.h" />

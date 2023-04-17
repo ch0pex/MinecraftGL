@@ -1,7 +1,10 @@
 #include "Chunklet.h"
-#include "Chunk.h"
+#include "../World.h"
 
-Chunklet::Chunklet(World& world, glm::vec3 _position) 
+
+
+Chunklet::Chunklet(World& world, glm::vec3 _position) : 
+	world(&world) 
 {
 	mesh = new Mesh(); 
 	position.x = _position.x; 
@@ -15,6 +18,8 @@ Chunklet::Chunklet(World& world, glm::vec3 _position)
 	}
 
 
+
+	
 	for (int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
 	
@@ -23,9 +28,9 @@ Chunklet::Chunklet(World& world, glm::vec3 _position)
 		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
 		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
 		if(blockMap[i] == Block::STONE) 
-			addBlock(glm::vec3(position.x + x, position.y + y, position.z + z));
+			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
 	}
-
+	/*
 	for(int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
 		int cube = 0; 
@@ -33,7 +38,7 @@ Chunklet::Chunklet(World& world, glm::vec3 _position)
 			cube = 1; 
 		std::cout << cube << "\n";  
 	}
-	
+	*/
 }
 
 Chunklet::~Chunklet() 
@@ -42,14 +47,14 @@ Chunklet::~Chunklet()
 }
 
 
-int Chunklet::getBlock(glm::vec3 absolutePosition)
+Block Chunklet::getBlock(glm::vec3 absolutePosition)
 {
-	return (int) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
+	return (Block) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
 }
 
 
 
-void Chunklet::addBlock(glm::vec3 position)
+void Chunklet::addBlockMesh(glm::vec3 position)
 {
 
 	if(tryToAddFace(BlockFace::FRONT, position))
@@ -72,66 +77,16 @@ void Chunklet::addBlock(glm::vec3 position)
 
 }
 
-bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 position)
-{
-	glm::vec3 offset = glm::vec3(0, 0, 0);
-	switch (blockFace)
-	{
-	case BlockFace::FRONT:
-		offset = glm::vec3(0, 0, 1);
-		break;
-	case BlockFace::BACK:
-		offset = glm::vec3(0, 0, -1);
-		break;
-	case BlockFace::RIGHT:
-		offset = glm::vec3(1, 0, 0);
-		break;
-	case BlockFace::LEFT:
-		offset = glm::vec3(-1, 0, 0);
-		break;
-	case BlockFace::TOP:
-		offset = glm::vec3(0, 1, 0);
-		break;
-	case BlockFace::BOTTOM:
-		offset = glm::vec3(0, -1, 0);
-		break;
-	default:
-		break;
-	}
 
-	
-	return true;
-}
-
-
-
-void Chunklet::addFace(glm::vec3 position, const Vertex face[])
-{
-	faces++; 
-	u32 index_offset = mesh->vertices.size(); 
-	for (int i = 0; i < 6; i++)
-	{
-		if(i < 4){
-			Vertex vertex = face[i];
-			vertex.position += position;
-			mesh->vertices.push_back(vertex);
-		}
-		mesh->indices.push_back(FACE_INDEX[i] + index_offset);
-
-	}
-}
 
 void Chunklet::bufferMesh()
 {
 	glGenVertexArrays(1, &mesh->vao);
 	glBindVertexArray(mesh->vao); 
 
-
 	glGenBuffers(1, &mesh->vbo); 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->vbo); 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertices.size(), &mesh->vertices[0], GL_STATIC_DRAW);
-
-	
 
 	glGenBuffers(1, &mesh->ebo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->ebo);
@@ -158,4 +113,62 @@ void Chunklet::bufferMesh()
 u32 Chunklet::getFaces()
 {
 	return mesh->vertices.size() / 4;
+}
+
+
+
+void Chunklet::addFace(glm::vec3 position, const Vertex face[])
+{
+	faces++; 
+	u32 index_offset = mesh->vertices.size(); 
+	for (int i = 0; i < 6; i++)
+	{
+		if(i < 4){
+			Vertex vertex = face[i];
+			vertex.position += position;
+			mesh->vertices.push_back(vertex);
+		}
+		mesh->indices.push_back(FACE_INDEX[i] + index_offset);
+
+	}
+}
+
+
+bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 blockPos)
+{
+	glm::vec3 offset = glm::vec3(0, 0, 0);
+	switch (blockFace)
+	{
+	case BlockFace::FRONT:  offset = glm::vec3(0, 0, 1);  break;
+	case BlockFace::BACK:   offset = glm::vec3(0, 0, -1); break;
+	case BlockFace::RIGHT:  offset = glm::vec3(1, 0, 0);  break;
+	case BlockFace::LEFT:   offset = glm::vec3(-1, 0, 0); break;
+	case BlockFace::TOP:    offset = glm::vec3(0, 1, 0);  break;
+	case BlockFace::BOTTOM: offset = glm::vec3(0, -1, 0); break;
+	default: break;
+	}
+
+	offset += blockPos; 
+
+	Block block;
+	//std::cout << outOfBounds(offset) << "\n"; 
+	if(outOfBounds(offset))
+		//block = world->getBlock(offset); 
+		return true;
+	//std::cout << (int) block << "\n"; 
+	else
+		block = getBlock(offset); 
+
+	if (block == Block::AIR) 
+		return true;
+	return false; 
+}
+
+
+bool Chunklet::outOfBounds(glm::vec3 blockPos)
+{
+	bool x = (blockPos.x >= position.x && blockPos.x < position.x + CHUNK_SIZE); 
+	bool y = (blockPos.y >= position.y && blockPos.y < position.y + CHUNK_SIZE);
+	bool z = (blockPos.z >= position.z && blockPos.z < position.z + CHUNK_SIZE);
+	return !(x && y && z); 
 }

@@ -4,7 +4,6 @@
 #include "../../common/public/CommonHeaders.h"
 
 
-
 class World; 
 
 
@@ -20,6 +19,7 @@ public:
 	Chunk(World& _world, glm::vec2 _position, std::vector<Block>* _blocks);
 	~Chunk();
 	bool isBuffered();
+	void loadChunklets(); 
 	void drawChunklets(RenderEngine& renderer); 
 	Block getBlock(glm::vec3 position);
 	glm::vec2 getPosition(); 

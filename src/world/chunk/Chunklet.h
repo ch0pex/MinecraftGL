@@ -6,6 +6,7 @@
 
 class World; 
 
+
 class Chunklet {
 
 private: 
@@ -13,15 +14,16 @@ private:
 	Block blockMap[CHUNKLET_VOLUME];
 	glm::vec3 position; 
 	u32 faces; 
+
 	void addFace(glm::vec3 position, const Vertex face[]); 
-	bool tryToAddFace(BlockFace blockFace, glm::vec3 position);
-	
+	bool tryToAddFace(BlockFace blockFace, glm::vec3 blockPos);
+	bool outOfBounds(glm::vec3 blockPos); 
 public:
-	u32 getFaces(); 
-	Mesh* mesh;
 	Chunklet(World& world, glm::vec3 _position);
 	~Chunklet();
-	void addBlock(glm::vec3 position); 
+	u32 getFaces(); 
+	Mesh* mesh;
+	void addBlockMesh(glm::vec3 position); 
 	void bufferMesh(); 
-	int getBlock(glm::vec3 absolutePosition); 
+	Block getBlock(glm::vec3 absolutePosition); 
 };
