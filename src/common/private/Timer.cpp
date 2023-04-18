@@ -1,9 +1,10 @@
 #include "../public/Timer.h"
 
-Timer::Timer(TimerMode _mode)
+Timer::Timer(std::string message, TimerMode timerMode)
 {
     start_time = std::chrono::high_resolution_clock::now();
-	mode = _mode; 
+	mode = timerMode;
+    msg = message ; 
 }
 
 Timer::~Timer() 

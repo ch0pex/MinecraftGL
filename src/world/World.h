@@ -2,8 +2,7 @@
 #include "../rendering/RenderEngine.h"
 #include "chunk/ChunksManager.h"
 #include "../rendering/Camera.h"
-
-
+#include <iostream>
 
 class World {
 

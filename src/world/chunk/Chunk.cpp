@@ -7,6 +7,7 @@ Chunk::Chunk(World& _world, glm::vec2 _position, std::vector<Block>* _blocks) :
 
 	position = _position; 
 	buffered = false; 
+	builded = false; 
 }
 
 Chunk::~Chunk()
@@ -19,6 +20,7 @@ void Chunk::loadChunklets()
 	for(int i = 0; i < CHUNK_SIZE; i++){
 		chunklets.push_back(new Chunklet(*world, glm::vec3(position.x * CHUNK_SIZE, i * CHUNK_SIZE, position.y * CHUNK_SIZE)));
 	}
+	builded = true; 
 }
 
 bool Chunk::isBuffered()
@@ -26,6 +28,10 @@ bool Chunk::isBuffered()
 	return buffered;
 }
 
+bool Chunk::isBuilded()
+{
+	return builded; 
+}
 
 void Chunk::drawChunklets(RenderEngine& renderer)
 {
@@ -47,4 +53,3 @@ glm::vec2 Chunk::getPosition()
 {
 	return position; 
 }
-

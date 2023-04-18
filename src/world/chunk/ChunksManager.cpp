@@ -5,19 +5,16 @@ ChunksManager::ChunksManager(World &_world) :
     world(&_world)
 {
 
-    std::cout << "Chunks Loading... ";
-    //TODO: load with threads chunks 8 to every direction at pos 0,0,0
-    loadChunks(); 
-    std::cout << "Done:" << chunks.size() << "loaded \n"; 
-
-
+    std::cout << "Chunks Loading... \n";
+    chunkLoaders.emplace_back([&] () {loadChunks(); }); 
 
 }
 
 
 ChunksManager::~ChunksManager()
 {
-    
+    for(auto& thread : chunkLoaders)
+        thread.join();
 }
 
 
@@ -42,24 +39,36 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 
 void ChunksManager::loadChunks()
 {
-    Timer t; 
-    for (size_t x = 0; x < 10; x++)
+    Timer t("loadChunks"); 
+    for (size_t x = 0; x < CHUNK_SIZE; x++)
     {
-        for (size_t z = 0; z < 10; z++)
+        for (size_t z = 0; z < CHUNK_SIZE; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             std::vector<Block>* blocks = generator.genChunk(pos);
+            std::unique_lock<std::mutex> lock(mutex);
             chunks.push_back(Chunk(*world, pos, blocks));
-            //chunk.loadChunklets(); 
 
         }
     }
 
-    for(auto& chunk : chunks)
-        chunk.loadChunklets();  
+
+    buildChunksMesh(); 
+
     
+    std::cout << "Chunks loaded: " << chunks.size() << "\n"; 
 
 }
+
+void ChunksManager::buildChunksMesh()
+{
+
+    for(auto& chunk: chunks){
+
+        chunk.loadChunklets();
+    } 
+}
+
 
 
 void ChunksManager::updateChunks(glm::vec3 playerPos)
