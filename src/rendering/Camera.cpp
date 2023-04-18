@@ -1,8 +1,10 @@
 #include "Camera.h"
-#include <iostream>
+#include "../GameEngine.h"
 
 
-Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position)
+
+Camera::Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position) :
+	game(_game)
 {
 	FOV = _FOV; 
 	width = _width; 
@@ -10,7 +12,7 @@ Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane,
 	nearPlane = _nearPlane; 
 	farPlane = _farPlane; 
 	position = _position; 
-	movementSpeed = 0.15f; 
+	movementSpeed = 0.5f; 
 	cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); 
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
 	yaw = 0; 
@@ -63,6 +65,8 @@ void Camera::setPosition(glm::vec3 _position)
 
 void Camera::update()
 {
+	while(game->isRunning()){
+	std::this_thread::sleep_for(std::chrono::milliseconds(1));
 	switch (movementDir)
 	{
 	case FRONT:
@@ -87,6 +91,8 @@ void Camera::update()
 		break;
 	}
 	calculateView();
+	}
+
 
 }
 

@@ -31,12 +31,14 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 
 GameEngine::GameEngine(): 
-	camera(45.0f, 1920, 1080, 0.1f, 500.0f, glm::vec3(0.0f, 270.0f, 6.0f)), 
+    running(true),
+	camera(this, 45.0f, 1920, 1080, 0.1f, 1000.0f, glm::vec3(0.0f, 270.0f, 6.0f)), 
     renderEngine(), 
     world()
 {
     cameraPointer = &camera;
-    
+    cameraThread = std::thread(&Camera::update, &camera); 
+
 	glfwSetKeyCallback(renderEngine.getWindow(), key_callback);
 	glfwSetCursorPosCallback(renderEngine.getWindow(), mouse_callback);
 }
@@ -44,7 +46,8 @@ GameEngine::GameEngine():
 
 GameEngine::~GameEngine()
 {
-
+    
+    cameraThread.join(); 
 }
 
 
@@ -53,15 +56,17 @@ void GameEngine::loop(void)
     // El bucle principal de la aplicación
     while (!renderEngine.shouldClose())
     {
-         
-        camera.update();
         world.update(camera); 
         world.prepareRender(renderEngine,camera); 
     	renderEngine.renderScene(camera); 
         glfwPollEvents(); // Escucha los eventos de la ventana
     }
     glfwTerminate();
+    running = false; 
     // Termina GLFW
 }
 
-
+bool GameEngine::isRunning()
+{
+    return running; 
+}

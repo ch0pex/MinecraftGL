@@ -3,6 +3,9 @@
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include "../common/public/CommonHeaders.h"
+#include <thread>
+#include <chrono>
+#include <iostream>
 
 enum Direction {
 	FRONT,
@@ -14,17 +17,16 @@ enum Direction {
 	STATIC
 };
 
-
+class GameEngine; 
  
 
 class Camera 
 {
 private:
+	GameEngine* game; 
 
 	glm::mat4 viewMatrix, projectionMatrix; 
 	glm::vec3 position, cameraFront, cameraUp; 
-
-
 
 	f32 FOV;
 	f32 width;
@@ -43,7 +45,7 @@ private:
 	void calculateView(); 
 
 public:
-	Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
+	Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
 	~Camera();
 
 	glm::mat4 getView();
