@@ -20,16 +20,7 @@ Chunklet::Chunklet(World& world, glm::vec3 _position) :
 
 
 	
-	for (int i = 0; i < CHUNKLET_VOLUME; i++)
-	{
-	
-		int x = i % CHUNK_SIZE;
-		int y = i / (CHUNK_SIZE * CHUNK_SIZE);
-		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
-		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
-		if(blockMap[i] == Block::STONE) 
-			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
-	}
+
 	/*
 	for(int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
@@ -50,6 +41,22 @@ Chunklet::~Chunklet()
 Block Chunklet::getBlock(glm::vec3 absolutePosition)
 {
 	return (Block) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
+}
+
+
+void Chunklet::buildMesh()
+{
+	for (int i = 0; i < CHUNKLET_VOLUME; i++)
+	{
+	
+		int x = i % CHUNK_SIZE;
+		int y = i / (CHUNK_SIZE * CHUNK_SIZE);
+		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
+		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
+		if(blockMap[i] == Block::STONE) 
+			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
+	}
+	
 }
 
 
@@ -153,9 +160,9 @@ bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 blockPos)
 	Block block;
 	//std::cout << outOfBounds(offset) << "\n"; 
 	if(outOfBounds(offset))
-		//block = world->getBlock(offset); 
-		return true;
-	//std::cout << (int) block << "\n"; 
+		block = world->getBlock(offset); 
+		//return true;
+		//std::cout << (int) block << "\n"; 
 	else
 		block = getBlock(offset); 
 

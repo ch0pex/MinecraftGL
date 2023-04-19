@@ -36,6 +36,10 @@ void World::prepareRender(RenderEngine &renderer, Camera &camera)
 
 Block World::getBlock(glm::vec3 pos)
 {
+	//std::cout << pos.x << ", " << pos.y << ", " << pos.z << "\n"; 
+	if(pos.y > 255 || pos.y < 0){ 
+		return Block::AIR; 
+	}
 	return chunksManager.getBlock(pos); 
 }
 

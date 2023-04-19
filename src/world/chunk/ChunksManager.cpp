@@ -22,17 +22,20 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 {
 
     glm::vec2 chunkPos; 
-    chunkPos.x = ((int) xzpos.x / CHUNK_SIZE) * CHUNK_SIZE;
-    chunkPos.y = ((int) xzpos.y / CHUNK_SIZE) * CHUNK_SIZE;
+    chunkPos.x = (int) ((int) xzpos.x / (int) CHUNK_SIZE);
+    chunkPos.y = (int) ((int) xzpos.y / (int) CHUNK_SIZE);
+    if(xzpos.x < 0) chunkPos.x -= 1; 
+    if(xzpos.y < 0) chunkPos.y -= 1; 
+    
+    //std::cout << "Pertenece al chunk: " << chunkPos.x << ", " << chunkPos.y << "\n"; 
 
-    //std::cout << chunkPos.x << ", " << chunkPos.y << "\n"; 
-    //std::cout << "Numero de chunks: " << chunks.size() << "\n"; 
-    for(auto& chunk : chunks){ 
-        std::cout << chunk.getPosition().x << ", " << chunk.getPosition().y << "\n";
-        if(chunk.getPosition() == chunkPos){
-            return &chunk; 
+    for(auto& chunk : chunks) {
+        if(chunk.getPosition().x == chunkPos.x && chunk.getPosition().y == chunkPos.y){
+
+            return &chunk;  
         }
     }
+
     return nullptr; 
 }
 
@@ -41,33 +44,31 @@ void ChunksManager::loadChunks()
 {
     {
     Timer t("loadChunks",TimerMode::MS); 
-    for (size_t x = 0; x < CHUNK_SIZE * 2; x++)
+    for (size_t x = 0; x <CHUNK_SIZE * 2; x++)
     {
         for (size_t z = 0; z < CHUNK_SIZE * 2; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             std::vector<Block>* blocks = generator.genChunk(pos);
-            //std::unique_lock<std::mutex> lock(mutex);
+            //std::unique_lock<std::mutex> lock(mutex); 
             chunks.push_back(Chunk(*world, pos, blocks));
-
         }
     }
     }
 
+
+    std::cout << "Chunks generated: " << chunks.size() << "\n"; 
     buildChunksMesh(); 
-
-    
     std::cout << "Chunks loaded: " << chunks.size() << "\n"; 
-
 }
 
 void ChunksManager::buildChunksMesh()
 {
     Timer t("buldMesh");
-    for(auto& chunk: chunks){
-
-        chunk.loadChunklets();
-    } 
+    std::cout << chunks.size() << "\n" ; 
+    for(auto& chunk: chunks)
+        chunk.buildMesh();
+    
 }
 
 
@@ -89,7 +90,9 @@ std::vector<Chunk>& ChunksManager::getChunks()
 Block ChunksManager::getBlock(glm::vec3 position)
 {
     Chunk* chunk = getChunk(glm::vec2(position.x, position.z));  
-    if(chunk == nullptr) return Block::AIR; 
-    return chunk->getBlock(position); 
+    if(chunk == nullptr) {
+        return Block::AIR;
+    } 
+    return chunk->getBlock(position);
 }
 

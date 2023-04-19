@@ -21,9 +21,13 @@ private:
 public:
 	Chunklet(World& world, glm::vec3 _position);
 	~Chunklet();
-	u32 getFaces(); 
+	
 	Mesh* mesh;
-	void addBlockMesh(glm::vec3 position); 
-	void bufferMesh(); 
+	u32 getFaces(); 
 	Block getBlock(glm::vec3 absolutePosition); 
+
+	void addBlockMesh(glm::vec3 position); 
+	void bufferMesh();
+	void buildMesh();  
+	
 };

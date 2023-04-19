@@ -6,6 +6,7 @@ std::vector<Block>* BasicGen::genChunk(glm::vec2 posXY)
 	int y;
 	int z;
 	std::vector<Block>* blocks = new std::vector<Block>();
+	blocks->reserve(CHUNK_VOLUME); 
 
 	for (u32 i = 0; i < CHUNK_VOLUME; i++)
 	{

@@ -17,23 +17,24 @@ Camera::Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPl
 	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
 	yaw = 0; 
 	pitch = 0; 
-
-
+	/*
 	std::cout << "Fov: " << FOV << std::endl; 
 	std::cout << "Width: " << width << std::endl; 
 	std::cout << "Height: " << height << std::endl; 
 	std::cout << "Near Plane: " << nearPlane << std::endl; 
 	std::cout << "Far Plane: " << farPlane << std::endl; 
 	std::cout << "Position: " << position.x << ", " << position.y << ", " << position.z << std::endl; 
-
+	*/
 	projectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane);
 	calculateView();
 }
+
 
 Camera::~Camera()
 {
 
 }
+
 
 void Camera::calculateView()
 {
@@ -41,10 +42,12 @@ void Camera::calculateView()
 	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp); 
 }
 
+
 glm::mat4 Camera::getView()
 {
 	return viewMatrix; 
 }
+
 
 glm::mat4 Camera::getProjection()
 {
@@ -56,11 +59,11 @@ glm::vec3 Camera::getPosition(){
 	return position; 
 }
 
+
 void Camera::setPosition(glm::vec3 _position)
 {
 	position = _position; 
 }
-
 
 
 void Camera::update()

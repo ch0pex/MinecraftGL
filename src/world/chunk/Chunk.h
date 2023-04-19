@@ -15,13 +15,17 @@ private:
 	std::vector<Chunklet*> chunklets;
 	bool buffered, builded;
 
+
 public:
 	Chunk(World& _world, glm::vec2 _position, std::vector<Block>* _blocks);
 	~Chunk();
+
 	bool isBuffered();
 	bool isBuilded(); 
-	void loadChunklets(); 
+
+	void buildMesh(); 
 	void drawChunklets(RenderEngine& renderer); 
+
 	Block getBlock(glm::vec3 position);
 	glm::vec2 getPosition(); 
 };
