@@ -2,9 +2,6 @@
 #include "RenderEngine.h"
 
 
-
-
-
 RenderEngine::RenderEngine() 
 {
 	if (!glfwInit())
@@ -51,6 +48,7 @@ RenderEngine::RenderEngine()
 
 }
 
+
 RenderEngine::~RenderEngine()
 {
 	
@@ -69,11 +67,11 @@ void RenderEngine::renderScene(Camera& camera)
 
 }
 
+
 void RenderEngine::drawChunklet(Chunklet& chunklet)
 {
 	if (chunklet.getFaces()) solidRenderer.addMesh(chunklet.mesh); 
 }
-
 
 
 bool RenderEngine::shouldClose()
@@ -86,5 +84,3 @@ GLFWwindow* RenderEngine::getWindow()
 {
 	return window; 
 }
-
-

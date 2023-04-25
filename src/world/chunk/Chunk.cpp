@@ -30,16 +30,17 @@ void Chunk::buildMesh()
 }
 
 
-
 bool Chunk::isBuffered()
 {
 	return buffered;
 }
 
+
 bool Chunk::isBuilded()
 {
 	return builded; 
 }
+
 
 void Chunk::drawChunklets(RenderEngine& renderer)
 {

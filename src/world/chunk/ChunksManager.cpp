@@ -31,7 +31,6 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 
     for(auto& chunk : chunks) {
         if(chunk.getPosition().x == chunkPos.x && chunk.getPosition().y == chunkPos.y){
-
             return &chunk;  
         }
     }
@@ -70,7 +69,6 @@ void ChunksManager::buildChunksMesh()
         chunk.buildMesh();
     
 }
-
 
 
 void ChunksManager::updateChunks(glm::vec3 playerPos)
