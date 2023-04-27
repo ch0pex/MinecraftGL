@@ -70,7 +70,8 @@ void RenderEngine::renderScene(Camera& camera)
 
 void RenderEngine::drawChunklet(Chunklet& chunklet)
 {
-	if (chunklet.getFaces()) solidRenderer.addMesh(chunklet.mesh); 
+	if (chunklet.getFaces() ) // TODO:f chunklet in frustrum
+		solidRenderer.addMesh(chunklet.mesh); 
 }
 
 

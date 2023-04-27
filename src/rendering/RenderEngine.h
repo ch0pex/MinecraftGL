@@ -8,7 +8,7 @@
 #include "../loaders/TextureLoader.h"
 #include "../loaders/ShaderLoader.h"
 #include "Camera.h"
-#include "SolidRenderer.h"
+#include "MeshRenderer.h"
 #include "../world/chunk/Chunklet.h"
 
 
@@ -16,7 +16,8 @@ class RenderEngine
 {
 private: 
 	GLFWwindow* window; 
-	SolidRenderer solidRenderer;
+	MeshRenderer solidRenderer;
+	//MeshRenderer waterRenderer; 
 
 public: 
 	RenderEngine();

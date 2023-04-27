@@ -4,7 +4,6 @@
 Chunk::Chunk(World& _world, glm::vec2 _position) : 
 	world(&_world)
 {
-
 	position = _position; 
 	buffered = false; 
 	builded = false; 
@@ -12,7 +11,6 @@ Chunk::Chunk(World& _world, glm::vec2 _position) :
 	for(int i = 0; i < CHUNK_SIZE; i++){
 		chunklets.push_back(new Chunklet(*world, glm::vec3(position.x * CHUNK_SIZE, i * CHUNK_SIZE, position.y * CHUNK_SIZE)));
 	}	
-
 }
 
 Chunk::~Chunk()
@@ -56,7 +54,6 @@ Block Chunk::getBlock(glm::vec3 position)
 {
 	int index = (int) (position.y / 16); 
 	//std::cout << index << ", " << chunklets.size() << std::endl; 
-
 	return chunklets.at(index)->getBlock(position); 
 }
 

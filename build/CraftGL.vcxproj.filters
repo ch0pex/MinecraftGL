@@ -22,10 +22,10 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp">
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\MeshRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp">
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.cpp">
@@ -78,10 +78,10 @@
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\MeshRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.h">

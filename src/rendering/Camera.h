@@ -7,6 +7,11 @@
 #include <chrono>
 #include <iostream>
 
+
+class GameEngine; 
+ 
+   
+
 enum Direction {
 	FRONT,
 	BACK,
@@ -16,9 +21,6 @@ enum Direction {
 	DOWN,
 	STATIC
 };
-
-class GameEngine; 
- 
 
 class Camera 
 {
@@ -57,11 +59,6 @@ public:
 	void move(Direction direction);
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 _position);
-
-	//float getSpeed(); 
-	//void setSpeed(GLfloat speed);
-
-	//void setDir(Direction dir); 
 
 };
 

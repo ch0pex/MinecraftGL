@@ -368,8 +368,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.cpp" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\MeshRenderer.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.cpp" />
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp" />
@@ -386,8 +386,8 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Mesh.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\MeshRenderer.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\RenderEngine.h" />
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\SolidRenderer.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\World.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunk.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.h" />

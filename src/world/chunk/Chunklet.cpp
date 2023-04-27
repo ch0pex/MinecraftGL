@@ -100,12 +100,11 @@ void Chunklet::bufferMesh()
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0); 
 
-	/*
+	
 	mesh->vertices.clear(); 
 	mesh->vertices.shrink_to_fit();
 	mesh->indices.clear(); 
 	mesh->indices.shrink_to_fit();
-	*/
 
 }
 
