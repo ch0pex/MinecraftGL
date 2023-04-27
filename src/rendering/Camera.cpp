@@ -103,7 +103,7 @@ void Camera::update()
 void Camera::move(Direction direction)
 {
 	movementDir = direction;
-	//std::cout << position.x << ", " << position.y << ", " << position.z << "\n"; 
+	std::cout << "Player pos(x,y,z): " << position.x << ", " << position.y << ", " << position.z << "\n";
 }
 
 

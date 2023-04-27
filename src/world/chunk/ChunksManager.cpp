@@ -43,7 +43,7 @@ void ChunksManager::loadChunks()
 {
     {
     Timer t("loadChunks",TimerMode::MS);  
-    for (size_t x = 0; x <CHUNK_SIZE * 2; x++)
+    for (size_t x = 0; x < CHUNK_SIZE * 2; x++)
     {
         for (size_t z = 0; z < CHUNK_SIZE * 2; z++)
         {

@@ -32,7 +32,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 GameEngine::GameEngine(): 
     running(true),
-	camera(this, 45.0f, 1920, 1080, 0.1f, 1000.0f, glm::vec3(0.0f, 270.0f, 6.0f)), 
+	camera(this, 45.0f, 1920, 1080, 0.1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)), 
     renderEngine(), 
     world()
 {
