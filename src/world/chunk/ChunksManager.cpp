@@ -42,15 +42,16 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 void ChunksManager::loadChunks()
 {
     {
-    Timer t("loadChunks",TimerMode::MS); 
+    Timer t("loadChunks",TimerMode::MS);  
     for (size_t x = 0; x <CHUNK_SIZE * 2; x++)
     {
         for (size_t z = 0; z < CHUNK_SIZE * 2; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
-            std::vector<Block>* blocks = generator.genChunk(pos);
+            Chunk chunk = Chunk(*world, pos); 
+            generator.genChunk(chunk); 
             //std::unique_lock<std::mutex> lock(mutex); 
-            chunks.push_back(Chunk(*world, pos, blocks));
+            chunks.push_back(chunk);
         }
     }
     }

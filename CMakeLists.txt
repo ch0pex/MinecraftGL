@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 project(CraftGL)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 configure_file(src/helpers/RootDir.h.in src/helpers/RootDir.h)
 
 link_directories(${PROJECT_SOURCE_DIR}/lib)

@@ -1,7 +1,7 @@
 @echo off
 
-if "%1"=="-f" (
-    cmake ..
+if "%1"=="-re" (
+    cmake .. -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 ) 
     
 cmake --build .

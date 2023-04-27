@@ -11,12 +11,22 @@ Chunklet::Chunklet(World& world, glm::vec3 _position) :
 	position.y = _position.y; 
 	position.z = _position.z; 
 
+	blockMap.reserve(CHUNKLET_VOLUME); 
 
+/*
+	for (int i = 0; i < CHUNKLET_VOLUME; i++)
+	{
+		blockMap.push_back(Block::STONE); 
+	}
+	
+	
+
+	
 	for(int i = 0; i < CHUNKLET_VOLUME; i++)
 	{
 		blockMap[i] = Block(Block::STONE);
 	}
-
+	*/	
 
 
 	
@@ -38,10 +48,7 @@ Chunklet::~Chunklet()
 }
 
 
-Block Chunklet::getBlock(glm::vec3 absolutePosition)
-{
-	return (Block) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
-}
+
 
 
 void Chunklet::buildMesh()
@@ -178,4 +185,16 @@ bool Chunklet::outOfBounds(glm::vec3 blockPos)
 	bool y = (blockPos.y >= position.y && blockPos.y < position.y + CHUNK_SIZE);
 	bool z = (blockPos.z >= position.z && blockPos.z < position.z + CHUNK_SIZE);
 	return !(x && y && z); 
+}
+
+
+Block Chunklet::getBlock(glm::vec3 absolutePosition)
+{
+	return (Block) blockMap[(int)(((absolutePosition.x - position.x) /16) + ((absolutePosition.y - position.y) *CHUNK_SIZE) + ((absolutePosition.z - position.z) * CHUNK_SIZE * CHUNK_SIZE))]; 
+}
+
+void Chunklet::setBlock(Block block)
+{
+	//TODO: Set block in position
+	blockMap.push_back(block); 
 }

@@ -63,6 +63,9 @@
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\helpers\RootDir.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -2,11 +2,12 @@
 #include "../chunk/block.h"
 #include <vector>
 #include <glm/glm/glm.hpp>
+#include "../chunk/Chunk.h"
 
 
 class BasicGen {
 public:
 	
-	static std::vector<Block>* genChunk(glm::vec2 posXY); 
+	static void genChunk(Chunk& chunk); 
 	
 };

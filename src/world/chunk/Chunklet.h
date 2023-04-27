@@ -11,7 +11,7 @@ class Chunklet {
 
 private: 
 	World* world; 
-	Block blockMap[CHUNKLET_VOLUME];
+	std::vector<Block> blockMap; //Block blockMap[CHUNKLET_VOLUME]
 	glm::vec3 position; 
 	u32 faces; 
 
@@ -24,7 +24,9 @@ public:
 	
 	Mesh* mesh;
 	u32 getFaces(); 
+
 	Block getBlock(glm::vec3 absolutePosition); 
+	void setBlock(Block block); 
 
 	void addBlockMesh(glm::vec3 position); 
 	void bufferMesh();

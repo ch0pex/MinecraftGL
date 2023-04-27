@@ -381,6 +381,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\GLDebug.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\PrimitiveTypes.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Timer.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\helpers\RootDir.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\ShaderLoader.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\TextureLoader.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\Camera.h" />

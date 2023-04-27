@@ -17,7 +17,7 @@ private:
 
 
 public:
-	Chunk(World& _world, glm::vec2 _position, std::vector<Block>* _blocks);
+	Chunk(World& _world, glm::vec2 _position);
 	~Chunk();
 
 	bool isBuffered();
@@ -27,5 +27,6 @@ public:
 	void drawChunklets(RenderEngine& renderer); 
 
 	Block getBlock(glm::vec3 position);
+	Chunklet* getChunklet(u8 Ypos);
 	glm::vec2 getPosition(); 
 };

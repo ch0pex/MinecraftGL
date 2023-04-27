@@ -1,7 +1,7 @@
 #include "Chunk.h"
 #include "../World.h"
 
-Chunk::Chunk(World& _world, glm::vec2 _position, std::vector<Block>* _blocks) : 
+Chunk::Chunk(World& _world, glm::vec2 _position) : 
 	world(&_world)
 {
 
@@ -63,4 +63,9 @@ Block Chunk::getBlock(glm::vec3 position)
 glm::vec2 Chunk::getPosition()
 {
 	return position; 
+}
+
+Chunklet* Chunk::getChunklet(u8 Ypos) 
+{
+	return chunklets.at(Ypos / 16); 
 }
