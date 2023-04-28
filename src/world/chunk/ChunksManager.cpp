@@ -7,15 +7,14 @@ ChunksManager::ChunksManager(World &_world) :
 
     std::cout << "Chunks Loading... \n";
     
-    
+    chunkLoader = std::thread([&] () {loadChunks(); });; 
 
 }
 
 
 ChunksManager::~ChunksManager()
 {
-    for(auto& thread : chunkLoaders)
-        thread.join();
+    chunkLoader.join();
 }
 
 
@@ -39,23 +38,29 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 }
 
 
-void ChunksManager::loadChunks()
+void ChunksManager::loadSection(size_t start, size_t end)
 {
-    {
     Timer t("loadChunks",TimerMode::MS);  
-    for (size_t x = 0; x < CHUNK_SIZE * 4; x++)
+    for (size_t x = start; x < end; x++)
     {
-        for (size_t z = 0; z < CHUNK_SIZE * 4; z++)
+        for (size_t z = start; z < end; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 
             generator.genChunk(chunk); 
-            //std::unique_lock<std::mutex> lock(mutex); 
+            std::unique_lock<std::mutex> lock(mutex); 
             chunks.push_back(chunk);
         }
     }
-    }
+}
 
+void ChunksManager::loadChunks()
+{
+    for(u8 i = 0; i < 4; i++)
+        sectorLoaders.emplace_back([&] () {loadSection(CHUNK_SIZE * i , (CHUNK_SIZE * i) + CHUNK_SIZE); }); 
+
+    for(auto& loader : sectorLoaders)
+        loader.join();
 
     std::cout << "Chunks generated: " << chunks.size() << "\n"; 
     buildChunksMesh(); 
