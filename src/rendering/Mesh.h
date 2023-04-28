@@ -15,6 +15,7 @@ struct Mesh{
 	u32 vao, vbo, ebo; 
 	std::vector<Vertex> vertices;
 	std::vector<u32> indices; 
+	u32 faces; 
 };
 
 

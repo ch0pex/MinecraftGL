@@ -110,14 +110,14 @@ void Chunklet::bufferMesh()
 
 u32 Chunklet::getFaces()
 {
-	return mesh->vertices.size() / 4;
+	return mesh->faces; 
 }
 
 
 
 void Chunklet::addFace(glm::vec3 position, const Vertex face[])
 {
-	faces++; 
+	mesh->faces++; 
 	u32 index_offset = mesh->vertices.size(); 
 	for (int i = 0; i < 6; i++)
 	{

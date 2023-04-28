@@ -35,6 +35,13 @@ void MeshRenderer::addMesh(Mesh* mesh)
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0); 
 
+	
+	mesh->vertices.clear();
+	mesh->vertices.shrink_to_fit();
+	mesh->indices.clear();
+	mesh->indices.shrink_to_fit();
+	
+
 	meshes.push_back(mesh);
 
 
@@ -152,7 +159,7 @@ void MeshRenderer::render(Camera& camera)
 
 	for(const auto& mesh : meshes){
 		glBindVertexArray(mesh->vao); 
-		glDrawElements(GL_TRIANGLES, mesh->indices.size(), GL_UNSIGNED_INT, 0); 
+		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0); 
 		glBindVertexArray(0); 
 
 	} 

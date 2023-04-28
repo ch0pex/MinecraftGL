@@ -6,7 +6,8 @@ ChunksManager::ChunksManager(World &_world) :
 {
 
     std::cout << "Chunks Loading... \n";
-    chunkLoaders.emplace_back([&] () {loadChunks(); }); 
+    
+    
 
 }
 
@@ -34,7 +35,6 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
             return &chunk;  
         }
     }
-
     return nullptr; 
 }
 
@@ -43,9 +43,9 @@ void ChunksManager::loadChunks()
 {
     {
     Timer t("loadChunks",TimerMode::MS);  
-    for (size_t x = 0; x < CHUNK_SIZE * 2; x++)
+    for (size_t x = 0; x < CHUNK_SIZE * 4; x++)
     {
-        for (size_t z = 0; z < CHUNK_SIZE * 2; z++)
+        for (size_t z = 0; z < CHUNK_SIZE * 4; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 
