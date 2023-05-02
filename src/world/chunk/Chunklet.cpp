@@ -4,12 +4,15 @@
 
 
 Chunklet::Chunklet(World& world, glm::vec3 _position) : 
-	world(&world) 
+	world(&world)
+	
 {
-	mesh = new Mesh(); 
+	mesh = new Mesh();
+	mesh->faces = 0; 
 	position.x = _position.x; 
 	position.y = _position.y; 
-	position.z = _position.z; 
+	position.z = _position.z;
+
 
 	blockMap.reserve(CHUNKLET_VOLUME); 
 
@@ -46,9 +49,10 @@ void Chunklet::buildMesh()
 		int y = i / (CHUNK_SIZE * CHUNK_SIZE);
 		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
 		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
-		if(blockMap[i] == Block::STONE) 
+		if(blockMap.at(i) == Block::STONE) 
 			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
 	}
+	bufferMesh(); 
 	
 }
 
@@ -143,17 +147,14 @@ bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 blockPos)
 	case BlockFace::LEFT:   offset = glm::vec3(-1, 0, 0); break;
 	case BlockFace::TOP:    offset = glm::vec3(0, 1, 0);  break;
 	case BlockFace::BOTTOM: offset = glm::vec3(0, -1, 0); break;
-	default: break;
 	}
 
 	offset += blockPos; 
 
 	Block block;
-	//std::cout << outOfBounds(offset) << "\n"; 
+
 	if(outOfBounds(offset))
 		block = world->getBlock(offset); 
-		//return true;
-		//std::cout << (int) block << "\n"; 
 	else
 		block = getBlock(offset); 
 

@@ -40,10 +40,10 @@ void ChunksManager::loadChunks()
 {
     {
     Timer t("loadChunks",TimerMode::MS);
-    chunks.reserve(CHUNK_SIZE * 4); 
-    for (size_t x = 0; x < CHUNK_SIZE * 4; x++)
+    chunks.reserve(1); 
+    for (size_t x = 0; x < 1; x++)
     {
-        for (size_t z = 0; z < CHUNK_SIZE * 4; z++)
+        for (size_t z = 0; z < 1; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 

@@ -15,37 +15,38 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::addMesh(Mesh* mesh)
 {
-	glGenVertexArrays(1, &mesh->vao);
-	glBindVertexArray(mesh->vao); 
-
-	glGenBuffers(1, &mesh->vbo); 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->vbo); 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertices.size(), &mesh->vertices[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &mesh->ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * mesh->indices.size(), &mesh->indices[0], GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0); 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<GLvoid*>(0)); 
-
-	glEnableVertexAttribArray(1); 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, Vertex::texCoords))); 
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0); 
-	glBindVertexArray(0); 
-
-	
-	mesh->vertices.clear();
-	mesh->vertices.shrink_to_fit();
-	mesh->indices.clear();
-	mesh->indices.shrink_to_fit();
-	
-
 	meshes.push_back(mesh);
-
-
 }
+
+
+void MeshRenderer::render(Camera& camera)
+{
+	glUseProgram(shader); 
+
+	u32 vpLoc = glGetUniformLocation(shader, "vp");
+	glm::mat4 vp = camera.getProjection() * camera.getView();
+
+	glUniformMatrix4fv(vpLoc, 1, GL_FALSE, glm::value_ptr(vp));
+	glBindTexture(GL_TEXTURE_2D, texture);
+	
+	for(const auto& mesh : meshes){
+		glBindVertexArray(mesh->vao); 
+		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0); 
+		glBindVertexArray(0); 
+	}
+	meshes.clear(); 
+}
+
+void MeshRenderer::setTexture(u32 _texture)
+{
+	texture = _texture; 
+}
+
+void MeshRenderer::setShader(u32 _shader)
+{
+	shader = _shader; 
+}
+
 
 void MeshRenderer::addReferenceMesh(void)
 {
@@ -143,36 +144,3 @@ void MeshRenderer::addReferenceMesh(void)
 	meshes.push_back(test_mesh); 
 }
 
-
-void MeshRenderer::render(Camera& camera)
-{
-
-
-	glUseProgram(shader); 
-
-	u32 vpLoc = glGetUniformLocation(shader, "vp");
-	glm::mat4 vp = camera.getProjection() * camera.getView();
-
-	glUniformMatrix4fv(vpLoc, 1, GL_FALSE, glm::value_ptr(vp));
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-
-	for(const auto& mesh : meshes){
-		glBindVertexArray(mesh->vao); 
-		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0); 
-		glBindVertexArray(0); 
-
-	}
-	
-
-}
-
-void MeshRenderer::setTexture(u32 _texture)
-{
-	texture = _texture; 
-}
-
-void MeshRenderer::setShader(u32 _shader)
-{
-	shader = _shader; 
-}

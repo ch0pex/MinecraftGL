@@ -1,12 +1,7 @@
 #pragma once 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <Windows.h>
-#include <iostream>
 
-#include "../common/public/CommonHeaders.h"
-#include "../loaders/TextureLoader.h"
-#include "../loaders/ShaderLoader.h"
 #include "Camera.h"
 #include "MeshRenderer.h"
 #include "../world/chunk/Chunklet.h"
@@ -14,16 +9,17 @@
 
 class RenderEngine
 {
-private: 
+private:
+	Camera& camera; 
 	GLFWwindow* window; 
 	MeshRenderer solidRenderer;
 	//MeshRenderer waterRenderer; 
 
 public: 
-	RenderEngine();
+	RenderEngine(Camera& _camera);
 	~RenderEngine();
 
-	void renderScene(Camera& camera); 
+	void renderScene(); 
 	bool shouldClose(); 
 
 	void drawChunklet(Chunklet& chunklet); 

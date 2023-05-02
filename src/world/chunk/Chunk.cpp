@@ -13,6 +13,7 @@ Chunk::Chunk(World& _world, glm::vec2 _position) :
 	}	
 }
 
+
 Chunk::~Chunk()
 {
 
@@ -24,7 +25,8 @@ void Chunk::buildMesh()
 	//std::cout << chunklets.size() << "\n"; 
 	for(auto& chunklet : chunklets) 
 		chunklet->buildMesh(); 
-	builded = true; 
+	builded = true;
+	buffered = true; 
 }
 
 
@@ -46,7 +48,7 @@ void Chunk::drawChunklets(RenderEngine& renderer)
 	for(const auto& chunklet : chunklets){
 		renderer.drawChunklet(*chunklet); 
 	}
-	buffered = true; 
+
 }
 
 
@@ -57,10 +59,12 @@ Block Chunk::getBlock(glm::vec3 position)
 	return chunklets.at(index)->getBlock(position); 
 }
 
+
 glm::vec2 Chunk::getPosition()
 {
 	return position; 
 }
+
 
 Chunklet* Chunk::getChunklet(u8 Ypos) 
 {

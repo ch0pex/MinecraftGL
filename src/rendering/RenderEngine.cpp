@@ -1,8 +1,14 @@
 
 #include "RenderEngine.h"
+#include <Windows.h>
+#include <iostream>
 
+#include "../common/public/CommonHeaders.h"
+#include "../loaders/TextureLoader.h"
+#include "../loaders/ShaderLoader.h"
 
-RenderEngine::RenderEngine() 
+RenderEngine::RenderEngine(Camera& _camera) :
+	camera(_camera)
 {
 	if (!glfwInit())
 	{
@@ -36,8 +42,8 @@ RenderEngine::RenderEngine()
 	glCullFace(GL_FRONT);
 
 
-	u32 shader = ShaderLoader::createProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs"); 
-	u32 texture = TextureLoader::loadTexture("res/textures/stone.jpg"); 
+	const u32 shader = ShaderLoader::createProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs"); 
+	const u32 texture = TextureLoader::loadTexture("res/textures/stone.jpg"); 
 
 	solidRenderer.setTexture(texture);
 	solidRenderer.setShader(shader);
@@ -55,14 +61,15 @@ RenderEngine::~RenderEngine()
 }
 
 
-void RenderEngine::renderScene(Camera& camera)
+void RenderEngine::renderScene()
 {
     	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.4f, 5.0f, 0.75f, 1.0);
 
 		solidRenderer.render(camera); 
+		//waterRenderer
+		//floraRenderer
 	
-
         glfwSwapBuffers(window);
 
 }
@@ -70,7 +77,7 @@ void RenderEngine::renderScene(Camera& camera)
 
 void RenderEngine::drawChunklet(Chunklet& chunklet)
 {
-	if (chunklet.getFaces()) // TODO:f chunklet in frustrum
+	if (chunklet.getFaces() && camera.inFrustum(chunklet)) // TODO:f chunklet in frustrum
 		solidRenderer.addMesh(chunklet.mesh); 
 }
 

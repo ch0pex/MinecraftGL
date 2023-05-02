@@ -13,7 +13,6 @@ private:
 	World* world; 
 	std::vector<Block> blockMap; //Block blockMap[CHUNKLET_VOLUME]
 	glm::vec3 position; 
-	u32 faces; 
 
 	void addFace(glm::vec3 position, const Vertex face[]); 
 	bool tryToAddFace(BlockFace blockFace, glm::vec3 blockPos);
