@@ -19,7 +19,7 @@ private:
 	std::vector<std::thread> sectorLoaders; 
 	std::mutex mutex; 
 
-	void loadSection(size_t start, size_t end);
+	void loadSection(size_t Xstart, size_t Xend, size_t Zstart, size_t Zend);
 	void loadChunks(); 
 
 	Chunk* getChunk(glm::vec2 xzpos);

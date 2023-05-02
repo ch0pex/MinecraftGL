@@ -6,7 +6,6 @@ ChunksManager::ChunksManager(World &_world) :
 {
 
     std::cout << "Chunks Loading... \n";
-    
     chunkLoader = std::thread([&] () {loadChunks(); });; 
 
 }
@@ -38,30 +37,38 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 }
 
 
-void ChunksManager::loadSection(size_t start, size_t end)
+void ChunksManager::loadSection(size_t Xstart, size_t Xend , size_t Zstart, size_t Zend)
 {
-    Timer t("loadChunks",TimerMode::MS);  
-    for (size_t x = start; x < end; x++)
+    Timer t("(section)",TimerMode::MS);
+    std::vector<Chunk> temp;
+    temp.reserve(CHUNK_SIZE * CHUNK_SIZE); 
+    for (size_t x = Xstart; x < Xend; x++)
     {
-        for (size_t z = start; z < end; z++)
+        for (size_t z = Zstart; z < Zend; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 
             generator.genChunk(chunk); 
-            std::unique_lock<std::mutex> lock(mutex); 
-            chunks.push_back(chunk);
+            //std::unique_lock<std::mutex> lock(mutex); 
+            temp.push_back(chunk);
         }
     }
+    chunks.insert(chunks.end(), temp.begin(), temp.end());
 }
 
 void ChunksManager::loadChunks()
 {
-    for(u8 i = 0; i < 4; i++)
-        sectorLoaders.emplace_back([&] () {loadSection(CHUNK_SIZE * i , (CHUNK_SIZE * i) + CHUNK_SIZE); }); 
+    {
+    Timer t("loadchunks",TimerMode::MS);
+    chunks.reserve(CHUNK_SIZE * CHUNK_SIZE * 4); 
+    sectorLoaders.emplace_back([&] () {loadSection(0, CHUNK_SIZE * 2, 0, CHUNK_SIZE * 2);});
+    sectorLoaders.emplace_back([&](){loadSection(0, CHUNK_SIZE * 2, CHUNK_SIZE * 2, CHUNK_SIZE * 4);});
+    sectorLoaders.emplace_back([&](){loadSection(CHUNK_SIZE * 2, CHUNK_SIZE * 4, 0, CHUNK_SIZE * 2);});
+    sectorLoaders.emplace_back([&](){loadSection(CHUNK_SIZE * 2, CHUNK_SIZE * 4, CHUNK_SIZE * 2, CHUNK_SIZE * 4);});
 
     for(auto& loader : sectorLoaders)
         loader.join();
-
+    }
     std::cout << "Chunks generated: " << chunks.size() << "\n"; 
     buildChunksMesh(); 
     std::cout << "Chunks loaded: " << chunks.size() << "\n"; 
