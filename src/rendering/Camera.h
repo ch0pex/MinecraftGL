@@ -1,12 +1,8 @@
 #pragma once 
-#include <GL/glew.h>
 #include <glm/glm/glm.hpp>
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include "../common/public/CommonHeaders.h"
-#include <thread>
-#include <chrono>
-#include <iostream>
-
+#include "../math/frustrum.h"
 
 class GameEngine; 
  
@@ -44,7 +40,8 @@ private:
 
 	Direction movementDir;
 	f32 movementSpeed;
-	void calculateView(); 
+	void calculateView();
+	Frustum frustum; 
 
 public:
 	Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
@@ -60,5 +57,9 @@ public:
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 _position);
 
+
+	bool inFrustum(Chunklet& chunklet); 
+	friend class Frustum; 
+	
 };
 

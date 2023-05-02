@@ -145,3 +145,8 @@ void Camera::mousePosToFront(double xpos, double ypos)
 	cameraFront = glm::normalize(direction);
 	calculateView();
 }
+
+bool Camera::inFrustum(Chunklet& chunklet)
+{
+    return (true); 
+}

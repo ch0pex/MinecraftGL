@@ -52,7 +52,7 @@ void Chunk::drawChunklets(RenderEngine& renderer)
 
 Block Chunk::getBlock(glm::vec3 position)
 {
-	int index = (int) (position.y / 16); 
+	int index = static_cast<int>(position.y / 16); 
 	//std::cout << index << ", " << chunklets.size() << std::endl; 
 	return chunklets.at(index)->getBlock(position); 
 }

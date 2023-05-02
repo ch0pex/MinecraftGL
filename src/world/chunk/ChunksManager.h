@@ -15,7 +15,6 @@ private:
 	BasicGen generator; 
 	
 	std::vector<Chunk> chunks;
-	std::thread chunkLoader; 
 	std::vector<std::thread> chunkLoaders; 
 	std::mutex mutex; 
 

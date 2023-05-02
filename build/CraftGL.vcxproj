@@ -361,6 +361,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\math\frustum.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\GLDebug.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\Timer.cpp" />
@@ -375,6 +376,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\Chunklet.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\ChunksManager.cpp" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\generators\BasicGen.cpp" />
+    <ClInclude Include="..\src\math\frustrum.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\GameEngine.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\CommonHeaders.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\Constants.h" />

@@ -1,7 +1,8 @@
 #pragma once
-#include <GL/glew.h>
 #include <glm/glm/glm.hpp>
-#include "../common/public/CommonHeaders.h"
+#include "../world/chunk/chunklet.h"
+
+class Camera;
 
 struct Plane
 {
@@ -12,8 +13,9 @@ struct Plane
     float distance = 0.f;             
 };
 
- struct Frustum
+ class Frustum
 {
+ private:
     Plane topFace;
     Plane bottomFace;
 
@@ -22,6 +24,10 @@ struct Plane
 
     Plane farFace;
     Plane nearFace;
+ public:
+     void update(Camera& camera);
+
+     
+     
 };
-    
 

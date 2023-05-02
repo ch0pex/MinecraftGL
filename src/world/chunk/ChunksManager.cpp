@@ -4,11 +4,8 @@
 ChunksManager::ChunksManager(World &_world) : 
     world(&_world)
 {
-
     std::cout << "Chunks Loading... \n";
-    
-    
-
+    chunkLoaders.emplace_back([&](){loadChunks();});
 }
 
 
@@ -23,8 +20,8 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 {
 
     glm::vec2 chunkPos; 
-    chunkPos.x = (int) ((int) xzpos.x / (int) CHUNK_SIZE);
-    chunkPos.y = (int) ((int) xzpos.y / (int) CHUNK_SIZE);
+    chunkPos.x = (int) (static_cast<int>(xzpos.x) / static_cast<int>(CHUNK_SIZE));
+    chunkPos.y = (int) (static_cast<int>(xzpos.y) / static_cast<int>(CHUNK_SIZE));
     if(xzpos.x < 0) chunkPos.x -= 1; 
     if(xzpos.y < 0) chunkPos.y -= 1; 
     
@@ -42,14 +39,15 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
 void ChunksManager::loadChunks()
 {
     {
-    Timer t("loadChunks",TimerMode::MS);  
+    Timer t("loadChunks",TimerMode::MS);
+    chunks.reserve(CHUNK_SIZE * 4); 
     for (size_t x = 0; x < CHUNK_SIZE * 4; x++)
     {
         for (size_t z = 0; z < CHUNK_SIZE * 4; z++)
         {
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 
-            generator.genChunk(chunk); 
+            BasicGen::genChunk(chunk); 
             //std::unique_lock<std::mutex> lock(mutex); 
             chunks.push_back(chunk);
         }
@@ -69,7 +67,7 @@ void ChunksManager::buildChunksMesh()
     for(auto& chunk: chunks)
         chunk.buildMesh();
     
-}
+}   
 
 
 void ChunksManager::updateChunks(glm::vec3 playerPos)

@@ -27,7 +27,7 @@ void MeshRenderer::addMesh(Mesh* mesh)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * mesh->indices.size(), &mesh->indices[0], GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0); 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0); 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<GLvoid*>(0)); 
 
 	glEnableVertexAttribArray(1); 
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, Vertex::texCoords))); 
@@ -132,7 +132,7 @@ void MeshRenderer::addReferenceMesh(void)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * test_mesh->indices.size(), &test_mesh->indices[0], GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0); 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)0); 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<GLvoid*>(0)); 
 
 	glEnableVertexAttribArray(1); 
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, Vertex::texCoords))); 
@@ -162,7 +162,8 @@ void MeshRenderer::render(Camera& camera)
 		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0); 
 		glBindVertexArray(0); 
 
-	} 
+	}
+	
 
 }
 
