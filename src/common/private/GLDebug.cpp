@@ -1,5 +1,6 @@
 #include "../Public/GLDebug.h"
 
+
 GLenum checkError_(const char *file, int line)
 {
     GLenum errorCode;

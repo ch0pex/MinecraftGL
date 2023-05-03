@@ -26,7 +26,7 @@ void World::update(Camera& camera)
 void World::prepareRender(RenderEngine &renderer, Camera &camera)
 {
 	for (auto& chunk : chunksManager.getChunks()){
-		if(chunk.isBuilded() && chunk.isBuffered()){
+		if(chunk.isBuilded() && chunk.isBuffered() && camera.inFrustum(chunk)){
 			chunk.drawChunklets(renderer); // Pass camera 
 		}
 	}

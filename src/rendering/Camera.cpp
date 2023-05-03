@@ -119,22 +119,22 @@ void Camera::mousePosToFront(double xpos, double ypos)
 		firstMouse = false;
 	}
 
-	double xoffset = xpos - lastX;
-	double yoffset = lastY - ypos;
+	double xOffset = xpos - lastX;
+	double yOffset = lastY - ypos;
 	lastX = xpos;
 	lastY = ypos;
 
-	double sensitivity = 0.1f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
+	constexpr double sensitivity = 0.1;
+	xOffset *= sensitivity;
+	yOffset *= sensitivity;
 
-	yaw += xoffset;
-	pitch += yoffset;
+	yaw += xOffset;
+	pitch += yOffset;
 
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
+	if (pitch > 89.0)
+		pitch = 89.0;
+	if (pitch < -89.0)
+		pitch = -89.0;
 
 	glm::vec3 direction;
 	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
@@ -149,4 +149,9 @@ void Camera::mousePosToFront(double xpos, double ypos)
 bool Camera::inFrustum(Chunklet& chunklet)
 {
     return (true); 
+}
+
+bool Camera::inFrustum(Chunk& chunk)
+{
+	return (true); 
 }

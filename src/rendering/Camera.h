@@ -4,8 +4,9 @@
 #include "../common/public/CommonHeaders.h"
 #include "../math/frustrum.h"
 
+
 class GameEngine; 
- 
+class Chunk;  
    
 
 enum Direction {
@@ -58,7 +59,8 @@ public:
 	void setPosition(glm::vec3 _position);
 
 
-	bool inFrustum(Chunklet& chunklet); 
+	bool inFrustum(Chunklet& chunklet);
+	bool inFrustum(Chunk& chunk);
 	friend class Frustum; 
 	
 };

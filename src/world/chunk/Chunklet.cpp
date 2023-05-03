@@ -52,7 +52,7 @@ void Chunklet::buildMesh()
 		if(blockMap.at(i) == Block::STONE) 
 			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
 	}
-	bufferMesh(); 
+	if (mesh->faces) bufferMesh(); 
 	
 }
 
@@ -86,7 +86,8 @@ void Chunklet::bufferMesh()
 {
 	glGenVertexArrays(1, &mesh->vao);
 	glBindVertexArray(mesh->vao); 
-
+	glCheckError(); 
+	
 	glGenBuffers(1, &mesh->vbo); 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->vbo); 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertices.size(), &mesh->vertices[0], GL_STATIC_DRAW);
@@ -105,9 +106,9 @@ void Chunklet::bufferMesh()
 	glBindVertexArray(0); 
 
 	
-	mesh->vertices.clear(); 
+	mesh->vertices.clear();
 	mesh->vertices.shrink_to_fit();
-	mesh->indices.clear(); 
+	mesh->indices.clear();
 	mesh->indices.shrink_to_fit();
 
 }
@@ -131,7 +132,6 @@ void Chunklet::addFace(glm::vec3 position, const Vertex face[])
 			mesh->vertices.push_back(vertex);
 		}
 		mesh->indices.push_back(FACE_INDEX[i] + index_offset);
-
 	}
 }
 

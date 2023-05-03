@@ -29,9 +29,11 @@ void MeshRenderer::render(Camera& camera)
 	glUniformMatrix4fv(vpLoc, 1, GL_FALSE, glm::value_ptr(vp));
 	glBindTexture(GL_TEXTURE_2D, texture);
 	
-	for(const auto& mesh : meshes){
+	for(const auto& mesh : meshes)
+	{
 		glBindVertexArray(mesh->vao); 
-		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0); 
+		glDrawElements(GL_TRIANGLES, mesh->faces * 6, GL_UNSIGNED_INT, 0);
+		glCheckError();
 		glBindVertexArray(0); 
 	}
 	meshes.clear(); 

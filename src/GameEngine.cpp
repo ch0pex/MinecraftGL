@@ -30,15 +30,15 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 }
 
 
-GameEngine::GameEngine(): 
+GameEngine::GameEngine() : 
     running(true),
 	camera(this, 45.0f, 1920, 1080, 0.1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)), 
-    renderEngine(camera), 
-    world()
+    renderEngine(camera)
 {
+ 
     cameraPointer = &camera;
     cameraThread = std::thread(&Camera::update, &camera); 
-
+    
 	glfwSetKeyCallback(renderEngine.getWindow(), key_callback);
 	glfwSetCursorPosCallback(renderEngine.getWindow(), mouse_callback);
 }
@@ -46,7 +46,6 @@ GameEngine::GameEngine():
 
 GameEngine::~GameEngine()
 {
-    
     cameraThread.join(); 
 }
 

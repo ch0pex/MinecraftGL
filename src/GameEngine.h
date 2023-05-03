@@ -10,20 +10,19 @@
 #include "rendering/RenderEngine.h"
 #include "rendering/Camera.h"
 #include "world/World.h"
+
 #include <thread> 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
 
 class GameEngine
 {
-private: 
-	RenderEngine renderEngine; 
-	Camera camera; 
+private:
+	bool running;
+	Camera camera;
+	RenderEngine renderEngine;
 	World world;
-	std::thread cameraThread; 
-	bool running; 
-
+	std::thread cameraThread;
 
 public: 
 	bool isRunning(); 
@@ -32,3 +31,5 @@ public:
 	void loop(); 
 
 };
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);

@@ -23,7 +23,7 @@ Chunk::~Chunk()
 void Chunk::buildMesh()
 {
 	//std::cout << chunklets.size() << "\n"; 
-	for(auto& chunklet : chunklets) 
+	for(auto& chunklet : chunklets)
 		chunklet->buildMesh(); 
 	builded = true;
 	buffered = true; 
