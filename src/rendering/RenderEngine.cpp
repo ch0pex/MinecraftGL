@@ -59,19 +59,20 @@ void RenderEngine::renderScene(Camera& camera)
 {
     	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.4f, 5.0f, 0.75f, 1.0);
-
-		solidRenderer.render(camera); 
 	
-
+		solidRenderer.render(camera);
+		//waterRenderer.render(camera);
+		//floraRenderer.render(camera);
+	
         glfwSwapBuffers(window);
-
 }
 
 
 void RenderEngine::drawChunklet(Chunklet& chunklet)
 {
-	if (chunklet.getFaces()) // TODO:f chunklet in frustrum
-		solidRenderer.addMesh(chunklet.mesh); 
+	solidRenderer.addMesh(&chunklet.mesh->renderInfo);
+	//waterRenderer.addMesh(&chunklet.waterMesh->renderInfo);
+	//floraRenderer.addMesh(&chunklet.floraMesh->renderInfo);
 }
 
 

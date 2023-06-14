@@ -1,33 +1,32 @@
 #pragma once
 #include <glm/glm/glm.hpp>
-#include "../world/chunk/chunklet.h"
+#include "../common/public/CommonHeaders.h"
+
 
 class Camera;
 
-struct Plane
-{
-    // unit vector
-    glm::vec3 normal = { 0.f, 1.f, 0.f };
+//Enum with the faces of the frustum
+enum Faces {
+    Near = 0,
+    Far,
+    Bottom,
+    Top,
+    Left,
+    Right
+};
 
-    // distance from origin to the nearest point in the plane
-    float distance = 0.f;             
+struct Plane {
+    glm::vec3 normal = { 0.f, 1.f, 0.f };
+    f32 distance = 0.f;             
 };
 
  class Frustum
 {
- private:
-    Plane topFace;
-    Plane bottomFace;
-
-    Plane rightFace;
-    Plane leftFace;
-
-    Plane farFace;
-    Plane nearFace;
  public:
-     void update(Camera& camera);
-
-     
+     void update(const glm::mat4 projectionMatrix);
+     bool isPointInside(glm::vec3 point);
+ private:
+     Plane planes[6];
      
 };
 

@@ -24,8 +24,6 @@ Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
     chunkPos.y = (int) (static_cast<int>(xzpos.y) / static_cast<int>(CHUNK_SIZE));
     if(xzpos.x < 0) chunkPos.x -= 1; 
     if(xzpos.y < 0) chunkPos.y -= 1; 
-    
-    //std::cout << "Pertenece al chunk: " << chunkPos.x << ", " << chunkPos.y << "\n"; 
 
     for(auto& chunk : chunks) {
         if(chunk.getPosition().x == chunkPos.x && chunk.getPosition().y == chunkPos.y){
@@ -40,7 +38,7 @@ void ChunksManager::loadChunks()
 {
     {
     Timer t("loadChunks",TimerMode::MS);
-    chunks.reserve(CHUNK_SIZE * 4); 
+    chunks.reserve(CHUNK_SIZE * CHUNK_SIZE * 16); 
     for (size_t x = 0; x < CHUNK_SIZE * 4; x++)
     {
         for (size_t z = 0; z < CHUNK_SIZE * 4; z++)
@@ -48,7 +46,7 @@ void ChunksManager::loadChunks()
             glm::vec2 pos = glm::vec2(x, z);
             Chunk chunk = Chunk(*world, pos); 
             BasicGen::genChunk(chunk); 
-            //std::unique_lock<std::mutex> lock(mutex); 
+            std::unique_lock<std::mutex> lock(mutex); 
             chunks.push_back(chunk);
         }
     }
@@ -72,8 +70,11 @@ void ChunksManager::buildChunksMesh()
 
 void ChunksManager::updateChunks(glm::vec3 playerPos)
 {
-   //TODO: load and unload chunks depending on player/cam position 
-
+    //TODO: load and unload chunks depending on player/cam position
+    for(auto &chunk : chunks) {
+        if(chunk.isBuilded() && !chunk.isBuffered()) 
+            chunk.bufferChunklets(); 
+    }
 }
 
 

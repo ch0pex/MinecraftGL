@@ -11,11 +11,15 @@ struct Vertex{
 	glm::vec2 texCoords; 
 };
 
+struct RenderInfo{
+	u32 vao, faces; 
+};
+
 struct Mesh{
-	u32 vao, vbo, ebo; 
+	RenderInfo renderInfo;
+	u32 vbo, ebo; 
 	std::vector<Vertex> vertices;
 	std::vector<u32> indices; 
-	u32 faces; 
 };
 
 

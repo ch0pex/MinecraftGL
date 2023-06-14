@@ -23,8 +23,9 @@ public:
 	bool isBuffered();
 	bool isBuilded(); 
 
-	void buildMesh(); 
-	void drawChunklets(RenderEngine& renderer); 
+	void buildMesh();
+	void bufferChunklets();
+	void drawChunklets(RenderEngine& renderer, Camera& camera); 
 
 	Block getBlock(glm::vec3 position);
 	Chunklet* getChunklet(u8 Ypos);

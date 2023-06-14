@@ -27,6 +27,12 @@ void Chunk::buildMesh()
 	builded = true; 
 }
 
+void Chunk::bufferChunklets()
+{
+	for(auto chunklet : chunklets)
+		chunklet->bufferMesh();
+	buffered = true;
+}
 
 bool Chunk::isBuffered()
 {
@@ -40,13 +46,11 @@ bool Chunk::isBuilded()
 }
 
 
-void Chunk::drawChunklets(RenderEngine& renderer)
+void Chunk::drawChunklets(RenderEngine& renderer, Camera& camera)
 {
-
-	for(const auto& chunklet : chunklets){
-		renderer.drawChunklet(*chunklet); 
-	}
-	buffered = true; 
+	for(const auto& chunklet : chunklets)
+		if (chunklet->getFaces() && camera.inFrustrum(*chunklet)) // TODO:f chunklet in frustrum
+			renderer.drawChunklet(*chunklet); 
 }
 
 

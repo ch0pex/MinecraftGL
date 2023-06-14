@@ -52,6 +52,11 @@ void Chunklet::buildMesh()
 	
 }
 
+glm::vec3 Chunklet::getPosition()
+{
+	return position;
+}
+
 
 void Chunklet::addBlockMesh(glm::vec3 position)
 {
@@ -80,8 +85,10 @@ void Chunklet::addBlockMesh(glm::vec3 position)
 
 void Chunklet::bufferMesh()
 {
-	glGenVertexArrays(1, &mesh->vao);
-	glBindVertexArray(mesh->vao); 
+
+	if(getFaces() == 0) return;
+	glGenVertexArrays(1, &mesh->renderInfo.vao);
+	glBindVertexArray(mesh->renderInfo.vao); 
 
 	glGenBuffers(1, &mesh->vbo); 
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->vbo); 
@@ -99,25 +106,23 @@ void Chunklet::bufferMesh()
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); 
 	glBindVertexArray(0); 
-
 	
 	mesh->vertices.clear(); 
 	mesh->vertices.shrink_to_fit();
 	mesh->indices.clear(); 
 	mesh->indices.shrink_to_fit();
-
 }
 
 u32 Chunklet::getFaces()
 {
-	return mesh->faces; 
+	return mesh->renderInfo.faces;
 }
 
 
 
 void Chunklet::addFace(glm::vec3 position, const Vertex face[])
 {
-	mesh->faces++; 
+	mesh->renderInfo.faces++; 
 	u32 index_offset = mesh->vertices.size(); 
 	for (int i = 0; i < 6; i++)
 	{

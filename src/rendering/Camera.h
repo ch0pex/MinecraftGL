@@ -3,10 +3,9 @@
 #include <glm/glm/gtc/matrix_transform.hpp>
 #include "../common/public/CommonHeaders.h"
 #include "../math/frustrum.h"
+#include "../world/Chunk/Chunklet.h"
 
 class GameEngine; 
- 
-   
 
 enum Direction {
 	FRONT,
@@ -20,29 +19,6 @@ enum Direction {
 
 class Camera 
 {
-private:
-	GameEngine* game; 
-
-	glm::mat4 viewMatrix, projectionMatrix; 
-	glm::vec3 position, cameraFront, cameraUp; 
-
-	f32 FOV;
-	f32 width;
-	f32 height;
-	f32 nearPlane;
-	f32 farPlane;
-
-	bool firstMouse; 
-	f64 lastX; 
-	f64 lastY;
-	f64 yaw;
-	f64 pitch;
-
-	Direction movementDir;
-	f32 movementSpeed;
-	void calculateView();
-	Frustum frustum; 
-
 public:
 	Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
 	~Camera();
@@ -57,9 +33,31 @@ public:
 	glm::vec3 getPosition();
 	void setPosition(glm::vec3 _position);
 
+	float* getViewProjValuePtr();
+	bool inFrustrum(Chunklet& chunklet);
+	friend class Frustum;
 
-	bool inFrustum(Chunklet& chunklet); 
-	friend class Frustum; 
-	
+private:
+	GameEngine* game;
+	Frustum frustum;
+
+	glm::mat4 viewMatrix, projectionMatrix, viewProjMatrix;
+	glm::vec3 position, cameraFront, cameraUp, cameraRight;
+
+	f32 FOV;
+	f32 width;
+	f32 height;
+	f32 nearPlane;
+	f32 farPlane;
+	f32 movementSpeed;
+
+	bool firstMouse;
+	f64 lastX;
+	f64 lastY;
+	f64 yaw;
+	f64 pitch;
+
+	Direction movementDir;
+	void calculateViewProj();
 };
 

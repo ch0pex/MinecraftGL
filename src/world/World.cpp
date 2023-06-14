@@ -27,8 +27,8 @@ void World::prepareRender(RenderEngine &renderer, Camera &camera)
 {
 	// TODO: Render not more further than RENDER MAX DISTANCE
 	for (auto& chunk : chunksManager.getChunks()){
-		if(chunk.isBuilded() && !chunk.isBuffered()){
-			chunk.drawChunklets(renderer); // Pass camera 
+		if(chunk.isBuilded() && chunk.isBuffered()){
+			chunk.drawChunklets(renderer,camera); // Pass camera 
 		}
 	}
 }

@@ -21,6 +21,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         cameraPointer->move(UP);
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
 }
 
 
@@ -29,18 +30,17 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
     cameraPointer->mousePosToFront(xpos, ypos); 
 }
 
-
 GameEngine::GameEngine(): 
     running(true),
-	camera(this, 45.0f, 1920, 1080, 0.1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)), 
+    camera(this, 45.0f, 1920, 1080, .1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)), 
     renderEngine(), 
     world()
 {
     cameraPointer = &camera;
     cameraThread = std::thread(&Camera::update, &camera); 
 
-	glfwSetKeyCallback(renderEngine.getWindow(), key_callback);
-	glfwSetCursorPosCallback(renderEngine.getWindow(), mouse_callback);
+    glfwSetKeyCallback(renderEngine.getWindow(), key_callback);
+    glfwSetCursorPosCallback(renderEngine.getWindow(), mouse_callback);
 }
 
 

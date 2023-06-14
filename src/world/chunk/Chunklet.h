@@ -30,6 +30,8 @@ public:
 
 	void addBlockMesh(glm::vec3 position); 
 	void bufferMesh();
-	void buildMesh();  
+	void buildMesh();
+
+	glm::vec3 getPosition();
 	
 };

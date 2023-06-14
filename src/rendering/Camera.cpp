@@ -14,19 +14,12 @@ Camera::Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPl
 	position = _position; 
 	movementSpeed = 0.5f; 
 	cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); 
-	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f); 
+	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+	cameraRight = glm::normalize(glm::cross(cameraUp, cameraFront)); 
 	yaw = 0; 
 	pitch = 0; 
-	/*
-	std::cout << "Fov: " << FOV << std::endl; 
-	std::cout << "Width: " << width << std::endl; 
-	std::cout << "Height: " << height << std::endl; 
-	std::cout << "Near Plane: " << nearPlane << std::endl; 
-	std::cout << "Far Plane: " << farPlane << std::endl; 
-	std::cout << "Position: " << position.x << ", " << position.y << ", " << position.z << std::endl; 
-	*/
 	projectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane);
-	calculateView();
+	calculateViewProj();
 }
 
 
@@ -36,10 +29,11 @@ Camera::~Camera()
 }
 
 
-void Camera::calculateView()
+void Camera::calculateViewProj()
 {
-
-	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp); 
+	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp);
+	viewMatrix += glm::translate(viewMatrix, -position); 
+	viewProjMatrix = projectionMatrix * viewMatrix;
 }
 
 
@@ -65,38 +59,42 @@ void Camera::setPosition(glm::vec3 _position)
 	position = _position; 
 }
 
+float* Camera::getViewProjValuePtr()
+{
+	return glm::value_ptr(viewProjMatrix); 
+}
+
 
 void Camera::update()
 {
 	while(game->isRunning()){
-	std::this_thread::sleep_for(std::chrono::milliseconds(1));
-	switch (movementDir)
-	{
-	case FRONT:
-		position += movementSpeed * cameraFront;
-		break;
-	case BACK:
-		position -= movementSpeed * cameraFront;
-		break;
-	case RIGHT:
-		position += glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
-		break;
-	case LEFT:
-		position -= glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
-		break;
-	case UP:
-		position += movementSpeed * cameraUp;
-		break;
-	case DOWN:
-		position -= movementSpeed * cameraUp;
-		break;
-	default:
-		break;
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		switch (movementDir)
+		{
+		case FRONT:
+			position += movementSpeed * cameraFront;
+			break;
+		case BACK:
+			position -= movementSpeed * cameraFront;
+			break;
+		case RIGHT:
+			position += glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
+			break;
+		case LEFT:
+			position -= glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
+			break;
+		case UP:
+			position += movementSpeed * cameraUp;
+			break;
+		case DOWN:
+			position -= movementSpeed * cameraUp;
+			break;
+		default:
+			break;
+		}
+		calculateViewProj();
+		frustum.update(viewProjMatrix);
 	}
-	calculateView();
-	}
-
-
 }
 
 
@@ -105,7 +103,6 @@ void Camera::move(Direction direction)
 	movementDir = direction;
 	//std::cout << "Player pos(x,y,z): " << position.x << ", " << position.y << ", " << position.z << "\n";
 }
-
 
 
 void Camera::mousePosToFront(double xpos, double ypos)
@@ -143,10 +140,13 @@ void Camera::mousePosToFront(double xpos, double ypos)
 	
 
 	cameraFront = glm::normalize(direction);
-	calculateView();
+	//cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
+	//cameraUp = glm::normalize(glm::cross(cameraRight, cameraFront));
+	calculateViewProj();
+	frustum.update(viewProjMatrix);
 }
 
-bool Camera::inFrustum(Chunklet& chunklet)
+bool Camera::inFrustrum(Chunklet& chunklet)
 {
-    return (true); 
+	return frustum.isPointInside(chunklet.getPosition() + glm::vec3(8.f, 8.f, 8.f));
 }
