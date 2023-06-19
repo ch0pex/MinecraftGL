@@ -2,13 +2,10 @@
 #include "../rendering/RenderEngine.h"
 #include "chunk/ChunksManager.h"
 #include "../rendering/Camera.h"
-#include <iostream>
+
 
 class World {
 
-private: 
-	ChunksManager chunksManager; 
-	
 public:
 	World();
 	~World();
@@ -16,5 +13,9 @@ public:
 	void update(Camera& camera); 
 	void prepareRender(RenderEngine& renderer, Camera& camera); 
 	
-	Block getBlock(glm::vec3 pos); 
+	Block getBlock(glm::vec3 pos);
+
+private: 
+	ChunksManager chunksManager; 
+	
 };

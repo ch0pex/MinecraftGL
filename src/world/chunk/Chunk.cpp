@@ -15,7 +15,8 @@ Chunk::Chunk(World& _world, glm::vec2 _position) :
 
 Chunk::~Chunk()
 {
-
+	/*for(auto chunklet : chunklets)
+		delete (chunklet);*/
 }
 
 

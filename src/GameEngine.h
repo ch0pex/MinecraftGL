@@ -1,34 +1,30 @@
 #pragma once
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <Windows.h>
-#include <iostream>
-#include <ft2build.h>
-#include FT_FREETYPE_H
+//#include <ft2build.h>
 
-
+#include "gameStateMachine/GameStateManager.h"
 #include "rendering/RenderEngine.h"
-#include "rendering/Camera.h"
+#include "player/Player.h"
 #include "world/World.h"
-#include <thread> 
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos); 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+
+struct Game {
+	RenderEngine renderEngine;
+	Player player;
+	World world;
+};
 
 class GameEngine
 {
-private: 
-	RenderEngine renderEngine; 
-	Camera camera; 
-	World world;
-	std::thread cameraThread; 
-	bool running; 
-
-
-public: 
-	bool isRunning(); 
+public:
 	GameEngine();
 	~GameEngine();
-	void loop(); 
-
+	void loop();
+	
+private:
+	Game *game;
+	GameStateManager stateMachine;
 };

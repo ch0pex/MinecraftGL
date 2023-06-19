@@ -1,6 +1,6 @@
 #include "GameEngine.h"
 
-int main(void)
+int main()
 {
     GameEngine gameEngine; 
     gameEngine.loop();

@@ -48,7 +48,7 @@ void Frustum::update(const glm::mat4 projectionMatrix)
 bool Frustum::isPointInside(glm::vec3 point)
 {
     return std::all_of(std::begin(planes), std::end(planes), [&](Plane plane) {
-        return glm::dot(point, plane.normal) + plane.distance >= -16.0f; 
+        return (glm::dot(point, plane.normal) + plane.distance >= -16.0f); 
     });
 }
 

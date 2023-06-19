@@ -5,6 +5,7 @@
 #include "../math/frustrum.h"
 #include "../world/Chunk/Chunklet.h"
 
+
 class GameEngine; 
 
 enum Direction {
@@ -20,7 +21,7 @@ enum Direction {
 class Camera 
 {
 public:
-	Camera(GameEngine *_game, f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
+	Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position);
 	~Camera();
 
 	glm::mat4 getView();
@@ -38,7 +39,6 @@ public:
 	friend class Frustum;
 
 private:
-	GameEngine* game;
 	Frustum frustum;
 
 	glm::mat4 viewMatrix, projectionMatrix, viewProjMatrix;

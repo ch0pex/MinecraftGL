@@ -33,7 +33,7 @@ Chunklet::Chunklet(World& world, glm::vec3 _position) :
 
 Chunklet::~Chunklet() 
 {
-
+	//delete (mesh);
 }
 
 
