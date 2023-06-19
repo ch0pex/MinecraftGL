@@ -1,6 +1,6 @@
 #pragma once
 #include <glm/glm/glm.hpp>
-#include "../common/public/CommonHeaders.h"
+#include "../common/public/common_headers.h"
 
 
 class Camera;
