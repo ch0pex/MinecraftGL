@@ -1,8 +1,7 @@
 #include "game_engine.h"
 
-int main()
-{
-    GameEngine gameEngine; 
-    gameEngine.loop();
-	return (0); 
+int main() {
+    GameEngine game_engine;
+    game_engine.Loop();
+    return (0);
 }

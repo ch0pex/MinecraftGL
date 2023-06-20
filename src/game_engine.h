@@ -1,4 +1,5 @@
 #pragma once
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 //#include <ft2build.h>
@@ -8,23 +9,22 @@
 #include "player/player.h"
 #include "world/world.h"
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
+void MouseCallback(GLFWwindow *window, double xpos, double ypos);
 
 struct Game {
-	RenderEngine renderEngine;
-	Player player;
-	World world;
+    RenderEngine render_engine;
+    Player player;
+    World world;
 };
 
-class GameEngine
-{
+class GameEngine {
 public:
-	GameEngine();
-	~GameEngine();
-	void loop();
-	
+    GameEngine();
+    ~GameEngine();
+    void Loop();
+
 private:
-	Game *game;
-	GameStateManager stateMachine;
+    Game *game_;
+    GameStateManager state_machine_;
 };

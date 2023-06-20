@@ -1,37 +1,36 @@
 #pragma once
+
 #include "../../rendering/mesh.h"
 #include <GL/glew.h>
 #include "block.h"
 
 
-class World; 
+class World;
 
 
 class Chunklet {
 
-private: 
-	World* world; 
-	std::vector<Block> blockMap; //Block blockMap[CHUNKLET_VOLUME]
-	glm::vec3 position; 
-	u32 faces; 
+private:
+    World *world_;
+    std::vector<Block> block_map_; //Block block_map_[kChunkletVolume]
+    glm::vec3 position_;
 
-	void addFace(glm::vec3 position, const Vertex face[]); 
-	bool tryToAddFace(BlockFace blockFace, glm::vec3 blockPos);
-	bool outOfBounds(glm::vec3 blockPos); 
+    void AddFace(glm::vec3 position, const Vertex face[]);
+    bool TryToAddFace(BlockFace block_face, glm::vec3 block_pos);
+    bool OutOfBounds(glm::vec3 block_pos);
 public:
-	Chunklet(World& world, glm::vec3 _position);
-	~Chunklet();
-	
-	Mesh* mesh;
-	u32 getFaces(); 
+    Chunklet(World &world, glm::vec3 position);
+    ~Chunklet();
 
-	Block getBlock(glm::vec3 absolutePosition); 
-	void setBlock(Block block); 
+    Mesh *mesh_;
+    u32 GetFaces();
 
-	void addBlockMesh(glm::vec3 position); 
-	void bufferMesh();
-	void buildMesh();
+    Block GetBlock(glm::vec3 absolute_position);
+    void SetBlock(Block block);
 
-	glm::vec3 getPosition();
-	
+    void AddBlockMesh(glm::vec3 position);
+    void BufferMesh();
+    void BuildMesh();
+
+    glm::vec3 GetPosition();
 };

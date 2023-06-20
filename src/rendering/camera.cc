@@ -2,145 +2,130 @@
 #include "../game_engine.h"
 
 
-
-Camera::Camera(f32 _FOV, f32 _width, f32 _height, f32 _nearPlane, f32 _farPlane, glm::vec3 _position) 
-{
-	FOV = _FOV; 
-	width = _width; 
-	height = _height;
-	nearPlane = _nearPlane; 
-	farPlane = _farPlane; 
-	position = _position; 
-	movementSpeed = 0.5f; 
-	cameraFront = glm::vec3(0.0f, 0.0f, -1.0f); 
-	cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
-	cameraRight = glm::normalize(glm::cross(cameraUp, cameraFront));
-	firstMouse = true;
-	yaw = 0; 
-	pitch = 0; 
-	projectionMatrix = glm::perspective(FOV, width / height, nearPlane, farPlane);
-	calculateViewProj();
+Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, glm::vec3 position) {
+    fov_ = fov;
+    width = width;
+    height = height;
+    near_plane_ = near_plane;
+    far_plane_ = far_plane;
+    position = position;
+    movement_speed_ = 0.5f;
+    camera_front_ = glm::vec3(0.0f, 0.0f, -1.0f);
+    camera_up_ = glm::vec3(0.0f, 1.0f, 0.0f);
+    camera_right_ = glm::normalize(glm::cross(camera_up_, camera_front_));
+    first_mouse_ = true;
+    yaw_ = 0;
+    pitch_ = 0;
+    movement_dir_ = Camera::kStatic;
+    projection_matrix_ = glm::perspective(fov_, width / height, near_plane_, far_plane_);
+    CalculateViewProj();
 }
 
-Camera::~Camera()
-{
+Camera::~Camera() {
 
 }
 
-void Camera::calculateViewProj()
-{
-	viewMatrix = glm::lookAt(position, position + cameraFront, cameraUp);
-	viewMatrix += glm::translate(viewMatrix, -position); 
-	viewProjMatrix = projectionMatrix * viewMatrix;
+void Camera::CalculateViewProj() {
+    view_matrix_ = glm::lookAt(position_, position_ + camera_front_, camera_up_);
+    view_matrix_ += glm::translate(view_matrix_, -position_);
+    view_proj_matrix_ = projection_matrix_ * view_matrix_;
 }
 
-glm::mat4 Camera::getView()
-{
-	return viewMatrix; 
+glm::mat4 Camera::GetView() {
+    return view_matrix_;
 }
 
-glm::mat4 Camera::getProjection()
-{
-	return projectionMatrix; 
+glm::mat4 Camera::GetProjection() {
+    return projection_matrix_;
 }
 
-glm::vec3 Camera::getPosition()
-{
-	return position; 
+glm::vec3 Camera::GetPosition() {
+    return position_;
 }
 
-void Camera::setPosition(glm::vec3 _position)
-{
-	position = _position; 
+void Camera::SetPosition(glm::vec3 position) {
+    position = position;
 }
 
-float* Camera::getViewProjValuePtr()
-{
-	return glm::value_ptr(viewProjMatrix); 
+float *Camera::GetViewProjValuePtr() {
+    return glm::value_ptr(view_proj_matrix_);
 }
 
-void Camera::update()
-{
-	std::this_thread::sleep_for(std::chrono::milliseconds(1));
-	switch (movementDir)
-	{
-	case FRONT:
-		position += movementSpeed * cameraFront;
-		break;
-	case BACK:
-		position -= movementSpeed * cameraFront;
-		break;
-	case RIGHT:
-		position += glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
-		break;
-	case LEFT:
-		position -= glm::normalize(glm::cross(cameraFront, cameraUp)) * movementSpeed;
-		break;
-	case UP:
-		position += movementSpeed * cameraUp;
-		break;
-	case DOWN:
-		position -= movementSpeed * cameraUp;
-		break;
-	default:
-		break;
-	}
-	calculateViewProj();
-	frustum.update(viewProjMatrix);
-
-	
+void Camera::Update() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    switch (movement_dir_) {
+        case Camera::kFront:
+            position_ += movement_speed_ * camera_front_;
+            break;
+        case Camera::kBack:
+            position_ -= movement_speed_ * camera_front_;
+            break;
+        case Camera::kRight:
+            position_ += glm::normalize(glm::cross(camera_front_, camera_up_)) * movement_speed_;
+            break;
+        case Camera::kLeft:
+            position_ -= glm::normalize(glm::cross(camera_front_, camera_up_)) * movement_speed_;
+            break;
+        case Camera::kUp:
+            position_ += movement_speed_ * camera_up_;
+            break;
+        case Camera::kDown:
+            position_ -= movement_speed_ * camera_up_;
+            break;
+        default:
+            break;
+    }
+    CalculateViewProj();
+    frustum_.Update(view_proj_matrix_);
+    //std::cout << position_.x << ", " << position_.y << ", " << position_.z << "\n";
 }
 
 
-void Camera::move(Direction direction)
-{
-	movementDir = direction;
+void Camera::Move(Direction direction) {
+    movement_dir_ = direction;
 }
 
 
-void Camera::mousePosToFront(double xpos, double ypos)
-{
-	
-	if (firstMouse)
-	{
+void Camera::MousePosToFront(double xpos, double ypos) {
 
-		lastX = xpos;
-		lastY = ypos;
-		firstMouse = false;
-	}
+    if (first_mouse_) {
 
-	double xoffset = xpos - lastX;
-	double yoffset = lastY - ypos;
-	lastX = xpos;
-	lastY = ypos;
+        last_x_ = xpos;
+        last_y_ = ypos;
+        first_mouse_ = false;
+    }
 
-	double sensitivity = 0.1f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
+    double xoffset = xpos - last_x_;
+    double yoffset = last_y_ - ypos;
+    last_x_ = xpos;
+    last_y_ = ypos;
 
-	yaw += xoffset;
-	pitch += yoffset;
+    double sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
 
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
+    yaw_ += xoffset;
+    pitch_ += yoffset;
 
-	glm::vec3 direction;
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	
+    if (pitch_ > 89.0f)
+        pitch_ = 89.0f;
+    if (pitch_ < -89.0f)
+        pitch_ = -89.0f;
 
-	cameraFront = glm::normalize(direction);
-	//cameraRight = glm::normalize(glm::cross(cameraFront, cameraUp));
-	//cameraUp = glm::normalize(glm::cross(cameraRight, cameraFront));
-	calculateViewProj();
-	frustum.update(viewProjMatrix);
+    glm::vec3 direction;
+    direction.x = cos(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+    direction.y = sin(glm::radians(pitch_));
+    direction.z = sin(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+
+
+    camera_front_ = glm::normalize(direction);
+    //camera_right_ = glm::normalize(glm::cross(camera_front_, camera_up_));
+    //camera_up_ = glm::normalize(glm::cross(camera_right_, camera_front_));
+    CalculateViewProj();
+    frustum_.Update(view_proj_matrix_);
 }
 
-bool Camera::inFrustrum(Chunklet& chunklet)
-{
-	glm::vec3 chunkletCenter = chunklet.getPosition() + glm::vec3(8.f, 8.f, 8.f); 
-	return frustum.isPointInside(chunkletCenter) || glm::distance(chunkletCenter, position) < 64.f;
+bool Camera::InFrustum(Chunklet &chunklet) {
+    glm::vec3 chunklet_center = chunklet.GetPosition() + glm::vec3(8.f, 8.f, 8.f);
+    return frustum_.IsPointInside(chunklet_center) || glm::distance(chunklet_center, position_) < 64.f;
 }

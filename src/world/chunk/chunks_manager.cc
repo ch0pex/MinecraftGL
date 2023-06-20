@@ -1,99 +1,86 @@
 #include "chunks_manager.h"
 #include "../world.h"
 
-ChunksManager::ChunksManager(World &_world) : 
-    world(&_world)
-{
+ChunksManager::ChunksManager(World &world) :
+        world_(&world) {
     std::cout << "Chunks Loading... \n";
-    chunkLoaders.emplace_back([&](){loadChunks();});
+    chunk_loaders_.emplace_back([&]() { LoadChunks(); });
 }
 
 
-ChunksManager::~ChunksManager()
-{
-    for(auto& thread : chunkLoaders)
+ChunksManager::~ChunksManager() {
+    for (auto &thread: chunk_loaders_)
         thread.join();
 }
 
 
-Chunk* ChunksManager::getChunk(glm::vec2 xzpos)
-{
+Chunk *ChunksManager::GetChunk(glm::vec2 xzpos) {
 
-    glm::vec2 chunkPos; 
-    chunkPos.x = (int) (static_cast<int>(xzpos.x) / static_cast<int>(CHUNK_SIZE));
-    chunkPos.y = (int) (static_cast<int>(xzpos.y) / static_cast<int>(CHUNK_SIZE));
-    if(xzpos.x < 0) chunkPos.x -= 1; 
-    if(xzpos.y < 0) chunkPos.y -= 1; 
+    glm::vec2 chunk_pos;
+    chunk_pos.x = (int) (static_cast<int>(xzpos.x) / static_cast<int>(kChunkSize));
+    chunk_pos.y = (int) (static_cast<int>(xzpos.y) / static_cast<int>(kChunkSize));
+    if (xzpos.x < 0) chunk_pos.x -= 1;
+    if (xzpos.y < 0) chunk_pos.y -= 1;
 
-    for(auto& chunk : chunks) {
-        if(chunk.getPosition().x == chunkPos.x && chunk.getPosition().y == chunkPos.y){
-            return &chunk;  
+    for (auto &chunk: chunks_) {
+        if (chunk.GetPosition().x == chunk_pos.x && chunk.GetPosition().y == chunk_pos.y) {
+            return &chunk;
         }
     }
-    return nullptr; 
+    return nullptr;
 }
 
 
-void ChunksManager::loadChunks()
-{
+void ChunksManager::LoadChunks() {
     {
-    Timer t("loadChunks",TimerMode::MS);
-    chunks.reserve(CHUNK_SIZE * CHUNK_SIZE * 1); 
-    for (size_t x = 0; x < CHUNK_SIZE * 2; x++)
-    {
-        for (size_t z = 0; z < CHUNK_SIZE * 2; z++)
-        {
-            glm::vec2 pos = glm::vec2(x, z);
-            Chunk chunk = Chunk(*world, pos); 
-            BasicGen::genChunk(chunk); 
-            std::unique_lock<std::mutex> lock(mutex); 
-            chunks.push_back(chunk);
+        Timer t("LoadChunks", TimerMode::kMs);
+        chunks_.reserve(kChunkSize * kChunkSize * 1);
+        for (size_t x = 0; x < 1; x++) {
+            for (size_t z = 0; z < 1; z++) {
+                glm::vec2 pos = glm::vec2(x, z);
+                Chunk chunk = Chunk(*world_, pos);
+                BasicGen::GenChunk(chunk);
+                std::unique_lock<std::mutex> lock(mutex_);
+                chunks_.push_back(chunk);
+            }
         }
     }
-    }
 
 
-    std::cout << "Chunks generated: " << chunks.size() << "\n"; 
-    buildChunksMesh(); 
-    std::cout << "Chunks loaded: " << chunks.size() << "\n"; 
+    std::cout << "Chunks generated: " << chunks_.size() << "\n";
+    BuildChunksMesh();
+    std::cout << "Chunks loaded: " << chunks_.size() << "\n";
 }
 
-void ChunksManager::buildChunksMesh()
-{
+void ChunksManager::BuildChunksMesh() {
     Timer t("buldMesh");
-    std::cout << chunks.size() << "\n" ; 
-    for(auto& chunk: chunks)
-        chunk.buildMesh();
-    
-}   
+    std::cout << chunks_.size() << "\n";
+    for (auto &chunk: chunks_)
+        chunk.BuildMesh();
+
+}
 
 
-void ChunksManager::updateChunks(glm::vec3 playerPos)
-{
-    //TODO: load and unload chunks depending on player/cam position
-    
-
-    
-    for(auto &chunk : chunks) {
-        if(chunk.isBuilded() && !chunk.isBuffered()) 
-            chunk.bufferChunklets(); 
+void ChunksManager::UpdateChunks(glm::vec3 player_pos) {
+    //TODO: load and unload chunks_ depending on player/cam position_
+    for (auto &chunk: chunks_) {
+        if (chunk.IsBuilded() && !chunk.IsBuffered())
+            chunk.BufferChunklets();
     }
 }
 
 
-std::vector<Chunk>& ChunksManager::getChunks()
-{
+std::vector<Chunk> &ChunksManager::GetChunks() {
     // TODO: insert return statement here
-    return chunks; 
+    return chunks_;
 }
 
 
-Block ChunksManager::getBlock(glm::vec3 position)
-{
-    Chunk* chunk = getChunk(glm::vec2(position.x, position.z));  
-    if(chunk == nullptr) {
-        return Block::AIR;
-    } 
-    return chunk->getBlock(position);
+Block ChunksManager::GetBlock(glm::vec3 position) {
+    Chunk *chunk = GetChunk(glm::vec2(position.x, position.z));
+    if (chunk == nullptr) {
+        return Block::kAir;
+    }
+    return chunk->GetBlock(position);
 }
 

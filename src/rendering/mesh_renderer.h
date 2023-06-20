@@ -10,20 +10,20 @@
 class MeshRenderer {
 
 private:
-	std::vector<RenderInfo*> meshes; 
-	u32 texture, shader; 
+    std::vector<RenderInfo *> meshes_;
+    u32 texture_, shader_;
 
 
 public:
-	MeshRenderer();
-	~MeshRenderer();
+    MeshRenderer();
+    ~MeshRenderer();
 
-	void setTexture(u32 _texture); 
-	void setShader(u32 _shader); 
+    void SetTexture(u32 texture);
+    void SetShader(u32 shader);
 
-	void addMesh(RenderInfo* mesh);
-	void render(Camera& camera);
-	
-	void addReferenceMesh();
+    void AddMesh(RenderInfo *mesh);
+    void Render(Camera &camera);
+
+    void AddReferenceMesh();
 
 };

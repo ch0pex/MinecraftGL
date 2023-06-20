@@ -1,23 +1,18 @@
 #include "loading_state.h"
 
 
-void LoadingState::onEnter(Game& game)
-{
+void LoadingState::OnEnter(Game &game) {
 }
 
-void LoadingState::onExit(Game& game)
-{
+void LoadingState::OnExit(Game &game) {
 }
 
-void LoadingState::update(Game& game)
-{
+void LoadingState::Update(Game &game) {
 }
 
-void LoadingState::handleInput(Player& player, GLFWwindow* window, u32 key, u32 action)
-{
+void LoadingState::HandleInput(Player &player, GLFWwindow *window, u32 key, u32 action) {
 }
 
-void LoadingState::handleMouse(Player& player, GLFWwindow* window, f64 xpos, f64 ypos)
-{
+void LoadingState::HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) {
 }
 

@@ -8,21 +8,20 @@
 #include "../world/chunk/chunklet.h"
 
 
-class RenderEngine
-{
-private: 
-	GLFWwindow* window; 
-	MeshRenderer solidRenderer;
-	//MeshRenderer waterRenderer; 
+class RenderEngine {
+private:
+    GLFWwindow *window_;
+    MeshRenderer solid_renderer_;
+    //MeshRenderer waterRenderer;
 
-public: 
-	RenderEngine();
-	~RenderEngine();
+public:
+    RenderEngine();
+    ~RenderEngine();
 
-	void renderScene(Camera& camera); 
-	bool shouldClose(); 
+    void RenderScene(Camera &camera);
+    bool ShouldClose();
 
-	void drawChunklet(Chunklet& chunklet); 
-	GLFWwindow* getWindow();
-	
+    void DrawChunklet(Chunklet &chunklet);
+    GLFWwindow *GetWindow();
+
 };

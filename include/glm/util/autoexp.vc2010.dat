@@ -11,7 +11,7 @@
 ; For good examples, read the rules in this file.
 ;
 ; To find what the debugger considers the type of a variable to
-; be, add it to the Watch window and look at the Type column.
+; be, add it to the Watch window_ and look at the Type column.
 ;
 ; An AutoExpand rule is a line with the name of a type, an equals
 ; sign, and text with replaceable parts in angle brackets. The
@@ -46,8 +46,8 @@
 ;	e		Signed scientific-notation	3./2.,e		   1.500000e+000
 ;	g		Shorter of e and f			3./2.,g		   1.5
 ;	c		Single character			0x0065,c	   'e'
-;	s		Zero-terminated string		pVar,s		   "Hello world"
-;	su		Unicode string				pVar,su		   "Hello world"
+;	s		Zero-terminated string		pVar,s		   "Hello world_"
+;	su		Unicode string				pVar,su		   "Hello world_"
 ;
 ; For details of other format specifiers see Help under:
 ; "format specifiers/watch variable"
@@ -67,7 +67,7 @@
 ; second argument is the name of the export from the DLL to use. For
 ; further information on this API see the sample called EEAddIn.
 ;
-; WARNING: if hexadecimal mode is on in the watch window, all numbers here are
+; WARNING: if hexadecimal mode_ is on in the watch window_, all numbers here are
 ; evaluated in hex, e.g. 42 becomes 0x42
 
 [AutoExpand]
@@ -77,7 +77,7 @@ tagPOINT =x=<x> y=<y>
 tagRECT =top=<top> bottom=<bottom> left=<left> right=<right>
 
 ; from winuser.h
-tagMSG =msg=<message,x> wp=<wParam,x> lp=<lParam,x>
+tagMSG =msg_=<message,x> wp=<wParam,x> lp=<lParam,x>
 
 ; intrinsics
 __m64 =<m64_i64,x>
@@ -2014,7 +2014,7 @@ std::tr1::regex_token_iterator<*>{
 			; For ease of understanding, we make dereferenceable regex_token_iterators
 			; appear to have data members with the "for exposition only" names from TR1.
 			#(
-				#([position] : $e._Pos),
+				#([position_] : $e._Pos),
 				#([result] : $e._Res),
 				#([suffix] : $e._Suffix),
 				#([N] : $e._Cur),
@@ -2093,7 +2093,7 @@ std::forward_list<*>{
 std::_Flist_iterator<*>|std::_Flist_const_iterator<*>{
 	preview (
 		#if ($e._Ptr == 0) (
-			"end"
+			"End"
 		) #else (
 			$e._Ptr->_Myval
 		)

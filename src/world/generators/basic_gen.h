@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../chunk/block.h"
 #include <vector>
 #include <glm/glm/glm.hpp>
@@ -7,7 +8,7 @@
 
 class BasicGen {
 public:
-	
-	static void genChunk(Chunk& chunk); 
-	
+
+    static void GenChunk(Chunk &chunk);
+
 };

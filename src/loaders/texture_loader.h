@@ -5,5 +5,5 @@
 
 class TextureLoader {
 public:
-	static u32 loadTexture(std::string fileName); 
+    static u32 LoadTexture(const std::string& file_name);
 };

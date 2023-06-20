@@ -3,17 +3,16 @@
 #include "../../common/public/common_headers.h"
 
 
-
 enum class Block : u8 {
-	AIR = 0u, 
-	STONE
+    kAir = 0u,
+    kStone
 };
 
 enum class BlockFace : u8 {
-	FRONT = 0u,
-	BACK,
-	RIGHT,
-	LEFT,
-	TOP,
-	BOTTOM
+    kFront = 0u,
+    kBack,
+    kRight,
+    kLeft,
+    kTop,
+    kBottom
 };

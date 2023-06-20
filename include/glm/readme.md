@@ -31,7 +31,7 @@ Thanks for contributing to the project by [submitting issues](https://github.com
 #include <glm/ext/matrix_clip_space.hpp> // glm::perspective
 #include <glm/ext/constants.hpp> // glm::pi
 
-glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
+glm::mat4 camera_(float Translate, glm::vec2 const& Rotate)
 {
 	glm::mat4 Projection = glm::perspective(glm::pi<float>() * 0.25f, 4.0f / 3.0f, 0.1f, 100.f);
 	glm::mat4 View = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -Translate));
@@ -185,7 +185,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed ICC build errors with constexpr #704
 - Fixed defaulted operator= and constructors #791
 - Fixed invalid conversion from int scalar with vec4 constructor when using SSE instruction
-- Fixed infinite loop in random functions when using negative radius values using an assert #739
+- Fixed infinite Loop in random functions when using negative radius values using an assert #739
 
 ### [GLM 0.9.9.0](https://github.com/g-truc/glm/releases/tag/0.9.9.0) - 2018-05-22
 #### Features:
@@ -461,7 +461,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 #### Features:
 - Added GTC_color_space: convertLinearToSRGB and convertSRGBToLinear functions
 - Added 'fmod' overload to GTX_common with tests #308
-- Left handed perspective and lookAt functions #314
+- kLeft handed perspective and lookAt functions #314
 - Added functions eulerAngleXYZ and extractEulerAngleXYZ #311
 - Added <glm/gtx/hash.hpp> to perform std::hash on GLM types #320 #367
 - Added <glm/gtx/wrap.hpp> for texcoord wrapping
@@ -592,7 +592,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed std::nextafter not supported with C++11 on Android #217
 - Fixed missing value_type for dual quaternion
 - Fixed return type of dual quaternion length
-- Fixed infinite loop in isfinite function with GCC #221
+- Fixed infinite Loop in isfinite function with GCC #221
 - Fixed Visual Studio 14 compiler warnings
 - Fixed implicit conversion from another tvec2 type to another tvec2 #241
 - Fixed lack of consistency of quat and dualquat constructors
@@ -602,7 +602,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 #### Deprecation:
 - Requires Visual Studio 2010, GCC 4.2, Apple Clang 4.0, LLVM 3.0, Cuda 4, ICC 2013 or a C++98 compiler
 - Removed degrees for function parameters
-- Removed GLM_FORCE_RADIANS, active by default
+- Removed GLM_FORCE_RADIANS, active_ by default
 - Removed VC 2005 / 8 and 2008 / 9 support
 - Removed GCC 3.4 to 4.3 support
 - Removed LLVM GCC support
@@ -714,10 +714,10 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 ### [GLM 0.9.4.6](https://github.com/g-truc/glm/releases/tag/0.9.4.6) - 2013-09-20
 - Fixed detection to select the last known compiler if newer version #106
 - Fixed is_int and is_uint code duplication with GCC and C++11 #107 
-- Fixed test suite build while using Clang in C++11 mode
-- Added c++1y mode support in CMake test suite
-- Removed ms extension mode to CMake when no using Visual C++
-- Added pedantic mode to CMake test suite for Clang and GCC
+- Fixed test suite build while using Clang in C++11 mode_
+- Added c++1y mode_ support in CMake test suite
+- Removed ms extension mode_ to CMake when no using Visual C++
+- Added pedantic mode_ to CMake test suite for Clang and GCC
 - Added use of GCC frontend on Unix for ICC and Visual C++ fronted on Windows
   for ICC
 - Added compilation errors for unsupported compiler versions
@@ -728,8 +728,8 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 ---
 ### GLM 0.9.4.5 - 2013-08-12
 - Fixed CUDA support
-- Fixed inclusion of intrinsics in "pure" mode #92
-- Fixed language detection on GCC when the C++0x mode isn't enabled #95
+- Fixed inclusion of intrinsics in "pure" mode_ #92
+- Fixed language detection on GCC when the C++0x mode_ isn't enabled #95
 - Fixed issue #97: register is deprecated in C++11
 - Fixed issue #96: CUDA issues
 - Added Windows CE detection #92
@@ -750,7 +750,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 ---
 ### GLM 0.9.4.3 - 2013-03-20
 - Detected qualifier for Clang
-- Fixed C++11 mode for GCC, couldn't be enabled without MS extensions
+- Fixed C++11 mode_ for GCC, couldn't be enabled without kMs extensions
 - Fixed squad, intermediate and exp quaternion functions
 - Fixed GTX_polar_coordinates euclidean function, takes a vec2 instead of a vec3
 - Clarify the license applying on the manual
@@ -770,7 +770,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Fixed packDouble2x32 on Xcode
 - Fixed mix for vec4 SSE implementation
 - Fixed 0x2013 dash character in comments that cause issue in Windows 
-  Japanese mode
+  Japanese mode_
 - Fixed documentation warnings
 - Fixed CUDA warnings
 
@@ -802,7 +802,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 - Added SSE4 and AVX2 detection.
 - Removed VIRTREV_xstream and the incompatibility generated with GCC
 - Fixed C++11 compiler option for GCC
-- Removed MS language extension option for GCC (not fonctionnal)
+- Removed kMs language extension option for GCC (not fonctionnal)
 - Fixed bitfieldExtract for vector types
 - Fixed warnings
 - Fixed SSE includes
@@ -811,7 +811,7 @@ glm::mat4 camera(float Translate, glm::vec2 const& Rotate)
 ### GLM 0.9.3.3 - 2012-05-10
 - Fixed isinf and isnan
 - Improved compatibility with Intel compiler
-- Added CMake test build options: SIMD, C++11, fast math and MS land ext
+- Added CMake test build options: SIMD, C++11, fast math and kMs land ext
 - Fixed SIMD mat4 test on GCC
 - Fixed perspectiveFov implementation
 - Fixed matrixCompMult for none-square matrices

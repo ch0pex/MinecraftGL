@@ -6,18 +6,17 @@
 
 struct Game;
 
-class GameStateManager
-{
+class GameStateManager {
 public:
     GameStateManager(Game &game);
     ~GameStateManager();
-    void update() const;
-    void handleInput(GLFWwindow *window, u32 key, u32 action) const;
-    void handleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) const;
-    void switchingState(GameStateType type);
-    
+    void Update() const;
+    void HandleInput(GLFWwindow *window, u32 key, u32 action) const;
+    void HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) const;
+    void SwitchingState(GameStateType type);
+
 private:
-    Game &game;
-    GameState *currentState;
-    std::unordered_map<GameStateType, GameState*> states;
+    Game &game_;
+    GameState *current_state_;
+    std::unordered_map<GameStateType, GameState *> states_;
 };

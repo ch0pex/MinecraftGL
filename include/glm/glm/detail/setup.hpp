@@ -13,7 +13,7 @@
 #define GLM_SETUP_INCLUDED			GLM_VERSION
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Active states
+// Active states_
 
 #define GLM_DISABLE		0
 #define GLM_ENABLE		1

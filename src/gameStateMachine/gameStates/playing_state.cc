@@ -2,48 +2,43 @@
 #include "../../game_engine.h"
 #include "../../player/player.h"
 
-void PlayingState::onEnter(Game& game)
-{
-    playerThread = std::thread(&Player::update, &game.player);
+void PlayingState::OnEnter(Game &game) {
+    player_thread_ = std::thread(&Player::Update, &game.player);
 }
 
-void PlayingState::onExit(Game& game)
-{
-    playerMutex.lock();
-    game.player.setActive(false);
-    playerMutex.unlock();
-    playerThread.join();    
+void PlayingState::OnExit(Game &game) {
+    player_mutex_.lock();
+    game.player.SetActive(false);
+    player_mutex_.unlock();
+    player_thread_.join();
 }
 
-void PlayingState::update(Game& game)
-{
-    game.world.update(game.player.camera); 
-    game.world.prepareRender(game.renderEngine,game.player.camera);
-    game.renderEngine.renderScene(game.player.camera); 
-   
+void PlayingState::Update(Game &game) {
+    game.world.Update(game.player.camera_);
+    game.world.PrepareRender(game.render_engine, game.player.camera_);
+    game.render_engine.RenderScene(game.player.camera_);
+
 }
 
-void PlayingState::handleInput(Player &player, GLFWwindow *window, u32 key, u32 action)
-{
-    player.camera.move(STATIC);
+void PlayingState::HandleInput(Player &player, GLFWwindow *window, u32 key, u32 action) {
+    player.camera_.Move(Camera::kStatic);
     // Cuando una tecla es presionada, registra que tecla fue presionada
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        player.camera.move(FRONT);
+        player.camera_.Move(Camera::kFront);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        player.camera.move(BACK);
+        player.camera_.Move(Camera::kBack);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        player.camera.move(LEFT);
+        player.camera_.Move(Camera::kLeft);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        player.camera.move(RIGHT);
+        player.camera_.Move(Camera::kRight);
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-        player.camera.move(DOWN);
+        player.camera_.Move(Camera::kDown);
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-        player.camera.move(UP);
+        player.camera_.Move(Camera::kUp);
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
 
-void PlayingState::handleMouse(Player& player, GLFWwindow* window, f64 xpos, f64 ypos)
-{
-    player.camera.mousePosToFront(xpos, ypos);
+void PlayingState::HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) {
+    player.camera_.MousePosToFront(xpos, ypos);
 }

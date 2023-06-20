@@ -1,45 +1,39 @@
 #include "game_engine.h"
 
 
-GameStateManager *stateMachinePointer;
-Player *playerPointer;
+GameStateManager *kStateMachinePointer;
+Player *kPlayerPointer;
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
-{
-    stateMachinePointer->handleInput(window, key, action);
+void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) {
+    kStateMachinePointer->HandleInput(window, key, action);
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-{
-    stateMachinePointer->handleMouse(*playerPointer, window, xpos, ypos);
+void MouseCallback(GLFWwindow *window, double xpos, double ypos) {
+    kStateMachinePointer->HandleMouse(*kPlayerPointer, window, xpos, ypos);
 }
 
 GameEngine::GameEngine() :
-    game(new Game()),
-    stateMachine(*game)
-{
-    stateMachinePointer = &stateMachine;
-    playerPointer = &game->player;
-    glfwSetKeyCallback(game->renderEngine.getWindow(), key_callback);
-    glfwSetCursorPosCallback(game->renderEngine.getWindow(), mouse_callback);
+        game_(new Game()),
+        state_machine_(*game_) {
+    kStateMachinePointer = &state_machine_;
+    kPlayerPointer = &game_->player;
+    glfwSetKeyCallback(game_->render_engine.GetWindow(), KeyCallback);
+    glfwSetCursorPosCallback(game_->render_engine.GetWindow(), MouseCallback);
 }
 
-GameEngine::~GameEngine()
-{
+GameEngine::~GameEngine() {
     std::cout << "GameEngine destructor called" << std::endl;
-    delete (game);
+    delete (game_);
 }
 
-void GameEngine::loop()
-{
+void GameEngine::Loop() {
 
     // El bucle principal de la aplicación
-    while (!game->renderEngine.shouldClose())
-    {
-        stateMachine.update();
-        /*world.update(camera); 
-        world.prepareRender(renderEngine,camera); */
-        //game->renderEngine.renderScene(game->player.camera);
+    while (!game_->render_engine.ShouldClose()) {
+        state_machine_.Update();
+        /*world_.Update(camera_);
+        world_.PrepareRender(render_engine,camera_); */
+        //game_->render_engine.RenderScene(game_->player.camera_);
         glfwPollEvents(); // Escucha los eventos de la ventana
     }
     glfwTerminate();

@@ -2,193 +2,185 @@
 #include "../world.h"
 
 
+Chunklet::Chunklet(World &world, glm::vec3 position) :
+        world_(&world) {
+    mesh_ = new Mesh();
+    position_.x = position.x;
+    position_.y = position.y;
+    position_.z = position.z;
+    block_map_.reserve(kChunkletVolume);
 
-Chunklet::Chunklet(World& world, glm::vec3 _position) : 
-	world(&world) 
-{
-	mesh = new Mesh(); 
-	position.x = _position.x; 
-	position.y = _position.y; 
-	position.z = _position.z; 
+    /*
+    for(int i = 0; i < kChunkletVolume; i++)
+    {
+        block_map_[i] = Block(Block::kStone);
+    }
 
-	blockMap.reserve(CHUNKLET_VOLUME); 
 
-	/*
-	for(int i = 0; i < CHUNKLET_VOLUME; i++)
-	{
-		blockMap[i] = Block(Block::STONE);
-	}
-	*/	
-	/*
-	for(int i = 0; i < CHUNKLET_VOLUME; i++)
-	{
-		int cube = 0; 
-		if (blockMap[i] == Block::STONE)
-			cube = 1; 
-		std::cout << cube << "\n";  
-	}
-	*/
+    for(int i = 0; i < kChunkletVolume; i++)
+    {
+        int cube = 0;
+        if (block_map_[i] == Block::kStone)
+            cube = 1;
+        std::cout << cube << "\n";
+    }
+    */
 }
 
 
-Chunklet::~Chunklet() 
-{
-	//delete (mesh);
+Chunklet::~Chunklet() {
+    //delete (mesh_);
 }
 
 
-void Chunklet::buildMesh()
-{
-	for (int i = 0; i < CHUNKLET_VOLUME; i++)
-	{
-	
-		int x = i % CHUNK_SIZE;
-		int y = i / (CHUNK_SIZE * CHUNK_SIZE);
-		int z = (i / CHUNK_SIZE) % CHUNK_SIZE;
-		//std::cout << "Block: " << x << ", " << y << ", " << z << std::endl; 
-		if(blockMap[i] == Block::STONE) 
-			addBlockMesh(glm::vec3(position.x + x, position.y + y, position.z + z));
-	}
-	
+void Chunklet::BuildMesh() {
+    for (int i = 0; i < kChunkletVolume; i++) {
+
+        int x = i % kChunkSize;
+        int y = i / (kChunkSize * kChunkSize);
+        int z = (i / kChunkSize) % kChunkSize;
+        //std::cout << "Block: " << x << ", " << y << ", " << z << std::endl;
+        if (block_map_[i] == Block::kStone)
+            AddBlockMesh(glm::vec3(position_.x + x, position_.y + y, position_.z + z));
+    }
+
 }
 
-glm::vec3 Chunklet::getPosition()
-{
-	return position;
+glm::vec3 Chunklet::GetPosition() {
+    return position_;
 }
 
 
-void Chunklet::addBlockMesh(glm::vec3 position)
-{
+void Chunklet::AddBlockMesh(glm::vec3 position) {
 
-	if(tryToAddFace(BlockFace::FRONT, position))
-		addFace(position, FACE_FRONT);
+    if (TryToAddFace(BlockFace::kFront, position))
+        AddFace(position, kFaceFront);
 
-	if(tryToAddFace(BlockFace::BACK, position))
-		addFace(position, FACE_BACK);
+    if (TryToAddFace(BlockFace::kBack, position))
+        AddFace(position, kFaceBack);
 
-	if(tryToAddFace(BlockFace::RIGHT, position))
-		addFace(position, FACE_RIGHT);
+    if (TryToAddFace(BlockFace::kRight, position))
+        AddFace(position, kFaceRight);
 
-	if(tryToAddFace(BlockFace::LEFT, position))
-		addFace(position, FACE_LEFT);
+    if (TryToAddFace(BlockFace::kLeft, position))
+        AddFace(position, kFaceLeft);
 
-	if(tryToAddFace(BlockFace::TOP, position))
-		addFace(position, FACE_TOP);
+    if (TryToAddFace(BlockFace::kTop, position))
+        AddFace(position, kFaceTop);
 
-	if(tryToAddFace(BlockFace::BOTTOM, position))
-		addFace(position, FACE_BOTTOM);
+    if (TryToAddFace(BlockFace::kBottom, position))
+        AddFace(position, kFaceBottom);
 
 }
 
 
+void Chunklet::BufferMesh() {
 
-void Chunklet::bufferMesh()
-{
+    if (GetFaces() == 0) return;
+    glGenVertexArrays(1, &mesh_->render_info.vao);
+    glBindVertexArray(mesh_->render_info.vao);
 
-	if(getFaces() == 0) return;
-	glGenVertexArrays(1, &mesh->renderInfo.vao);
-	glBindVertexArray(mesh->renderInfo.vao); 
+    glGenBuffers(1, &mesh_->vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, mesh_->vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh_->vertices.size(), &mesh_->vertices[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &mesh->vbo); 
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->vbo); 
-	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * mesh->vertices.size(), &mesh->vertices[0], GL_STATIC_DRAW);
+    glGenBuffers(1, &mesh_->ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh_->ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * mesh_->indices.size(), &mesh_->indices[0], GL_STATIC_DRAW);
 
-	glGenBuffers(1, &mesh->ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(u32) * mesh->indices.size(), &mesh->indices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<GLvoid *>(0));
 
-	glEnableVertexAttribArray(0); 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), static_cast<GLvoid*>(0)); 
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) (offsetof(Vertex, Vertex::tex_coords)));
 
-	glEnableVertexAttribArray(1); 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)(offsetof(Vertex, Vertex::texCoords))); 
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0); 
-	glBindVertexArray(0); 
-	
-	mesh->vertices.clear(); 
-	mesh->vertices.shrink_to_fit();
-	mesh->indices.clear(); 
-	mesh->indices.shrink_to_fit();
+    mesh_->vertices.clear();
+    mesh_->vertices.shrink_to_fit();
+    mesh_->indices.clear();
+    mesh_->indices.shrink_to_fit();
 }
 
-u32 Chunklet::getFaces()
-{
-	return mesh->renderInfo.faces;
+u32 Chunklet::GetFaces() {
+    return mesh_->render_info.faces;
 }
 
 
+void Chunklet::AddFace(glm::vec3 position, const Vertex face[]) {
+    mesh_->render_info.faces++;
+    u32 index_offset = mesh_->vertices.size();
+    for (int i = 0; i < 6; i++) {
+        if (i < 4) {
+            Vertex vertex = face[i];
+            vertex.position += position;
+            mesh_->vertices.push_back(vertex);
+        }
+        mesh_->indices.push_back(kFaceIndex[i] + index_offset);
 
-void Chunklet::addFace(glm::vec3 position, const Vertex face[])
-{
-	mesh->renderInfo.faces++; 
-	u32 index_offset = mesh->vertices.size(); 
-	for (int i = 0; i < 6; i++)
-	{
-		if(i < 4){
-			Vertex vertex = face[i];
-			vertex.position += position;
-			mesh->vertices.push_back(vertex);
-		}
-		mesh->indices.push_back(FACE_INDEX[i] + index_offset);
-
-	}
+    }
 }
 
 
-bool Chunklet::tryToAddFace(BlockFace blockFace, glm::vec3 blockPos)
-{
-	glm::vec3 offset = glm::vec3(0, 0, 0);
-	switch (blockFace)
-	{
-	case BlockFace::FRONT:  offset = glm::vec3(0, 0, 1);  break;
-	case BlockFace::BACK:   offset = glm::vec3(0, 0, -1); break;
-	case BlockFace::RIGHT:  offset = glm::vec3(1, 0, 0);  break;
-	case BlockFace::LEFT:   offset = glm::vec3(-1, 0, 0); break;
-	case BlockFace::TOP:    offset = glm::vec3(0, 1, 0);  break;
-	case BlockFace::BOTTOM: offset = glm::vec3(0, -1, 0); break;
-	default: break;
-	}
+bool Chunklet::TryToAddFace(BlockFace block_face, glm::vec3 block_pos) {
+    glm::vec3 offset = glm::vec3(0, 0, 0);
+    switch (block_face) {
+        case BlockFace::kFront:
+            offset = glm::vec3(0, 0, 1);
+            break;
+        case BlockFace::kBack:
+            offset = glm::vec3(0, 0, -1);
+            break;
+        case BlockFace::kRight:
+            offset = glm::vec3(1, 0, 0);
+            break;
+        case BlockFace::kLeft:
+            offset = glm::vec3(-1, 0, 0);
+            break;
+        case BlockFace::kTop:
+            offset = glm::vec3(0, 1, 0);
+            break;
+        case BlockFace::kBottom:
+            offset = glm::vec3(0, -1, 0);
+            break;
+        default:
+            break;
+    }
 
-	offset += blockPos; 
+    offset += block_pos;
 
-	Block block;
-	//std::cout << outOfBounds(offset) << "\n"; 
-	if(outOfBounds(offset))
-		block = world->getBlock(offset); 
-		//return true;
-		//std::cout << (int) block << "\n"; 
-	else
-		block = getBlock(offset); 
+    Block block;
+    //std::cout << OutOfBounds(offset) << "\n";
+    if (OutOfBounds(offset))
+        block = world_->GetBlock(offset);
+    else
+        block = GetBlock(offset);
 
-	if (block == Block::AIR) 
-		return true;
-	return false; 
+    if (block == Block::kAir)
+        return true;
+    return false;
 }
 
 
-bool Chunklet::outOfBounds(glm::vec3 blockPos)
-{
-	bool x = (blockPos.x >= position.x && blockPos.x < position.x + CHUNK_SIZE); 
-	bool y = (blockPos.y >= position.y && blockPos.y < position.y + CHUNK_SIZE);
-	bool z = (blockPos.z >= position.z && blockPos.z < position.z + CHUNK_SIZE);
-	return !(x && y && z); 
+bool Chunklet::OutOfBounds(glm::vec3 block_pos) {
+    bool x = (block_pos.x >= position_.x && block_pos.x < position_.x + kChunkSize);
+    bool y = (block_pos.y >= position_.y && block_pos.y < position_.y + kChunkSize);
+    bool z = (block_pos.z >= position_.z && block_pos.z < position_.z + kChunkSize);
+    return !(x && y && z);
 }
 
 
-Block Chunklet::getBlock(glm::vec3 absolutePosition)
-{
-	int x = absolutePosition.x - position.x;
-	int y = absolutePosition.y - position.y;
-	int z = absolutePosition.z - position.z;
-	int index = x + z * CHUNK_SIZE + y * CHUNK_SIZE * CHUNK_SIZE;
-	return blockMap[index];
+Block Chunklet::GetBlock(glm::vec3 absolute_position) {
+    int x = absolute_position.x - position_.x;
+    int y = absolute_position.y - position_.y;
+    int z = absolute_position.z - position_.z;
+    int index = x + z * kChunkSize + y * kChunkSize * kChunkSize;
+    return block_map_[index];
 
 }
 
-void Chunklet::setBlock(Block block)
-{
-	//TODO: Set block in position
-	blockMap.push_back(block); 
+void Chunklet::SetBlock(Block block) {
+    //TODO: Set block in position_
+    block_map_.push_back(block);
 }

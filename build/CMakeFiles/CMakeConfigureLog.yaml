@@ -1,15 +1,12 @@
-
 ---
 events:
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Windows - 10.0.22623 - AMD64
-  -
-    kind: "message-v1"
+  - kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -59,9 +56,8 @@ events:
       
       The C compiler identification is MSVC, found in:
         D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CompilerIdC/CompilerIdC.exe
-      
-  -
-    kind: "message-v1"
+
+  - kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -111,9 +107,8 @@ events:
       
       The CXX compiler identification is MSVC, found in:
         D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CompilerIdCXX/CompilerIdCXX.exe
-      
-  -
-    kind: "try_compile-v1"
+
+  - kind: "try_compile-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -160,10 +155,9 @@ events:
             0 Errores
         
         Tiempo transcurrido 00:00:00.51
-        
+
       exitCode: 0
-  -
-    kind: "try_compile-v1"
+  - kind: "try_compile-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -210,6 +204,6 @@ events:
             0 Errores
         
         Tiempo transcurrido 00:00:00.46
-        
+
       exitCode: 0
 ...
