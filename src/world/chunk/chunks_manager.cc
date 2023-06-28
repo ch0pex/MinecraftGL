@@ -8,7 +8,8 @@ ChunksManager::ChunksManager(World &world) :
 }
 
 
-ChunksManager::~ChunksManager() {
+ChunksManager::~ChunksManager()
+{
     for (auto &thread: chunk_loaders_)
         thread.join();
 }
@@ -35,8 +36,8 @@ void ChunksManager::LoadChunks() {
     {
         Timer t("LoadChunks", TimerMode::kMs);
         chunks_.reserve(kChunkSize * kChunkSize * 1);
-        for (size_t x = 0; x < 1; x++) {
-            for (size_t z = 0; z < 1; z++) {
+        for (size_t x = 0; x < kChunkSize * 3; x++) {
+            for (size_t z = 0; z < kChunkSize * 3; z++) {
                 glm::vec2 pos = glm::vec2(x, z);
                 Chunk chunk = Chunk(*world_, pos);
                 BasicGen::GenChunk(chunk);

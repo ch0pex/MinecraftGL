@@ -4,7 +4,7 @@
 #include <GLFW/glfw3.h>
 //#include <ft2build.h>
 
-#include "gameStateMachine/game_state_manager.h"
+#include "game_state_machine/game_state_manager.h"
 #include "rendering/render_engine.h"
 #include "player/player.h"
 #include "world/world.h"

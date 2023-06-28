@@ -4,7 +4,7 @@
 Chunk::Chunk(World &world, glm::vec2 position) :
         world_(&world)
 {
-    position = position;
+    position_ = position;
     buffered_ = false;
     builded_ = false;
 

@@ -6,10 +6,8 @@ void PlayingState::OnEnter(Game &game) {
     player_thread_ = std::thread(&Player::Update, &game.player);
 }
 
-void PlayingState::OnExit(Game &game) {
-    player_mutex_.lock();
-    game.player.SetActive(false);
-    player_mutex_.unlock();
+void PlayingState::OnExit(Game &game) 
+{
     player_thread_.join();
 }
 

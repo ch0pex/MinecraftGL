@@ -29,4 +29,3 @@ private:
     Plane planes_[6];
 
 };
-

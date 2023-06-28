@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../rendering/camera.h"
-
+#include "player_states/player_state.h"
+#include <unordered_map>
 enum class GameStateType;
 
 class Player {
@@ -11,11 +12,11 @@ public:
 
     Camera camera_;
     void Update();
-
-    void SetActive(bool active);
-    bool IsActive() const;
+    void ChangeState(PlayerStateType state);
+    PlayerStateType GetState(); 
 
 private:
-    bool active_;
-
+    PlayerStateType currentState_;
+    std::unordered_map<PlayerStateType, PlayerState*> states_;
+    bool controlsEnabled_;
 };

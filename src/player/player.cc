@@ -1,22 +1,32 @@
 #include "player.h"
+#include <ostream>
 
-Player::Player() : camera_(45.0f, 1920, 1080, .1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)) {
-    active_ = true;
+Player::Player() : 
+	camera_(45.0f, 1920, 1080, .1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)),
+	currentState_(PlayerStateType::kGround),
+	controlsEnabled_(true)
+{
+
 }
 
-Player::~Player() {
+Player::~Player() 
+{
 
 }
 
-void Player::Update() {
-    while (active_)
+void Player::Update() 
+{
+    while (controlsEnabled_)
         camera_.Update();
 }
 
-void Player::SetActive(bool active) {
-    active = active;
+void Player::ChangeState(PlayerStateType state) 
+{
+	currentState_ = state;
 }
 
-bool Player::IsActive() const {
-    return active_;
+PlayerStateType Player::GetState() 
+{
+	return currentState_;
 }
+

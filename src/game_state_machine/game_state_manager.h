@@ -1,7 +1,7 @@
 #pragma once
 
 #include <unordered_map>
-#include "gameStates/game_state.h"
+#include "game_states/game_state.h"
 #include "../player/player.h"
 
 struct Game;

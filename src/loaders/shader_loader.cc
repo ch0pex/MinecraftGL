@@ -1,6 +1,6 @@
 #include "shader_loader.h"
 
-#include <RootDir.h>
+#include <root_dir.h>
 
 std::string ShaderLoader::ReadShader(std::string file_name) {
     std::string shader_code;
