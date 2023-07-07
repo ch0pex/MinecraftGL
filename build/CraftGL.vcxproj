@@ -363,6 +363,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\gl_debug.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\timer.cc" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\config.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_engine.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_state_machine\game_state_manager.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_state_machine\game_states\game_over_state.cc" />
@@ -386,6 +387,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\gl_debug.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\primitive_types.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\timer.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\config.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_engine.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_state_machine\game_state_manager.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_state_machine\game_states\game_over_state.h" />

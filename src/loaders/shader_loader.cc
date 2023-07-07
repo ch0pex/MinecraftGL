@@ -5,7 +5,6 @@
 std::string ShaderLoader::ReadShader(std::string file_name) {
     std::string shader_code;
     std::ifstream file((ROOT_DIR + file_name).c_str(), std::ios::in);
-    std::cout << "Shader check point\n";
     if (!file.good()) {
         std::cout << "Can't read file" << std::endl;
         std::terminate();

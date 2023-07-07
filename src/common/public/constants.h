@@ -11,5 +11,3 @@ constexpr u8 kMinHeight = 0;
 
 
 
-
-

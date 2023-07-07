@@ -2,7 +2,7 @@
 #include <ostream>
 
 Player::Player() : 
-	camera_(45.0f, 1920, 1080, .1f, 1000.0f, glm::vec3(0.0f, 75.0f, 6.0f)),
+	camera_(45.0f, 1920, 1080, .1f, 1000.0f, glm::vec3(0.0f, 75.0f, 200.0f)),
 	currentState_(PlayerStateType::kGround),
 	controlsEnabled_(true)
 {

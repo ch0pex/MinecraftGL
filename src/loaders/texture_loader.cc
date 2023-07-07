@@ -40,6 +40,5 @@ u32 TextureLoader::LoadTexture(const std::string& file_name) {
     glBindTexture(GL_TEXTURE_2D, 0);
     stbi_image_free(image);
 
-
     return mtexture;
 }

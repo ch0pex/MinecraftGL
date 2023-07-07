@@ -2,7 +2,7 @@
 
 #include "../loaders/shader_loader.h"
 #include "../loaders/texture_loader.h"
-
+#include "../config/config.h"
 
 RenderEngine::RenderEngine()
 {
@@ -54,7 +54,7 @@ RenderEngine::~RenderEngine()
 void RenderEngine::RenderScene(Camera &camera)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(0.4f, 5.0f, 0.75f, 1.0);
+    glClearColor(kGameConfig.back_ground_color.x, kGameConfig.back_ground_color.y, kGameConfig.back_ground_color.z, kGameConfig.back_ground_color.w);
 
     solid_renderer_.Render(camera);
     //waterRenderer.Render(camera_);

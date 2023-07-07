@@ -15,10 +15,10 @@ void MouseCallback(GLFWwindow *window, double xpos, double ypos)
 }
 
 GameEngine::GameEngine() :
-	game_(new Game()),
-	state_machine_(*game_) 
+        game_(new Game()),
+        game_state_(*game_)
 {
-	kStateMachinePointer = &state_machine_;
+	kStateMachinePointer = &game_state_;
 	kPlayerPointer = &game_->player;
 	glfwSetKeyCallback(game_->render_engine.GetWindow(), KeyCallback);
 	glfwSetCursorPosCallback(game_->render_engine.GetWindow(), MouseCallback);
@@ -33,8 +33,9 @@ GameEngine::~GameEngine()
 void GameEngine::Loop() 
 {
 	// El bucle principal de la aplicación
-	while (!game_->render_engine.ShouldClose()) {
-		state_machine_.Update();
+	while (!game_->render_engine.ShouldClose())
+    {
+		game_state_.Update();
 		glfwPollEvents(); // Escucha los eventos de la ventana
 	}
 	glfwTerminate();

@@ -123,7 +123,6 @@ void MeshRenderer::Render(Camera &camera) {
     glUseProgram(shader_);
     glUniformMatrix4fv(vp_loc, 1, GL_FALSE, camera.GetViewProjValuePtr());
     glBindTexture(GL_TEXTURE_2D, texture_);
-    GL_CHECK_ERROR();
 
     for (const auto &mesh: meshes_) {
         glBindVertexArray(mesh->vao);

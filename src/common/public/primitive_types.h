@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include "nlohmann/json.hpp"
 #include <glm/glm/glm.hpp>
 
 
@@ -20,3 +21,4 @@ using s64 = int64_t;
 using f32 = float;
 using f64 = double;
 
+using Json = nlohmann::json;

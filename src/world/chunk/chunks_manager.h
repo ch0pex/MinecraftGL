@@ -22,7 +22,6 @@ private:
     Chunk *GetChunk(glm::vec2 xzpos);
     void BuildChunksMesh();
 public:
-
     ChunksManager(World &world);
     ~ChunksManager();
     void LoadChunks();

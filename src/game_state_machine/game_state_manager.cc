@@ -18,7 +18,7 @@ GameStateManager::GameStateManager(Game &game) : game_(game)
     current_state_->OnEnter(game);
 }
 
-GameStateManager::~GameStateManager() 
+GameStateManager::~GameStateManager()
 {
     /*for(const auto state : states_)
         delete(state.second);*/
