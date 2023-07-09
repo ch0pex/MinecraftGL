@@ -1,5 +1,0 @@
-C:\Users\acbsu\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\231.9161.40\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -S D:\Alvaro\Programacion\MinecraftSublime -B D:\Alvaro\Programacion\MinecraftSublime\cmake-build-ms-debug
--- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.22623.
--- Configuring done
--- Generating done
--- Build files have been written to: D:/Alvaro/Programacion/MinecraftSublime/cmake-build-ms-debug
