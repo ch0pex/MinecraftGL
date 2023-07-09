@@ -34,12 +34,11 @@ RenderEngine::RenderEngine()
     glCullFace(GL_FRONT);
 
 
-    u32 shader = ShaderLoader::CreateProgram("res/shaders/solidShader.vs", "res/shaders/solidShader.fs");
-    u32 texture = TextureLoader::LoadTexture("res/textures/stone.jpg");
+    u32 shader = ShaderLoader::CreateProgram((kGameConfig.solid_vertex_shader_path).c_str(), (kGameConfig.solid_fragment_shader_path).c_str());
+    u32 texture = TextureLoader::LoadTexture(kGameConfig.texture_atlas_path);
 
     solid_renderer_.SetTexture(texture);
     solid_renderer_.SetShader(shader);
-    solid_renderer_.AddReferenceMesh();
     glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 }

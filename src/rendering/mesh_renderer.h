@@ -24,6 +24,4 @@ public:
     void AddMesh(RenderInfo *mesh);
     void Render(Camera &camera);
 
-    void AddReferenceMesh();
-
 };

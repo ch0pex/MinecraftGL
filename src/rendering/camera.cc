@@ -8,7 +8,7 @@ Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, gl
     height = height;
     near_plane_ = near_plane;
     far_plane_ = far_plane;
-    position = position;
+    position_ = position;
     movement_speed_ = 0.5f;
     camera_front_ = glm::vec3(0.0f, 0.0f, -1.0f);
     camera_up_ = glm::vec3(0.0f, 1.0f, 0.0f);

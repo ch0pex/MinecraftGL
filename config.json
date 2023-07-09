@@ -1,0 +1,37 @@
+{
+  "world" : {
+    "chunk_distance" : 48
+  },
+  "lighting": {
+    "background_color" : {
+      "red" : 0.0,
+      "green" : 0.0,
+      "blue" : 0.0,
+      "alpha" : 1.0
+    },
+    "ambient_light_intensity" : 0.1,
+    "ambient_light_color" : {
+      "red" : 255,
+      "green" : 255,
+      "blue" : 255 
+    },
+    "sun_light_intensity" : 0.3,
+    "sun_light_color" : {
+      "red" : 255,
+      "green" : 255,
+      "blue" : 255 
+    },
+    "sun_light_position" : {
+      "x" : 350.0,
+      "y" : 500.0,
+      "z" : 300.0
+    }
+  },
+  "shading" : {
+    "solid_vertex_shader_path" : "res/shaders/solidShader.vs",
+    "solid_fragment_shader_path" : "res/shaders/solidShader.fs",
+    "water_vertex_shader_path" : "res/shaders/waterShader.vs",
+    "water_fragment_shader_path" : "res/shaders/waterShader.fs",
+    "texture_atlas_path" : "res/textures/stone.jpg"
+  }
+}

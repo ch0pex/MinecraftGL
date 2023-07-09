@@ -1,5 +1,4 @@
 #include "shader_loader.h"
-
 #include <root_dir.h>
 
 std::string ShaderLoader::ReadShader(std::string file_name) {

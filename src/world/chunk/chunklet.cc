@@ -9,22 +9,6 @@ Chunklet::Chunklet(World &world, glm::vec3 position) :
     position_.y = position.y;
     position_.z = position.z;
     block_map_.reserve(kChunkletVolume);
-
-    /*
-    for(int i = 0; i < kChunkletVolume; i++)
-    {
-        block_map_[i] = Block(Block::kStone);
-    }
-
-
-    for(int i = 0; i < kChunkletVolume; i++)
-    {
-        int cube = 0;
-        if (block_map_[i] == Block::kStone)
-            cube = 1;
-        std::cout << cube << "\n";
-    }
-    */
 }
 
 
@@ -93,6 +77,9 @@ void Chunklet::BufferMesh() {
 
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) (offsetof(Vertex, Vertex::tex_coords)));
+
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *) (offsetof(Vertex, Vertex::normal)));
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);

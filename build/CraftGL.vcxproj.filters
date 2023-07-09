@@ -7,7 +7,7 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\private\timer.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\config.cc">
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\config\config.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_engine.cc">
@@ -81,7 +81,7 @@
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\common\public\timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\config.h">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\config\config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\game_engine.h">
@@ -103,9 +103,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\helpers\root_dir.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\helpers\singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\loaders\shader_loader.h">
