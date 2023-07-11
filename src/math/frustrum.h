@@ -23,7 +23,7 @@ struct Plane {
 
 class Frustum {
 public:
-    void Update(const glm::mat4 projection_matrix);
+    void Update(const glm::mat4 &projection_matrix);
     bool IsPointInside(glm::vec3 point);
 private:
     Plane planes_[6];

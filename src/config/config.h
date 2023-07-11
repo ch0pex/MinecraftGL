@@ -10,7 +10,7 @@ struct Config {
     glm::vec3 ambient_light_color;
     f32 ambient_light_intensity;
 
-    glm::vec3 sun_light_position;
+    glm::vec3 sun_light_direction;
     glm::vec3 sun_light_color;
     f32 sun_light_intensity;
 

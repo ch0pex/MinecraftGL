@@ -12,7 +12,9 @@ class RenderEngine {
 private:
     GLFWwindow *window_;
     MeshRenderer solid_renderer_;
-    //MeshRenderer waterRenderer;
+    MeshRenderer water_renderer_;
+
+    void InitializeRenderers();
 
 public:
     RenderEngine();

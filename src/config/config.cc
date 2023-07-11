@@ -24,9 +24,9 @@ Config::Config()
 	sun_light_color = glm::vec3(config["lighting"]["sun_light_color"]["red"],
 				      config["lighting"]["sun_light_color"]["green"],
 				      config["lighting"]["sun_light_color"]["blue"]);
-	sun_light_position = glm::vec3(config["lighting"]["sun_light_position"]["x"],
-				       config["lighting"]["sun_light_position"]["y"],
-				       config["lighting"]["sun_light_position"]["z"]);
+	sun_light_direction = glm::vec3(config["lighting"]["sun_light_direction"]["x"],
+				       config["lighting"]["sun_light_direction"]["y"],
+				       config["lighting"]["sun_light_direction"]["z"]);
 
 	solid_vertex_shader_path = config["shading"]["solid_vertex_shader_path"];
 	solid_fragment_shader_path = config["shading"]["solid_fragment_shader_path"];
@@ -44,7 +44,7 @@ Config::Config()
         ambient_light_intensity = .2f;
 	sun_light_intensity = .4f;
 	sun_light_color = glm::vec3(255.f, 255.f, 255.f);
-	sun_light_position = glm::vec3(300.f, 300.f, 300.f);
+	sun_light_direction = glm::vec3(300.f, 300.f, 300.f);
 	solid_vertex_shader_path = "res/shaders/solidShader.vs";
 	solid_fragment_shader_path = "res/shaders/solidShader.fs";
 	water_vertex_shader_path = "res/shaders/waterShader.vs";

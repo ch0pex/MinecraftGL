@@ -5,11 +5,10 @@
 #include "../common/public/common_headers.h"
 #include "../math/frustrum.h"
 #include "../world/Chunk/chunklet.h"
+#include <mutex>
 
 
 class GameEngine;
-
-
 
 class Camera {
 public:
@@ -59,6 +58,8 @@ private:
     f64 last_y_;
     f64 yaw_;
     f64 pitch_;
+
+    std::mutex mutex_;
 
     Direction movement_dir_;
     void CalculateViewProj();

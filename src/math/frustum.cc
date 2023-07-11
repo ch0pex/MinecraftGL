@@ -4,7 +4,8 @@
 #include "../rendering/camera.h"
 
 
-void Frustum::Update(const glm::mat4 projection_matrix) {
+void Frustum::Update(const glm::mat4 &projection_matrix) 
+{
 
     planes_[Faces::kNear].normal.x = projection_matrix[0][3] + projection_matrix[0][2];
     planes_[Faces::kNear].normal.y = projection_matrix[1][3] + projection_matrix[1][2];

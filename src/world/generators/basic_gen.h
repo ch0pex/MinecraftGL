@@ -8,7 +8,5 @@
 
 class BasicGen {
 public:
-
     static void GenChunk(Chunk &chunk);
-
 };

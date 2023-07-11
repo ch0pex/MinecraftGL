@@ -2,7 +2,8 @@
 #include "../game_engine.h"
 
 
-Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, glm::vec3 position) {
+Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, glm::vec3 position) 
+{
     fov_ = fov;
     width = width;
     height = height;
@@ -21,37 +22,47 @@ Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, gl
     CalculateViewProj();
 }
 
-Camera::~Camera() {
+Camera::~Camera()
+{
 
 }
 
-void Camera::CalculateViewProj() {
+void Camera::CalculateViewProj() 
+{
     view_matrix_ = glm::lookAt(position_, position_ + camera_front_, camera_up_);
     view_matrix_ += glm::translate(view_matrix_, -position_);
+    mutex_.lock();
     view_proj_matrix_ = projection_matrix_ * view_matrix_;
+    mutex_.unlock();
 }
 
-glm::mat4 Camera::GetView() {
+glm::mat4 Camera::GetView() 
+{
     return view_matrix_;
 }
 
-glm::mat4 Camera::GetProjection() {
+glm::mat4 Camera::GetProjection() 
+{
     return projection_matrix_;
 }
 
-glm::vec3 Camera::GetPosition() {
+glm::vec3 Camera::GetPosition() 
+{
     return position_;
 }
 
-void Camera::SetPosition(glm::vec3 position) {
-    position = position;
+void Camera::SetPosition(glm::vec3 position) 
+{
+    position_ = position;
 }
 
-float *Camera::GetViewProjValuePtr() {
+float *Camera::GetViewProjValuePtr() 
+{
     return glm::value_ptr(view_proj_matrix_);
 }
 
-void Camera::Update() {
+void Camera::Update() 
+{
     std::this_thread::sleep_for(std::chrono::milliseconds(1));
     switch (movement_dir_) {
         case Camera::kFront:
@@ -76,17 +87,20 @@ void Camera::Update() {
             break;
     }
     CalculateViewProj();
+    mutex_.lock();
     frustum_.Update(view_proj_matrix_);
-    //std::cout << position_.x << ", " << position_.y << ", " << position_.z << "\n";
+    mutex_.unlock();
 }
 
 
-void Camera::Move(Direction direction) {
+void Camera::Move(Direction direction) 
+{
     movement_dir_ = direction;
 }
 
 
-void Camera::MousePosToFront(double xpos, double ypos) {
+void Camera::MousePosToFront(double xpos, double ypos)
+{
 
     if (first_mouse_) {
 
@@ -119,13 +133,14 @@ void Camera::MousePosToFront(double xpos, double ypos) {
 
 
     camera_front_ = glm::normalize(direction);
-    //camera_right_ = glm::normalize(glm::cross(camera_front_, camera_up_));
-    //camera_up_ = glm::normalize(glm::cross(camera_right_, camera_front_));
     CalculateViewProj();
+    mutex_.lock();
     frustum_.Update(view_proj_matrix_);
+    mutex_.unlock();
 }
 
-bool Camera::InFrustum(Chunklet &chunklet) {
+bool Camera::InFrustum(Chunklet &chunklet) 
+{
     glm::vec3 chunklet_center = chunklet.GetPosition() + glm::vec3(8.f, 8.f, 8.f);
     return frustum_.IsPointInside(chunklet_center) || glm::distance(chunklet_center, position_) < 64.f;
 }

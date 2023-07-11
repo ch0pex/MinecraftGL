@@ -14,5 +14,4 @@ public:
 
 private:
     std::thread player_thread_;
-    std::mutex player_mutex_;
 };

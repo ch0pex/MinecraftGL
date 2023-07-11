@@ -15,23 +15,24 @@
       "green" : 255,
       "blue" : 255 
     },
-    "sun_light_intensity" : 0.3,
+    "sun_light_intensity" : 0.8,
     "sun_light_color" : {
       "red" : 255,
       "green" : 255,
       "blue" : 255 
     },
-    "sun_light_position" : {
+    
+    "sun_light_direction" : {
       "x" : 350.0,
-      "y" : 500.0,
+      "y" : -500.0,
       "z" : 300.0
     }
   },
   "shading" : {
     "solid_vertex_shader_path" : "res/shaders/solidShader.vs",
     "solid_fragment_shader_path" : "res/shaders/solidShader.fs",
-    "water_vertex_shader_path" : "res/shaders/waterShader.vs",
+    "water_vertex_shader_path" : "res/shaders/solidShader.vs",
     "water_fragment_shader_path" : "res/shaders/waterShader.fs",
-    "texture_atlas_path" : "res/textures/stone.jpg"
+    "texture_atlas_path" : "res/textures/Atlas.png"
   }
 }

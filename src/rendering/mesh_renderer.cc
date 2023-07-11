@@ -26,7 +26,7 @@ void MeshRenderer::Render(Camera &camera)
     u32 vp_loc = glGetUniformLocation(shader_, "vp");
     u32 ambient_color_loc = glGetUniformLocation(shader_, "ambientColor"); 
     u32 ambient_light_intensity = glGetUniformLocation(shader_, "ambientLightIntensity");
-    u32 sun_light_pos_loc = glGetUniformLocation(shader_, "sunLightPosition");
+    u32 sun_light_dir_loc = glGetUniformLocation(shader_, "sunLightDirection");
     u32 sun_light_color_loc = glGetUniformLocation(shader_, "sunLightColor");
     u32 sun_light_intensity_loc = glGetUniformLocation(shader_, "sunLightIntensity");
 
@@ -34,7 +34,7 @@ void MeshRenderer::Render(Camera &camera)
     glUniformMatrix4fv(vp_loc, 1, GL_FALSE, camera.GetViewProjValuePtr());
     glUniform1f(ambient_light_intensity, kGameConfig.ambient_light_intensity * 0.01f);
     glUniform3f(ambient_color_loc,kGameConfig.ambient_light_color.x, kGameConfig.ambient_light_color.y, kGameConfig.ambient_light_color.z);
-    glUniform3f(sun_light_pos_loc, kGameConfig.sun_light_position.x, kGameConfig.sun_light_position.y, kGameConfig.sun_light_position.z);
+    glUniform3f(sun_light_dir_loc, kGameConfig.sun_light_direction.x, kGameConfig.sun_light_direction.y, kGameConfig.sun_light_direction.z);
     glUniform3f(sun_light_color_loc, kGameConfig.sun_light_color.x, kGameConfig.sun_light_color.y, kGameConfig.sun_light_color.z);
     glUniform1f(sun_light_intensity_loc, kGameConfig.sun_light_intensity * 0.01f);
 
