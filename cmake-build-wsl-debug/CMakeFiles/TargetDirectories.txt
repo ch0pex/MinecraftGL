@@ -1,3 +1,0 @@
-/mnt/d/Alvaro/Programacion/MinecraftSublime/cmake-build-wsl-debug/CMakeFiles/CraftGL.dir
-/mnt/d/Alvaro/Programacion/MinecraftSublime/cmake-build-wsl-debug/CMakeFiles/edit_cache.dir
-/mnt/d/Alvaro/Programacion/MinecraftSublime/cmake-build-wsl-debug/CMakeFiles/rebuild_cache.dir
