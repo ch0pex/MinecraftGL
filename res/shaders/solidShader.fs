@@ -12,7 +12,7 @@ uniform sampler2D Texture;
 uniform vec3 ambientColor;
 uniform float ambientLightIntensity;
 
-uniform vec3 sunLightPosition;
+uniform vec3 sunLightDirection;	
 uniform vec3 sunLightColor;
 uniform float sunLightIntensity;
 
@@ -21,7 +21,7 @@ void main()
 	vec4 ambientLight = vec4(ambientColor, 1.0f) * ambientLightIntensity;
 
 	vec3 norm = normalize(passNormal);
-	vec3 lightDir = normalize(sunLightPosition - passFragPos);
+	vec3 lightDir = normalize(-sunLightDirection);
 	float diff = max(dot(norm, lightDir), 0.0f);
 	vec4 diffuseLight = vec4(sunLightColor, 1.0f) * diff * sunLightIntensity;
 
