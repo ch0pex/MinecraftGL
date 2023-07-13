@@ -8,7 +8,6 @@
 
 
 class MeshRenderer {
-
 private:
     std::vector<RenderInfo *> meshes_;
     u32 texture_, shader_;

@@ -31,7 +31,10 @@ void Chunk::BuildMesh()
 void Chunk::BufferChunklets()
 {
     for (auto chunklet: chunklets_)
-        chunklet->BufferMesh();
+    {
+        chunklet->BufferMesh(*chunklet->model_.solid_mesh);
+        chunklet->BufferMesh(*chunklet->model_.water_mesh);
+    }
     buffered_ = true;
 }
 

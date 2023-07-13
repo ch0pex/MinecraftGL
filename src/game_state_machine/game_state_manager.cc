@@ -20,8 +20,8 @@ GameStateManager::GameStateManager(Game &game) : game_(game)
 
 GameStateManager::~GameStateManager()
 {
-    /*for(const auto state : states_)
-        delete(state.second);*/
+    for(const auto state : states_)
+        delete(state.second);
 
 }
 

@@ -1,12 +1,15 @@
+
 ---
 events:
-  - kind: "message-v1"
+  -
+    kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineSystem.cmake:204 (message)"
       - "CMakeLists.txt:2 (project)"
     message: |
       The system is: Windows - 10.0.22623 - AMD64
-  - kind: "message-v1"
+  -
+    kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -21,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.4.1+9a89d02ff for .NET Framework
-      Compilación iniciada a las 13/04/2023 21:17:32.
+      Compilación iniciada a las 11/07/2023 17:40:47.
       Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\3.26.2\\CompilerIdC\\CompilerIdC.vcxproj" en nodo 1 (destinos predeterminados).
       PrepareForBuild:
         Creando directorio "Debug\\".
@@ -47,7 +50,7 @@ events:
           0 Advertencia(s)
           0 Errores
       
-      Tiempo transcurrido 00:00:00.60
+      Tiempo transcurrido 00:00:00.63
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -56,8 +59,9 @@ events:
       
       The C compiler identification is MSVC, found in:
         D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CompilerIdC/CompilerIdC.exe
-
-  - kind: "message-v1"
+      
+  -
+    kind: "message-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
@@ -72,7 +76,7 @@ events:
       The output was:
       0
       MSBuild version 17.4.1+9a89d02ff for .NET Framework
-      Compilación iniciada a las 13/04/2023 21:17:33.
+      Compilación iniciada a las 11/07/2023 17:40:47.
       Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\3.26.2\\CompilerIdCXX\\CompilerIdCXX.vcxproj" en nodo 1 (destinos predeterminados).
       PrepareForBuild:
         Creando directorio "Debug\\".
@@ -98,7 +102,7 @@ events:
           0 Advertencia(s)
           0 Errores
       
-      Tiempo transcurrido 00:00:00.51
+      Tiempo transcurrido 00:00:00.50
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -107,8 +111,9 @@ events:
       
       The CXX compiler identification is MSVC, found in:
         D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/3.26.2/CompilerIdCXX/CompilerIdCXX.exe
-
-  - kind: "try_compile-v1"
+      
+  -
+    kind: "try_compile-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -116,8 +121,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-bsvyot"
-      binary: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-bsvyot"
+      source: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-9kn5sk"
+      binary: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-9kn5sk"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
@@ -125,39 +130,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-bsvyot
+        Change Dir: D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-9kn5sk
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_9753e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.4.1+9a89d02ff for .NET Framework
-        Compilación iniciada a las 13/04/2023 21:17:34.
-        Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bsvyot\\cmTC_9753e.vcxproj" en nodo 1 (destinos predeterminados).
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_a984f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+        Compilación iniciada a las 11/07/2023 17:40:48.
+        Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9kn5sk\\cmTC_a984f.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
-          Creando directorio "cmTC_9753e.dir\\Debug\\".
-          Creando directorio "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bsvyot\\Debug\\".
-          Creando directorio "cmTC_9753e.dir\\Debug\\cmTC_9753e.tlog\\".
+          Creando directorio "cmTC_a984f.dir\\Debug\\".
+          Creando directorio "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9kn5sk\\Debug\\".
+          Creando directorio "cmTC_a984f.dir\\Debug\\cmTC_a984f.tlog\\".
         InitializeBuildStatus:
-          Se creará "cmTC_9753e.dir\\Debug\\cmTC_9753e.tlog\\unsuccessfulbuild" porque se especificó "AlwaysCreate".
+          Se creará "cmTC_a984f.dir\\Debug\\cmTC_a984f.tlog\\unsuccessfulbuild" porque se especificó "AlwaysCreate".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9753e.dir\\Debug\\\\" /Fd"cmTC_9753e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a984f.dir\\Debug\\\\" /Fd"cmTC_a984f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
           Compilador de optimización de C/C++ de Microsoft (R) versión 19.33.31631 para x64
           CMakeCCompilerABI.c
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9753e.dir\\Debug\\\\" /Fd"cmTC_9753e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a984f.dir\\Debug\\\\" /Fd"cmTC_a984f.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCCompilerABI.c"
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bsvyot\\Debug\\cmTC_9753e.exe" /INCREMENTAL /ILK:"cmTC_9753e.dir\\Debug\\cmTC_9753e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-bsvyot/Debug/cmTC_9753e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-bsvyot/Debug/cmTC_9753e.lib" /MACHINE:X64  /machine:x64 cmTC_9753e.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_9753e.vcxproj -> D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bsvyot\\Debug\\cmTC_9753e.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9kn5sk\\Debug\\cmTC_a984f.exe" /INCREMENTAL /ILK:"cmTC_a984f.dir\\Debug\\cmTC_a984f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-9kn5sk/Debug/cmTC_a984f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-9kn5sk/Debug/cmTC_a984f.lib" /MACHINE:X64  /machine:x64 cmTC_a984f.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_a984f.vcxproj -> D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9kn5sk\\Debug\\cmTC_a984f.exe
         FinalizeBuildStatus:
-          Se eliminará el archivo "cmTC_9753e.dir\\Debug\\cmTC_9753e.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_9753e.dir\\Debug\\cmTC_9753e.tlog\\cmTC_9753e.lastbuildstate".
-        Compilación del proyecto terminada "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-bsvyot\\cmTC_9753e.vcxproj" (destinos predeterminados).
+          Se eliminará el archivo "cmTC_a984f.dir\\Debug\\cmTC_a984f.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_a984f.dir\\Debug\\cmTC_a984f.tlog\\cmTC_a984f.lastbuildstate".
+        Compilación del proyecto terminada "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9kn5sk\\cmTC_a984f.vcxproj" (destinos predeterminados).
         
         Compilación correcta.
             0 Advertencia(s)
             0 Errores
         
         Tiempo transcurrido 00:00:00.51
-
+        
       exitCode: 0
-  - kind: "try_compile-v1"
+  -
+    kind: "try_compile-v1"
     backtrace:
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
       - "C:/Program Files/CMake/share/cmake-3.26/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
@@ -165,8 +171,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-1hdaak"
-      binary: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-1hdaak"
+      source: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-35qtem"
+      binary: "D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-35qtem"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
@@ -174,36 +180,36 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-1hdaak
+        Change Dir: D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-35qtem
         
-        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_1cfc2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.4.1+9a89d02ff for .NET Framework
-        Compilación iniciada a las 13/04/2023 21:17:35.
-        Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1hdaak\\cmTC_1cfc2.vcxproj" en nodo 1 (destinos predeterminados).
+        Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_b870e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n && MSBuild version 17.4.1+9a89d02ff for .NET Framework
+        Compilación iniciada a las 11/07/2023 17:40:49.
+        Proyecto "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-35qtem\\cmTC_b870e.vcxproj" en nodo 1 (destinos predeterminados).
         PrepareForBuild:
-          Creando directorio "cmTC_1cfc2.dir\\Debug\\".
-          Creando directorio "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1hdaak\\Debug\\".
-          Creando directorio "cmTC_1cfc2.dir\\Debug\\cmTC_1cfc2.tlog\\".
+          Creando directorio "cmTC_b870e.dir\\Debug\\".
+          Creando directorio "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-35qtem\\Debug\\".
+          Creando directorio "cmTC_b870e.dir\\Debug\\cmTC_b870e.tlog\\".
         InitializeBuildStatus:
-          Se creará "cmTC_1cfc2.dir\\Debug\\cmTC_1cfc2.tlog\\unsuccessfulbuild" porque se especificó "AlwaysCreate".
+          Se creará "cmTC_b870e.dir\\Debug\\cmTC_b870e.tlog\\unsuccessfulbuild" porque se especificó "AlwaysCreate".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1cfc2.dir\\Debug\\\\" /Fd"cmTC_1cfc2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\CL.exe /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b870e.dir\\Debug\\\\" /Fd"cmTC_b870e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
           Compilador de optimización de C/C++ de Microsoft (R) versión 19.33.31631 para x64
           CMakeCXXCompilerABI.cpp
           (C) Microsoft Corporation. Todos los derechos reservados.
-          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1cfc2.dir\\Debug\\\\" /Fd"cmTC_1cfc2.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_b870e.dir\\Debug\\\\" /Fd"cmTC_b870e.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.26\\Modules\\CMakeCXXCompilerABI.cpp"
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1hdaak\\Debug\\cmTC_1cfc2.exe" /INCREMENTAL /ILK:"cmTC_1cfc2.dir\\Debug\\cmTC_1cfc2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-1hdaak/Debug/cmTC_1cfc2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-1hdaak/Debug/cmTC_1cfc2.lib" /MACHINE:X64  /machine:x64 cmTC_1cfc2.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_1cfc2.vcxproj -> D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1hdaak\\Debug\\cmTC_1cfc2.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.33.31629\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-35qtem\\Debug\\cmTC_b870e.exe" /INCREMENTAL /ILK:"cmTC_b870e.dir\\Debug\\cmTC_b870e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-35qtem/Debug/cmTC_b870e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Alvaro/Programacion/MinecraftSublime/build/CMakeFiles/CMakeScratch/TryCompile-35qtem/Debug/cmTC_b870e.lib" /MACHINE:X64  /machine:x64 cmTC_b870e.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_b870e.vcxproj -> D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-35qtem\\Debug\\cmTC_b870e.exe
         FinalizeBuildStatus:
-          Se eliminará el archivo "cmTC_1cfc2.dir\\Debug\\cmTC_1cfc2.tlog\\unsuccessfulbuild".
-          Aplicando tarea Touch a "cmTC_1cfc2.dir\\Debug\\cmTC_1cfc2.tlog\\cmTC_1cfc2.lastbuildstate".
-        Compilación del proyecto terminada "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-1hdaak\\cmTC_1cfc2.vcxproj" (destinos predeterminados).
+          Se eliminará el archivo "cmTC_b870e.dir\\Debug\\cmTC_b870e.tlog\\unsuccessfulbuild".
+          Aplicando tarea Touch a "cmTC_b870e.dir\\Debug\\cmTC_b870e.tlog\\cmTC_b870e.lastbuildstate".
+        Compilación del proyecto terminada "D:\\Alvaro\\Programacion\\MinecraftSublime\\build\\CMakeFiles\\CMakeScratch\\TryCompile-35qtem\\cmTC_b870e.vcxproj" (destinos predeterminados).
         
         Compilación correcta.
             0 Advertencia(s)
             0 Errores
         
-        Tiempo transcurrido 00:00:00.46
-
+        Tiempo transcurrido 00:00:00.75
+        
       exitCode: 0
 ...

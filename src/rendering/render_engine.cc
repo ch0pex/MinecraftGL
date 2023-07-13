@@ -31,8 +31,8 @@ RenderEngine::RenderEngine()
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glCullFace(GL_FRONT);
 
 	InitializeRenderers();
@@ -76,9 +76,9 @@ void RenderEngine::RenderScene(Camera &camera)
 
 
 void RenderEngine::DrawChunklet(Chunklet &chunklet) {
-	solid_renderer_.AddMesh(&chunklet.mesh_->render_info);
-	water_renderer_.AddMesh(&chunklet.water_mesh_->render_info);
-	//floraRenderer.AddMesh(&chunklet.floraMesh->render_info);
+	solid_renderer_.AddMesh(&chunklet.model_.solid_mesh->render_info);
+	water_renderer_.AddMesh(&chunklet.model_.water_mesh->render_info);
+	//floraRenderer.AddMesh(&chunklet.model_.flora_mesh->render_info);
 }
 
 
