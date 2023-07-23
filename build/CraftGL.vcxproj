@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -103,10 +103,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -141,7 +141,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -158,10 +158,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -196,7 +196,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -213,10 +213,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -251,7 +251,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -267,10 +267,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Alvaro\Programacion\MinecraftSublime\src;D:\Alvaro\Programacion\MinecraftSublime\include;D:\Alvaro\Programacion\MinecraftSublime\build\src\helpers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -375,8 +375,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\math\frustum.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\player\player.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\camera.cc" />
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh_renderer.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.cc" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\sky_renderer.cc" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\solid_renderer.cc" />
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\translucent_renderer.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunk.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunklet.cc" />
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunks_manager.cc" />
@@ -402,8 +404,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\player\player_states\player_state.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\camera.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh.h" />
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh_renderer.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\base_renderer.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\renderers.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\sky_renderer.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\solid_renderer.h" />
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\translucent_renderer.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\block.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunk.h" />
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunklet.h" />

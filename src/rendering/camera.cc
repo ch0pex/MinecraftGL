@@ -30,7 +30,6 @@ Camera::~Camera()
 void Camera::CalculateViewProj() 
 {
     view_matrix_ = glm::lookAt(position_, position_ + camera_front_, camera_up_);
-    view_matrix_ += glm::translate(view_matrix_, -position_);
     mutex_.lock();
     view_proj_matrix_ = projection_matrix_ * view_matrix_;
     mutex_.unlock();

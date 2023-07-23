@@ -4,16 +4,16 @@
 #include <GLFW/glfw3.h>
 
 #include "camera.h"
-#include "mesh_renderer.h"
+#include "renderers/renderers.h"
 #include "../world/chunk/chunklet.h"
 
 
 class RenderEngine {
 private:
     GLFWwindow *window_;
-    MeshRenderer solid_renderer_;
-    MeshRenderer water_renderer_;
-
+    SolidRenderer solid_renderer_;
+    TranslucentRenderer water_renderer_;
+    SkyRenderer sky_renderer_;
     void InitializeRenderers();
 
 public:

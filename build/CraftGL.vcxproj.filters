@@ -43,10 +43,16 @@
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\camera.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh_renderer.cc">
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.cc">
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\sky_renderer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\solid_renderer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\translucent_renderer.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\chunk.cc">
@@ -126,10 +132,22 @@
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\mesh_renderer.h">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\render_engine.h">
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\base_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\renderers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\sky_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\solid_renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\rendering\renderers\translucent_renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\Alvaro\Programacion\MinecraftSublime\src\world\chunk\block.h">

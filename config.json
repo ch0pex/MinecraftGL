@@ -3,13 +3,15 @@
     "movement_speed": 10
   },
   "world" : {
-    "chunk_distance" : 48
+    "chunk_distance" : 48,
+    "water_level" : 60,
+    "water_opacity" : 0.6
   },
   "lighting": {
     "background_color" : {
-      "red" : 0.0,
-      "green" : 0.0,
-      "blue" : 0.0,
+      "red" : 0.20,
+      "green" : 0.60,
+      "blue" : 0.80,
       "alpha" : 1.0
     },
     "ambient_light_intensity" : 0.1,
@@ -36,6 +38,12 @@
     "solid_fragment_shader_path" : "res/shaders/solidShader.fs",
     "water_vertex_shader_path" : "res/shaders/solidShader.vs",
     "water_fragment_shader_path" : "res/shaders/waterShader.fs",
-    "texture_atlas_path" : "res/textures/Atlas.png"
+    "sky_vertex_shader_path" : "res/shaders/skyShader.vs",
+    "sky_fragment_shader_path" : "res/shaders/skyShader.fs",
+    "texture_atlas_path" : "res/textures/Atlas.png",
+    "sky_faces_paths" :[
+      "res/textures/skybox/bot_top.png",
+      "res/textures/skybox/sides.png"
+    ]
   }
 }
