@@ -1,44 +1,65 @@
 #include "game_engine.h"
 
+#include "config/config.h"
 
-GameStateManager *kStateMachinePointer;
-Player *kPlayerPointer;
+bool kKeys[1024];
+glm::vec2 kMousePos;
 
-void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode) 
-{
-	kStateMachinePointer->HandleInput(window, key, action);
+void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode){
+  if(key >= 0 && key <= 1024){
+    if(action == GLFW_PRESS)
+      kKeys[key] = true;
+    else if(action == GLFW_RELEASE)
+      kKeys[key] = false;
+  }
 }
 
-void MouseCallback(GLFWwindow *window, double xpos, double ypos) 
-{
-	kStateMachinePointer->HandleMouse(*kPlayerPointer, window, xpos, ypos);
+void MouseCallback(GLFWwindow *window, double xpos, double ypos){
+  kMousePos.x = xpos;
+  kMousePos.y = ypos;
 }
 
 GameEngine::GameEngine() :
-        game_(new Game()),
-        game_state_(*game_)
+    game_(new Game()),
+    game_state_(*game_),
+    input_info_ {kKeys, &kMousePos, 0.0f}
 {
-	kStateMachinePointer = &game_state_;
-	kPlayerPointer = &game_->player;
-	glfwSetKeyCallback(game_->render_engine.GetWindow(), KeyCallback);
-	glfwSetCursorPosCallback(game_->render_engine.GetWindow(), MouseCallback);
+  glfwSetKeyCallback(game_->render_engine.GetWindow(), KeyCallback);
+  glfwSetCursorPosCallback(game_->render_engine.GetWindow(), MouseCallback);
 }
 
-GameEngine::~GameEngine() 
-{
-	std::cout << "GameEngine destructor called" << std::endl;
-	delete (game_);
+GameEngine::~GameEngine() {
+  std::cout << "GameEngine destructor called" << std::endl;
+  delete (game_);
 }
 
-void GameEngine::Loop() 
-{
-	// El bucle principal de la aplicación
-	while (!game_->render_engine.ShouldClose())
-    {
-		game_state_.Update();
-		glfwPollEvents(); // Escucha los eventos de la ventana
-	}
-	glfwTerminate();
+void GameEngine::Loop() {
+  const f32 dt = 1.0f / 175.0f;
+  std::chrono::microseconds current_time;
+  std::chrono::microseconds new_time;
+  f32 t = 0.0f, accumulator = 0.0f;
 
+  current_time = Time::Now();
+  while (!game_->render_engine.ShouldClose()) {
+    new_time = Time::Now();
+    input_info_.frame_time = (new_time.count() - current_time.count()) / 1000000.0f;
+    //Time::SetLastFrameTime(frame_time);
+    current_time = new_time;
+    accumulator += input_info_.frame_time;
+
+    game_state_.HandleInput(input_info_);
+    game_state_.HandleMouse(input_info_);
+
+    glfwPollEvents();
+    while (accumulator >= dt) {
+      game_state_.Update();
+
+      accumulator -= dt;
+      t += dt;
+    }
+    game_state_.Render();
+  }
+  glfwTerminate();
 }
+
 

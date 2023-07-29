@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../chunk/block.h"
+#include "world/chunk/block.h"
 #include <vector>
 #include <glm/glm/glm.hpp>
-#include "../chunk/chunk.h"
+#include "world/chunk/chunk.h"
 
 
 class BasicGen {
 public:
-    static void GenChunk(Chunk &chunk);
+  static void GenChunk(Chunk &chunk);
 };

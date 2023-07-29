@@ -5,25 +5,25 @@
 
 #include "camera.h"
 #include "renderers/renderers.h"
-#include "../world/chunk/chunklet.h"
+#include "world/chunk/chunklet.h"
 
 
 class RenderEngine {
 private:
-    GLFWwindow *window_;
-    SolidRenderer solid_renderer_;
-    TranslucentRenderer water_renderer_;
-    SkyRenderer sky_renderer_;
-    void InitializeRenderers();
+  GLFWwindow *window_;
+  SolidRenderer solid_renderer_;
+  TranslucentRenderer water_renderer_;
+  SkyRenderer sky_renderer_;
+  void InitializeRenderers();
 
 public:
-    RenderEngine();
-    ~RenderEngine();
+  RenderEngine();
+  ~RenderEngine();
 
-    void RenderScene(Camera &camera);
-    bool ShouldClose();
+  void RenderScene(Camera &camera);
+  bool ShouldClose();
 
-    void DrawChunklet(Chunklet &chunklet);
-    GLFWwindow *GetWindow();
+  void DrawChunklet(Chunklet &chunklet);
+  GLFWwindow *GetWindow();
 
 };

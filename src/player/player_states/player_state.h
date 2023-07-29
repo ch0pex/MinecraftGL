@@ -1,13 +1,13 @@
-#pragma once 
+#pragma once
 
 enum class PlayerStateType {
-	kGround,
-	kAir,
-	kDead,
+  kGround,
+  kAir,
+  kDead,
 };
 
 class PlayerState {
 public:
-    virtual ~PlayerState() {}
-    virtual void update() = 0;
+  virtual ~PlayerState() = default;
+  virtual void Update() = 0;
 };

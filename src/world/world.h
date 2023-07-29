@@ -1,22 +1,22 @@
 #pragma once
 
-#include "../rendering/render_engine.h"
+#include "rendering/render_engine.h"
 #include "chunk/chunks_manager.h"
-#include "../rendering/camera.h"
+#include "rendering/camera.h"
 
 
 class World {
 
 public:
-    World();
-    ~World();
+  World();
+  ~World();
 
-    void Update(Camera &camera);
-    void PrepareRender(RenderEngine &renderer, Camera &camera);
+  void Update(Camera &camera);
+  void PrepareRender(RenderEngine &renderer, Camera &camera);
 
-    Block GetBlock(glm::vec3 pos);
+  Block GetBlock(glm::vec3 pos);
 
 private:
-    ChunksManager chunks_manager_;
+  ChunksManager chunks_manager_;
 
 };

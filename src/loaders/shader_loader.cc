@@ -2,19 +2,19 @@
 #include <root_dir.h>
 
 std::string ShaderLoader::ReadShader(std::string file_name) {
-    std::string shader_code;
-    std::ifstream file((ROOT_DIR + file_name).c_str(), std::ios::in);
-    if (!file.good()) {
-        std::cout << "Can't read file" << std::endl;
-        std::terminate();
-    }
+  std::string shader_code;
+  std::ifstream file((ROOT_DIR + file_name).c_str(), std::ios::in);
+  if (!file.good()) {
+    std::cout << "Can't read file" << std::endl;
+    std::terminate();
+  }
 
-    file.seekg(0, std::ios::end);
-    shader_code.resize((unsigned int) file.tellg());
-    file.seekg(0, std::ios::beg);
-    file.read(&shader_code[0], shader_code.size());
-    file.close();
-    return shader_code;
+  file.seekg(0, std::ios::end);
+  shader_code.resize((unsigned int) file.tellg());
+  file.seekg(0, std::ios::beg);
+  file.read(&shader_code[0], shader_code.size());
+  file.close();
+  return shader_code;
 }
 
 GLuint ShaderLoader::CreateShader(GLenum shader_type, std::string &source, const char *shader_name)
@@ -29,23 +29,23 @@ Los pasos para ello son los siguientes:
 	- Si el compile result ha sido falso. Muestras el info log con el error correspondiente. 
 */
 {
-    int compile_result = 0;
-    GLuint shader = glCreateShader(shader_type);
-    const char *shader_code_ptr = source.c_str();
-    const int shader_code_size = source.size();
-    glShaderSource(shader, 1, &shader_code_ptr, &shader_code_size);
-    glCompileShader(shader);
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &compile_result);
+  int compile_result = 0;
+  GLuint shader = glCreateShader(shader_type);
+  const char *shader_code_ptr = source.c_str();
+  const int shader_code_size = source.size();
+  glShaderSource(shader, 1, &shader_code_ptr, &shader_code_size);
+  glCompileShader(shader);
+  glGetShaderiv(shader, GL_COMPILE_STATUS, &compile_result);
 
-    if (compile_result == GL_FALSE) {
-        int info_log_length = 0;
-        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &info_log_length);
-        std::vector<char> shader_log(info_log_length);
-        glGetShaderInfoLog(shader, info_log_length, NULL, &shader_log[0]);
-        std::cout << "Error compiling shader_: " << shader_name << std::endl << &shader_log[0] << std::endl;
-        return 0;
-    }
-    return shader;
+  if (compile_result == GL_FALSE) {
+    int info_log_length = 0;
+    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &info_log_length);
+    std::vector<char> shader_log(info_log_length);
+    glGetShaderInfoLog(shader, info_log_length, NULL, &shader_log[0]);
+    std::cout << "Error compiling shader_: " << shader_name << std::endl << &shader_log[0] << std::endl;
+    return 0;
+  }
+  return shader;
 }
 
 GLuint ShaderLoader::CreateProgram(const char *vertex_shader_name, const char *fragment_shader_name)
@@ -53,27 +53,27 @@ GLuint ShaderLoader::CreateProgram(const char *vertex_shader_name, const char *f
 coordina los vertex shader_ y los fragment shader_. Si hay un error devolvemos 0, en caso contrario
 se devuelve el identificador del programa*/
 {
-    std::string source_vertex_shader = ReadShader(vertex_shader_name);
-    std::string source_fragment_shader = ReadShader(fragment_shader_name);
+  std::string source_vertex_shader = ReadShader(vertex_shader_name);
+  std::string source_fragment_shader = ReadShader(fragment_shader_name);
 
-    GLuint vertex_shader = CreateShader(GL_VERTEX_SHADER, source_vertex_shader, "Vertex Shader");
-    GLuint fragment_shader = CreateShader(GL_FRAGMENT_SHADER, source_fragment_shader, "Fragment Shader");
+  GLuint vertex_shader = CreateShader(GL_VERTEX_SHADER, source_vertex_shader, "Vertex Shader");
+  GLuint fragment_shader = CreateShader(GL_FRAGMENT_SHADER, source_fragment_shader, "Fragment Shader");
 
-    int link_result = 0;
+  int link_result = 0;
 
-    GLuint program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
-    glGetProgramiv(program, GL_LINK_STATUS, &link_result);
+  GLuint program = glCreateProgram();
+  glAttachShader(program, vertex_shader);
+  glAttachShader(program, fragment_shader);
+  glLinkProgram(program);
+  glGetProgramiv(program, GL_LINK_STATUS, &link_result);
 
-    if (link_result == GL_FALSE) {
-        int info_log_length = 0;
-        glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_log_length);
-        std::vector<char> info_log(info_log_length);
-        glGetProgramInfoLog(program, info_log_length, NULL, &info_log[0]);
-        std::cout << "Shader Loader: LINK ERROR." << std::endl << &info_log[0] << std::endl;
-        return 0;
-    }
-    return program;
+  if (link_result == GL_FALSE) {
+    int info_log_length = 0;
+    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &info_log_length);
+    std::vector<char> info_log(info_log_length);
+    glGetProgramInfoLog(program, info_log_length, NULL, &info_log[0]);
+    std::cout << "Shader Loader: LINK ERROR." << std::endl << &info_log[0] << std::endl;
+    return 0;
+  }
+  return program;
 }

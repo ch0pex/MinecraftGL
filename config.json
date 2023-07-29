@@ -1,4 +1,7 @@
 {
+  "graphics": {
+    "max_framerate": 300
+  },
   "player": {
     "movement_speed": 10
   },
@@ -26,7 +29,6 @@
       "green" : 255,
       "blue" : 255 
     },
-    
     "sun_light_direction" : {
       "x" : 350.0,
       "y" : -500.0,

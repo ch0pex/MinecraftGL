@@ -1,45 +1,51 @@
 #include "playing_state.h"
-#include "../../game_engine.h"
-#include "../../player/player.h"
 
-void PlayingState::OnEnter(Game &game)
-{
-    player_thread_ = std::thread(&Player::Update, &game.player);
+#include "game_engine.h"
+
+PlayingState::PlayingState(Game &game) : GameState(game) {}
+
+void PlayingState::OnEnter() {
+
 }
 
-void PlayingState::OnExit(Game &game) 
-{
-    player_thread_.join();
+void PlayingState::OnExit() {
+
 }
 
-void PlayingState::Update(Game &game) 
-{
-    game.world.Update(game.player.camera_);
-    game.world.PrepareRender(game.render_engine, game.player.camera_);
-    game.render_engine.RenderScene(game.player.camera_);
+void PlayingState::Update() {
+  game_.player.Update();
+  game_.world.Update(game_.player.camera_);
 }
 
-void PlayingState::HandleInput(Player &player, GLFWwindow *window, u32 key, u32 action) 
-{
-    player.camera_.Move(Camera::kStatic);
-    // Cuando una tecla es presionada, registra que tecla fue presionada
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        player.camera_.Move(Camera::kFront);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        player.camera_.Move(Camera::kBack);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        player.camera_.Move(Camera::kLeft);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        player.camera_.Move(Camera::kRight);
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-        player.camera_.Move(Camera::kDown);
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-        player.camera_.Move(Camera::kUp);
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+void PlayingState::Render() {
+  game_.world.PrepareRender(game_.render_engine, game_.player.camera_);
+  game_.render_engine.RenderScene(game_.player.camera_);
 }
 
-void PlayingState::HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) 
-{
-    player.camera_.MousePosToFront(xpos, ypos);
+void PlayingState::HandleInput(InputInfo &input_info) {
+  f32 movement_speed = game_.player.GetSpeed();
+  f32 factor = input_info.frame_time * movement_speed;
+
+  if (input_info.PressedKeysAreDiag())
+    factor *= 0.707f;
+
+  // Keys for player movement
+  if (input_info.keys[GLFW_KEY_W])
+    game_.player.Move(Player::Direction::kFront, factor);
+  if (input_info.keys[GLFW_KEY_S])
+    game_.player.Move(Player::Direction::kBack, factor);
+  if (input_info.keys[GLFW_KEY_A])
+    game_.player.Move(Player::Direction::kLeft, factor);
+  if (input_info.keys[GLFW_KEY_D])
+    game_.player.Move(Player::Direction::kRight, factor);
+  if (input_info.keys[GLFW_KEY_Q])
+    game_.player.Move(Player::Direction::kDown, factor);
+  if (input_info.keys[GLFW_KEY_E])
+    game_.player.Move(Player::Direction::kUp, factor);
+  if (input_info.keys[GLFW_KEY_ESCAPE])
+    glfwSetWindowShouldClose(game_.render_engine.GetWindow(), true);
+}
+
+void PlayingState::HandleMouse(InputInfo &input_info) {
+  game_.player.LookAt(input_info.mouse_pos->x, input_info.mouse_pos->y);
 }

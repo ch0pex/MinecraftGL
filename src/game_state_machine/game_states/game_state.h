@@ -2,24 +2,30 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "../../common/public/common_headers.h"
-#include "../../player/player.h"
+
+#include "common/public/common_headers.h"
+#include "player/player.h"
+#include "input/input.h"
 
 
 struct Game;
 enum class GameStateType {
-    kStart,
-    kLoading,
-    kPlaying,
-    kGameover,
+  kStart,
+  kLoading,
+  kPlaying,
+  kGameOver,
 };
 
 class GameState {
 public:
-    virtual ~GameState() = default;
-    virtual void OnEnter(Game &game) = 0;
-    virtual void OnExit(Game &game) = 0;
-    virtual void Update(Game &game) = 0;
-    virtual void HandleInput(Player &player, GLFWwindow *window, u32 key, u32 action) = 0;
-    virtual void HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) = 0;
+  explicit GameState(Game& game) : game_(game) {};
+  virtual ~GameState() = default;
+  virtual void OnEnter() = 0;
+  virtual void OnExit() = 0;
+  virtual void Update() = 0;
+  virtual void Render() = 0;
+  virtual void HandleInput(InputInfo &input_info) = 0;
+  virtual void HandleMouse(InputInfo &input_info) = 0;
+protected:
+  Game& game_;
 };

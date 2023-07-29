@@ -7,23 +7,21 @@
 #include "rendering/render_engine.h"
 #include "player/player.h"
 #include "world/world.h"
-
-void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode);
-void MouseCallback(GLFWwindow *window, double xpos, double ypos);
+#include "input/input.h"
 
 struct Game {
-    RenderEngine render_engine;
-    Player player;
-    World world;
+  RenderEngine render_engine;
+  Player player;
+  World world;
 };
 
 class GameEngine {
 public:
-    GameEngine();
-    ~GameEngine();
-    void Loop();
-
+  GameEngine();
+  ~GameEngine();
+  void Loop();
 private:
-    Game *game_;
-    GameStateManager game_state_;
+  Game *game_;
+  InputInfo input_info_;
+  GameStateManager game_state_;
 };

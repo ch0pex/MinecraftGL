@@ -1,4 +1,4 @@
-#pragma once 
+#pragma once
 
 #include "sky_renderer.h"
 #include "solid_renderer.h"

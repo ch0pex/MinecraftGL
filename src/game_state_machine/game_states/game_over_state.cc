@@ -1,16 +1,27 @@
 #include "game_over_state.h"
 
-void GameOverState::OnEnter(Game &game) {
+GameOverState::GameOverState(Game &game) : GameState(game) {}
+
+void GameOverState::OnEnter() {
+
 }
 
-void GameOverState::OnExit(Game &game) {
+void GameOverState::OnExit() {
+
 }
 
-void GameOverState::Update(Game &game) {
+void GameOverState::Update() {
+
 }
 
-void GameOverState::HandleInput(Player &player, GLFWwindow *window, u32 key, u32 action) {
+void GameOverState::HandleInput(InputInfo &input_info) {
+
 }
 
-void GameOverState::HandleMouse(Player &player, GLFWwindow *window, f64 xpos, f64 ypos) {
+void GameOverState::HandleMouse(InputInfo &input_info) {
+
+}
+
+void GameOverState::Render() {
+
 }
