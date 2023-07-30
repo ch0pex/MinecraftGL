@@ -7,7 +7,10 @@ RenderEngine::RenderEngine() {
   if (!glfwInit())
     std::terminate();
 
-  // Crea una ventana de GLFW
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
   window_ = glfwCreateWindow(1920, 1080, "CraftGL", NULL, NULL);
 
   if (!window_) {
@@ -64,14 +67,15 @@ void RenderEngine::InitializeRenderers() {
 }
 
 void RenderEngine::RenderScene(Camera &camera) {
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
   glClearColor(kGameConfig.back_ground_color.x, kGameConfig.back_ground_color.y, kGameConfig.back_ground_color.z,
                kGameConfig.back_ground_color.w);
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   solid_renderer_.Render(camera);
   water_renderer_.Render(camera);
   // floraRenderer.Render(camera_);
-  //sky_renderer_.Render(camera);
+  sky_renderer_.Render(camera);
 
   glfwSwapBuffers(window_);
 }

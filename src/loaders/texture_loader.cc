@@ -8,7 +8,7 @@
 
 
 u32 TextureLoader::LoadTexture(const std::string &file_name) {
-  s32 width, height, channels;
+  i32 width, height, channels;
   u32 mtexture;
 
   std::cout << ROOT_DIR + file_name << std::endl;
@@ -39,7 +39,7 @@ u32 TextureLoader::LoadTexture(const std::string &file_name) {
 
 
 u32 TextureLoader::LoadSkyTexture(const std::string faces[2]) {
-  s32 width, height, channels;
+  i32 width, height, channels;
   u32 mtexture;
 
   glGenTextures(1, &mtexture);
@@ -48,19 +48,20 @@ u32 TextureLoader::LoadSkyTexture(const std::string faces[2]) {
   stbi_uc *bot_top_image = stbi_load((ROOT_DIR + faces[0]).c_str(), &width, &height, &channels, 0);
   stbi_uc *sides_image = stbi_load((ROOT_DIR + faces[1]).c_str(), &width, &height, &channels, 0);
 
+
   if (bot_top_image && sides_image) {
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 0, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 sides_image);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 1, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 sides_image);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 2, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 bot_top_image);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 3, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 bot_top_image);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 4, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 sides_image);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 5, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE,
-                 sides_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 0, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE,sides_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 1, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, sides_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 2, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, bot_top_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 3, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, bot_top_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 4, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, sides_image);
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + 5, 0, GL_RGB, width, height, 0,
+                 GL_RGB, GL_UNSIGNED_BYTE, sides_image);
     stbi_image_free(bot_top_image);
     stbi_image_free(sides_image);
   } else {

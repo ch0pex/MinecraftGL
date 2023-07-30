@@ -19,7 +19,7 @@ public:
   Player();
   ~Player() = default;
 
-  f32 GetSpeed();
+  f32 GetSpeed() const;
 
   void Move(Direction dir, f32 speed_factor);
   void LookAt(f64 xpos, f64 ypos);

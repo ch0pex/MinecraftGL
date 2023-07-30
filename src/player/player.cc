@@ -34,16 +34,16 @@ void Player::Move(Direction dir, f32 speed_factor) {
       position_ -= camera_.front_ * speed_factor;
       break;
     case Direction::kRight:
-      position_ += glm::normalize(glm::cross(camera_.front_, camera_.up_)) * speed_factor;
+      position_ += camera_.right_ * speed_factor;
       break;
     case Direction::kLeft:
-      position_ -= glm::normalize(glm::cross(camera_.front_, camera_.up_))* speed_factor;
+      position_ -= camera_.right_ * speed_factor;
       break;
     case Direction::kUp:
-      position_ += camera_.up_ * speed_factor;
+      position_ += camera_.world_up_ * speed_factor;
       break;
     case Direction::kDown:
-      position_ -= camera_.up_ * speed_factor;
+      position_ -= camera_.world_up_ * speed_factor;
       break;
   }
   camera_.SetPosition(position_);
@@ -53,7 +53,7 @@ void Player::LookAt(f64 xpos, f64 ypos) {
      return;
    camera_.SetFront(xpos, ypos);
 }
-f32 Player::GetSpeed() {
+f32 Player::GetSpeed() const {
   return movement_speed_;
 }
 

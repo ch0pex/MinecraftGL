@@ -33,7 +33,7 @@ private:
   Frustum frustum_;
 
   glm::mat4 view_matrix_, projection_matrix_, view_proj_matrix_;
-  glm::vec3 position_, front_, up_, right_;
+  glm::vec3 position_, front_, up_, right_, world_up_;
 
   f32 fov_;
   f32 width_;
@@ -47,6 +47,7 @@ private:
   f64 yaw_;
   f64 pitch_;
 
+  void UpdateVectors();
   void CalculateViewProj();
 };
 

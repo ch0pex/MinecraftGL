@@ -5,7 +5,7 @@
 bool kKeys[1024];
 glm::vec2 kMousePos;
 
-void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode){
+void KeyCallback(GLFWwindow *window, i32 key, i32 scancode, i32 action, i32 mode){
   if(key >= 0 && key <= 1024){
     if(action == GLFW_PRESS)
       kKeys[key] = true;
@@ -14,7 +14,7 @@ void KeyCallback(GLFWwindow *window, int key, int scancode, int action, int mode
   }
 }
 
-void MouseCallback(GLFWwindow *window, double xpos, double ypos){
+void MouseCallback(GLFWwindow *window, f64 xpos, f64 ypos){
   kMousePos.x = xpos;
   kMousePos.y = ypos;
 }

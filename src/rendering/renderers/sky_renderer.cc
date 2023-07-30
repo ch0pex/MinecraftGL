@@ -93,16 +93,12 @@ void SkyRenderer::BufferSkyMesh() {
 }
 
 
-SkyRenderer::~SkyRenderer() {
-
-}
-
 void SkyRenderer::Render(Camera &camera) {
   u32 vp_loc = glGetUniformLocation(shader_, "vp");
   glm::mat4 vp = glm::mat4(glm::mat3(camera.GetView())) * camera.GetProjection();
 
   glDisable(GL_BLEND);
-  glEnable(GL_CULL_FACE);
+  glDisable(GL_CULL_FACE);
 
   glDepthFunc(GL_LEQUAL);
   glUseProgram(shader_);
@@ -111,7 +107,7 @@ void SkyRenderer::Render(Camera &camera) {
   glBindVertexArray(meshes_[0]->vao);
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_CUBE_MAP, texture_);
-  glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+  glDrawArrays(GL_TRIANGLES, 0, 36);
   glBindVertexArray(0);
   glDepthFunc(GL_LESS);
 }

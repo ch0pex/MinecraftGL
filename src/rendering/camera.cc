@@ -10,12 +10,12 @@ Camera::Camera(f32 fov, f32 width, f32 height, f32 near_plane, f32 far_plane, gl
   far_plane_ = far_plane;
   position_ = position;
   front_ = glm::vec3(0.0f, 0.0f, -1.0f);
-  up_ = glm::vec3(0.0f, 1.0f, 0.0f);
-  right_ = glm::normalize(glm::cross(up_, front_));
+  world_up_ = glm::vec3(0.0f, 1.0f, 0.0f);
   first_mouse_ = true;
   yaw_ = 0;
   pitch_ = 0;
   projection_matrix_ = glm::perspective(fov_, width / height, near_plane_, far_plane_);
+  UpdateVectors();
   CalculateViewProj();
 }
 
@@ -41,10 +41,19 @@ void Camera::SetPosition(glm::vec3 position) {
   CalculateViewProj();
   frustum_.Update(view_proj_matrix_);
 }
+void Camera::UpdateVectors(){
+  glm::vec3 direction;
 
+  direction.x = cos(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+  direction.y = sin(glm::radians(pitch_));
+  direction.z = sin(glm::radians(yaw_)) * cos(glm::radians(pitch_));
+
+  front_ = glm::normalize(direction);
+  right_ = glm::normalize(glm::cross(front_, world_up_));
+  up_ = glm::normalize(glm::cross(right_,front_));
+}
 
 void Camera::SetFront(f64 xpos, f64 ypos) {
-  glm::vec3 direction;
 
   if (first_mouse_) {
 
@@ -70,12 +79,7 @@ void Camera::SetFront(f64 xpos, f64 ypos) {
   if (pitch_ < -89.0f)
     pitch_ = -89.0f;
 
-  direction.x = cos(glm::radians(yaw_)) * cos(glm::radians(pitch_));
-  direction.y = sin(glm::radians(pitch_));
-  direction.z = sin(glm::radians(yaw_)) * cos(glm::radians(pitch_));
-
-
-  front_ = glm::normalize(direction);
+  UpdateVectors();
   CalculateViewProj();
   frustum_.Update(view_proj_matrix_);
 }
