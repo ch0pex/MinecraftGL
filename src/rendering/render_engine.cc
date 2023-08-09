@@ -75,7 +75,7 @@ void RenderEngine::RenderScene(Camera &camera) {
   solid_renderer_.Render(camera);
   water_renderer_.Render(camera);
   // floraRenderer.Render(camera_);
-  sky_renderer_.Render(camera);
+  //sky_renderer_.Render(camera);
 
   glfwSwapBuffers(window_);
 }
