@@ -11,10 +11,10 @@ void LoadingState::OnExit() {
 void LoadingState::Update() {
 }
 
-void LoadingState::HandleInput(InputInfo &input_info) {
+void LoadingState::HandleInput() {
 }
 
-void LoadingState::HandleMouse(InputInfo &input_info) {
+void LoadingState::HandleMouse() {
 }
 void LoadingState::Render() {
 

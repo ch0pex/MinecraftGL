@@ -58,9 +58,9 @@ void Config::SetConfigJson(Json &config) {
   //--------------------------------Graphics---------------------------
   max_framerate = config["graphics"]["max_framerate"];
   //----------------------------------World----------------------------
-  chunk_distance = config["world"]["chunk_distance"];
-  water_level = config["world"]["water_level"];
-  water_opacity = config["world"]["water_opacity"];
+  chunk_distance = config["world_"]["chunk_distance"];
+  water_level = config["world_"]["water_level"];
+  water_opacity = config["world_"]["water_opacity"];
 
   //------------------------------Lighting----------------------------
   back_ground_color = glm::vec4(config["lighting"]["background_color"]["red"],

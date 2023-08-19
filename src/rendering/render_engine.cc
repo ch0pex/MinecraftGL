@@ -36,9 +36,7 @@ RenderEngine::RenderEngine() {
 
 }
 
-RenderEngine::~RenderEngine() {
-
-}
+RenderEngine::~RenderEngine() = default;
 
 void RenderEngine::InitializeRenderers() {
   u32 solid_shader, water_shader, sky_shader, atlas, sky_texture;

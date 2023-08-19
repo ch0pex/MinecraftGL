@@ -1,7 +1,7 @@
-#include "game_engine.h"
+#include "game.h"
 
 int main() {
-  GameEngine game;
+  Game game;
   game.Loop();
   return (0);
 }

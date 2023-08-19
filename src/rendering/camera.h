@@ -8,7 +8,7 @@
 #include <mutex>
 
 
-class GameEngine;
+class Game;
 
 class Camera {
 public:

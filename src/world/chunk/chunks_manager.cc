@@ -54,7 +54,7 @@ void ChunksManager::BuildChunksMesh() {
 }
 
 void ChunksManager::UpdateChunks(glm::vec3 player_pos) {
-  //TODO: load and unload chunks_ depending on player/cam position_
+  //TODO: load and unload chunks_ depending on player_/cam position_
   for (auto &chunk: chunks_) {
     if (chunk.IsBuilded() && !chunk.IsBuffered())
       chunk.BufferChunklets();

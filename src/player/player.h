@@ -4,7 +4,6 @@
 #include "player_states/player_state.h"
 #include <unordered_map>
 
-enum class GameStateType;
 
 class Player {
 public:

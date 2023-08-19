@@ -14,11 +14,11 @@ void GameOverState::Update() {
 
 }
 
-void GameOverState::HandleInput(InputInfo &input_info) {
+void GameOverState::HandleInput() {
 
 }
 
-void GameOverState::HandleMouse(InputInfo &input_info) {
+void GameOverState::HandleMouse() {
 
 }
 

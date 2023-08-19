@@ -8,8 +8,9 @@
 #include "input/input.h"
 
 
-struct Game;
-enum class GameStateType {
+class Game;
+
+enum class GameStateType{
   kStart,
   kLoading,
   kPlaying,
@@ -24,8 +25,8 @@ public:
   virtual void OnExit() = 0;
   virtual void Update() = 0;
   virtual void Render() = 0;
-  virtual void HandleInput(InputInfo &input_info) = 0;
-  virtual void HandleMouse(InputInfo &input_info) = 0;
+  virtual void HandleInput() = 0;
+  virtual void HandleMouse() = 0;
 protected:
   Game& game_;
 };

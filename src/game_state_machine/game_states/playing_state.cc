@@ -1,6 +1,6 @@
 #include "playing_state.h"
 
-#include "game_engine.h"
+#include "game.h"
 
 PlayingState::PlayingState(Game &game) : GameState(game) {}
 
@@ -13,39 +13,39 @@ void PlayingState::OnExit() {
 }
 
 void PlayingState::Update() {
-  game_.player.Update();
-  game_.world.Update(game_.player.camera_);
+  game_.GetPlayer().Update();
+  game_.GetWorld().Update(game_.GetPlayer().camera_);
 }
 
 void PlayingState::Render() {
-  game_.world.PrepareRender(game_.render_engine, game_.player.camera_);
-  game_.render_engine.RenderScene(game_.player.camera_);
+  game_.GetWorld().PrepareRender(game_.GetRenderEngine(), game_.GetPlayer().camera_);
+  game_.GetRenderEngine().RenderScene(game_.GetPlayer().camera_);
 }
 
-void PlayingState::HandleInput(InputInfo &input_info) {
-  f32 movement_speed = game_.player.GetSpeed();
-  f32 factor = input_info.frame_time * movement_speed;
+void PlayingState::HandleInput() {
+  f32 movement_speed = game_.GetPlayer().GetSpeed();
+  f32 factor = game_.GetInput().frame_time * movement_speed;
 
-  if (input_info.PressedKeysAreDiag())
+  if (game_.GetInput().PressedKeysAreDiag())
     factor *= 0.707f;
 
-  // Keys for player movement
-  if (input_info.keys[GLFW_KEY_W])
-    game_.player.Move(Player::Direction::kFront, factor);
-  if (input_info.keys[GLFW_KEY_S])
-    game_.player.Move(Player::Direction::kBack, factor);
-  if (input_info.keys[GLFW_KEY_A])
-    game_.player.Move(Player::Direction::kLeft, factor);
-  if (input_info.keys[GLFW_KEY_D])
-    game_.player.Move(Player::Direction::kRight, factor);
-  if (input_info.keys[GLFW_KEY_Q])
-    game_.player.Move(Player::Direction::kDown, factor);
-  if (input_info.keys[GLFW_KEY_E])
-    game_.player.Move(Player::Direction::kUp, factor);
-  if (input_info.keys[GLFW_KEY_ESCAPE])
-    glfwSetWindowShouldClose(game_.render_engine.GetWindow(), true);
+  // Keys for GetPlayer() movement
+  if (game_.GetInput().keys[GLFW_KEY_W])
+    game_.GetPlayer().Move(Player::Direction::kFront, factor);
+  if (game_.GetInput().keys[GLFW_KEY_S])
+    game_.GetPlayer().Move(Player::Direction::kBack, factor);
+  if (game_.GetInput().keys[GLFW_KEY_A])
+    game_.GetPlayer().Move(Player::Direction::kLeft, factor);
+  if (game_.GetInput().keys[GLFW_KEY_D])
+    game_.GetPlayer().Move(Player::Direction::kRight, factor);
+  if (game_.GetInput().keys[GLFW_KEY_Q])
+    game_.GetPlayer().Move(Player::Direction::kDown, factor);
+  if (game_.GetInput().keys[GLFW_KEY_E])
+    game_.GetPlayer().Move(Player::Direction::kUp, factor);
+  if (game_.GetInput().keys[GLFW_KEY_ESCAPE])
+    glfwSetWindowShouldClose(game_.GetRenderEngine().GetWindow(), true);
 }
 
-void PlayingState::HandleMouse(InputInfo &input_info) {
-  game_.player.LookAt(input_info.mouse_pos->x, input_info.mouse_pos->y);
+void PlayingState::HandleMouse() {
+  game_.GetPlayer().LookAt(game_.GetInput().mouse_pos->x, game_.GetInput().mouse_pos->y);
 }

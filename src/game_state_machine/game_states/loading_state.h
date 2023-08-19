@@ -9,6 +9,6 @@ public:
   void OnExit() override;
   void Update() override;
   void Render() override;
-  void HandleInput(InputInfo &input_info) override;
-  void HandleMouse(InputInfo &input_info) override;
+  void HandleInput() override;
+  void HandleMouse() override;
 };
