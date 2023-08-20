@@ -14,7 +14,7 @@ public:
   ~Chunk();
 
   bool IsBuffered() const;
-  bool IsBuilded() const;
+  bool IsBuilt() const;
 
   void BuildMesh();
   void BufferChunklets();
@@ -27,6 +27,6 @@ public:
 private:
   World *world_;
   glm::vec2 position_;
-  std::vector<Chunklet *> chunklets_;
-  bool buffered_, builded_;
+  std::vector<Chunklet> chunklets_;
+  bool buffered_, built_;
 };

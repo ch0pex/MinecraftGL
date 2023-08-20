@@ -1,12 +1,10 @@
 #include "world.h"
 
 
-World::World() :
-    chunks_manager_(*this) {
+World::World() : chunks_manager_(*this) {
 
 }
-
-World::~World() {
+World::~World(){
 
 }
 
@@ -18,8 +16,8 @@ void World::Update(Camera &camera) {
 // Currently just solidrenderer
 void World::PrepareRender(RenderEngine &renderer, Camera &camera) {
   // TODO: Render not further than RENDER MAX DISTANCE
-  for (auto &chunk: chunks_manager_.GetChunks()) {
-    if (chunk.IsBuilded() && chunk.IsBuffered()) {
+  for (auto& chunk: chunks_manager_.GetChunks()) {
+    if (chunk.IsBuilt() && chunk.IsBuffered()) {
       chunk.DrawChunklets(renderer, camera); // Pass camera_
     }
   }

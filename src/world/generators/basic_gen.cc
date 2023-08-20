@@ -32,7 +32,9 @@ void BasicGen::GenChunk(Chunk &chunk) {
         block = Block::kStone;
     } else block = Block::kAir;
 
-    if (block == Block::kAir && y < 55) block = Block::kWater;
+    if (block == Block::kAir && y < 55)
+      block = Block::kWater;
+
     chunk.GetChunklet(y)->SetBlock(block);
   }
 }

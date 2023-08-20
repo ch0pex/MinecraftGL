@@ -4,24 +4,20 @@
 
 Chunklet::Chunklet(World &world, glm::vec3 position) :
     world_(&world) {
-  model_.solid_mesh = new Mesh();
-  model_.water_mesh = new Mesh();
+  model_.solid_mesh = Mesh();
+  model_.water_mesh = Mesh();
   position_.x = position.x;
   position_.y = position.y;
   position_.z = position.z;
   block_map_.reserve(kChunkletVolume);
 }
 
-
 Chunklet::~Chunklet() {
-  delete (model_.solid_mesh);
-  delete (model_.water_mesh);
-}
-
+  std::cout << "Chunklet destroyed" << std::endl;
+};
 
 void Chunklet::BuildMesh() {
   for (int i = 0; i < kChunkletVolume; i++) {
-
     int x = i % kChunkSize;
     int y = i / (kChunkSize * kChunkSize);
     int z = (i / kChunkSize) % kChunkSize;
@@ -30,10 +26,6 @@ void Chunklet::BuildMesh() {
       AddBlockMesh(glm::vec3(position_.x + x, position_.y + y, position_.z + z), block_map_[i]);
   }
 
-}
-
-glm::vec3 Chunklet::GetPosition() {
-  return position_;
 }
 
 
@@ -93,7 +85,7 @@ void Chunklet::BufferMesh(Mesh &mesh) {
 }
 
 u32 Chunklet::GetFaces() {
-  return (model_.solid_mesh->render_info.faces + model_.water_mesh->render_info.faces);
+  return (model_.solid_mesh.render_info.faces + model_.water_mesh.render_info.faces);
 }
 
 
@@ -101,8 +93,8 @@ void Chunklet::AddFace(glm::vec3 position, const Vertex face[], u32 face_texture
 
   Mesh *mesh_pointer;
 
-  if (face_texture_index == 8) mesh_pointer = model_.water_mesh;
-  else mesh_pointer = model_.solid_mesh;
+  if (face_texture_index == 8) mesh_pointer = &model_.water_mesh;
+  else mesh_pointer = &model_.solid_mesh;
 
 
   mesh_pointer->render_info.faces++;
@@ -184,3 +176,4 @@ void Chunklet::SetBlock(Block block) {
   //TODO: Set block in position_
   block_map_.push_back(block);
 }
+

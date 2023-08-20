@@ -9,21 +9,20 @@
 
 
 class RenderEngine {
-private:
-  GLFWwindow *window_;
-  SolidRenderer solid_renderer_;
-  TranslucentRenderer water_renderer_;
-  SkyRenderer sky_renderer_;
-  void InitializeRenderers();
 
 public:
   RenderEngine();
   ~RenderEngine();
-
+  void Terminate();
   void RenderScene(Camera &camera);
   bool ShouldClose();
-
   void DrawChunklet(Chunklet &chunklet);
   GLFWwindow *GetWindow();
 
+private:
+  void InitializeRenderers();
+  GLFWwindow *window_;
+  SolidRenderer solid_renderer_;
+  TranslucentRenderer water_renderer_;
+  SkyRenderer sky_renderer_;
 };

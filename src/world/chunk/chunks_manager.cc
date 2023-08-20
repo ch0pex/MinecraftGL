@@ -30,14 +30,11 @@ Chunk *ChunksManager::GetChunk(glm::vec2 xzpos) {
 }
 
 void ChunksManager::LoadChunks() {
-  chunks_.reserve(kGameConfig.chunk_distance);
+  chunks_.reserve(kGameConfig.chunk_distance * kGameConfig.chunk_distance);
   for (size_t x = 0; x < kGameConfig.chunk_distance; x++) {
     for (size_t z = 0; z < kGameConfig.chunk_distance; z++) {
-      glm::vec2 pos = glm::vec2(x, z);
-      Chunk chunk = Chunk(*world_, pos);
-      BasicGen::GenChunk(chunk);
       std::unique_lock<std::mutex> lock(mutex_);
-      chunks_.push_back(chunk);
+      chunks_.emplace_back(*world_, glm::vec2(x, z));
     }
   }
 
@@ -50,18 +47,17 @@ void ChunksManager::BuildChunksMesh() {
   std::cout << chunks_.size() << "\n";
   for (auto &chunk: chunks_)
     chunk.BuildMesh();
-
 }
 
 void ChunksManager::UpdateChunks(glm::vec3 player_pos) {
   //TODO: load and unload chunks_ depending on player_/cam position_
   for (auto &chunk: chunks_) {
-    if (chunk.IsBuilded() && !chunk.IsBuffered())
+    if (chunk.IsBuilt() && !chunk.IsBuffered())
       chunk.BufferChunklets();
   }
 }
 
-std::vector<Chunk> &ChunksManager::GetChunks() {
+std::vector<Chunk>& ChunksManager::GetChunks() {
   // TODO: insert return statement here
   return chunks_;
 }

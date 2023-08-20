@@ -29,7 +29,6 @@ Game::Game() :
   states_[GameStateType::kGameOver] = new GameOverState(*this);
   //states_[GameStateType::EXIT] = new ExitState();
   current_state_ = states_[GameStateType::kPlaying];
-
   glfwSetKeyCallback(render_engine_.GetWindow(), KeyCallback);
   glfwSetCursorPosCallback(render_engine_.GetWindow(), MouseCallback);
 
@@ -37,6 +36,8 @@ Game::Game() :
 }
 
 Game::~Game() {
+  for(auto& state : states_)
+    delete(state.second);
   std::cout << "Game destructor called" << std::endl;
 }
 
@@ -60,14 +61,14 @@ void Game::Loop() {
     glfwPollEvents();
     while (accumulator >= dt) {
       current_state_->Update();
-
       accumulator -= dt;
       t += dt;
     }
     current_state_->Render();
   }
-  glfwTerminate();
+  render_engine_.Terminate();
 }
+
 
 void Game::SwitchState(GameStateType next_state){
     current_state_->OnExit();

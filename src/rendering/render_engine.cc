@@ -79,8 +79,8 @@ void RenderEngine::RenderScene(Camera &camera) {
 }
 
 void RenderEngine::DrawChunklet(Chunklet &chunklet) {
-  solid_renderer_.AddMesh(&chunklet.model_.solid_mesh->render_info);
-  water_renderer_.AddMesh(&chunklet.model_.water_mesh->render_info);
+  solid_renderer_.AddMesh(&chunklet.GetModel().solid_mesh.render_info);
+  water_renderer_.AddMesh(&chunklet.GetModel().water_mesh.render_info);
   //floraRenderer.AddMesh(&chunklet.model_.flora_mesh->render_info);
 }
 
@@ -92,4 +92,8 @@ bool RenderEngine::ShouldClose() {
 
 GLFWwindow *RenderEngine::GetWindow() {
   return window_;
+}
+
+void RenderEngine::Terminate(){
+  glfwTerminate();
 }

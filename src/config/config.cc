@@ -16,11 +16,12 @@ Config::Config() {
       configJSON.close();
     }
     catch (const std::exception &e) {
-      std::cout << "Error en el archivo de configuracion, se usaron los valores por defecto\n";
+      std::cout << "Error in config file, defaults values will be used instead\n";
+      configJSON.close();
       SetDefaults();
     }
   } else {
-    std::cout << "Error en el archivo de configuracion, se usaron los valores por defecto\n";
+    std::cout << "Could not open config file, defaults values will be used instead\n";
     SetDefaults();
   }
 }
@@ -49,7 +50,7 @@ void Config::SetDefaults() {
   water_fragment_shader_path = "res/shaders/waterShader.fs";
   sky_vertex_shader_path = "res/shaders/skyShader.vs";
   sky_fragment_shader_path = "res/shaders/skyShader.fs";
-  texture_atlas_path = "res/textures/stone.jpg";
+  texture_atlas_path = "res/textures/Atlas.png";
   skybox_faces_paths[0] = "res/textures/skybox/bot_top.png";
   skybox_faces_paths[1] = "res/textures/skybox/sides.png";
 }
@@ -58,9 +59,9 @@ void Config::SetConfigJson(Json &config) {
   //--------------------------------Graphics---------------------------
   max_framerate = config["graphics"]["max_framerate"];
   //----------------------------------World----------------------------
-  chunk_distance = config["world_"]["chunk_distance"];
-  water_level = config["world_"]["water_level"];
-  water_opacity = config["world_"]["water_opacity"];
+  chunk_distance = config["world"]["chunk_distance"];
+  water_level = config["world"]["water_level"];
+  water_opacity = config["world"]["water_opacity"];
 
   //------------------------------Lighting----------------------------
   back_ground_color = glm::vec4(config["lighting"]["background_color"]["red"],
