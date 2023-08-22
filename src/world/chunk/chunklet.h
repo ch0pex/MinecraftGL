@@ -15,18 +15,18 @@ struct Model {
 
 class Chunklet {
 public:
-  Chunklet(World &world, glm::vec3 position);
+  Chunklet(World &world, glm::vec3 chunklet_position);
   ~Chunklet();
 
   void AddBlockMesh(glm::vec3 position, Block block_type);
   void BufferMesh(Mesh &mesh);
   void BuildMesh();
 
-  u32 GetFaces();
+  u32 GetFaces() const;
   Block GetBlock(glm::vec3 absolute_position);
   void SetBlock(Block block);
   inline Model& GetModel() { return model_; }
-  inline glm::vec3 GetPosition() { return position_; }
+  inline glm::vec3 GetPosition() const { return world_position_; }
 
 private:
   void AddFace(glm::vec3 position, const Vertex face[], u32 face_texture_index);
@@ -35,6 +35,7 @@ private:
 
   World *world_;
   std::vector<Block> block_map_;
-  glm::vec3 position_;
+  glm::vec3 world_position_;
+  glm::vec3 chunklet_position_;
   Model model_;
 };

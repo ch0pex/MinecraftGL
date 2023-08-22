@@ -4,22 +4,20 @@
 
 Chunk::Chunk(World &world, glm::vec2 position) :
     world_(&world),
-    position_(position)
+    chunk_position_(position)
   {
   buffered_ = false;
   built_ = false;
+  world_position_ = {position.x * kChunkSize, position.y * kChunkSize};
 
-  chunklets_.reserve(16);
+  chunklets_.reserve(kChunkSize);
   for (int i = 0; i < kChunkSize; i++)
-    chunklets_.emplace_back(*world_, glm::vec3(position.x * kChunkSize, i * kChunkSize, position.y * kChunkSize));
+    chunklets_.emplace_back(*world_, glm::vec3(chunk_position_.x, i, chunk_position_.y));
   BasicGen::GenChunk(*this);
 }
 
-
 Chunk::~Chunk() {
-  /*for(auto chunklet : chunklets_)
-      delete (chunklet); */
-  std::cout << "Destructor de chunk" << std::endl;
+  std::cout << "Destroying chunk\n";
 }
 
 void Chunk::BuildMesh() {
@@ -58,7 +56,7 @@ Block Chunk::GetBlock(glm::vec3 position) {
 }
 
 glm::vec2 Chunk::GetPosition() {
-  return position_;
+  return chunk_position_;
 }
 
 Chunklet *Chunk::GetChunklet(u8 ypos) {

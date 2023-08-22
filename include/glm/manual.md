@@ -2027,10 +2027,10 @@ glm::vec3 lighting(intersection const& Intersection, material const& Material, l
 {
     glm::vec3 Color = glm::vec3(0.0f);
     glm::vec3 LightVertor = glm::normalize(
-        Light.position_() - Intersection.globalPosition() +
+        Light.chunk_position_() - Intersection.globalPosition() +
         glm::ballRand(0.0f, Light.inaccuracy());
 
-    if(!shadow(Intersection.globalPosition(), Light.position_(), LightVertor))
+    if(!shadow(Intersection.globalPosition(), Light.chunk_position_(), LightVertor))
     {
         float Diffuse = glm::dot(Intersection.normal(), LightVector);
         if(Diffuse &lt;= 0.0f)

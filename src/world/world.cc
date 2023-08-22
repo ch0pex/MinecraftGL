@@ -1,11 +1,13 @@
 #include "world.h"
 
 
-World::World() : chunks_manager_(*this) {
+World::World() :
+  chunks_manager_(*this),
+  active_(true){
 
 }
 World::~World(){
-
+  active_ = false;
 }
 
 void World::Update(Camera &camera) {
@@ -23,7 +25,6 @@ void World::PrepareRender(RenderEngine &renderer, Camera &camera) {
   }
 }
 
-
 Block World::GetBlock(glm::vec3 pos) {
   //std::cout << pos.x << ", " << pos.y << ", " << pos.z << "\n";
   if (pos.y > 255 || pos.y < 0) {
@@ -32,3 +33,4 @@ Block World::GetBlock(glm::vec3 pos) {
   return chunks_manager_.GetBlock(pos);
 }
 
+bool World::IsActive() { return active_; }

@@ -1220,10 +1220,10 @@ typedef struct GLFWcursor GLFWcursor;
  */
 typedef void (* GLFWerrorfun)(int error_code, const char* description);
 
-/*! @brief The function pointer type for window_ position_ callbacks.
+/*! @brief The function pointer type for window_ chunk_position_ callbacks.
  *
- *  This is the function pointer type for window_ position_ callbacks.  A window_
- *  position_ callback function has the following signature:
+ *  This is the function pointer type for window_ chunk_position_ callbacks.  A window_
+ *  chunk_position_ callback function has the following signature:
  *  @code
  *  void callback_name(GLFWwindow* window_, int xpos, int ypos)
  *  @endcode
@@ -1436,10 +1436,10 @@ typedef void (* GLFWwindowcontentscalefun)(GLFWwindow* window, float xscale, flo
  */
 typedef void (* GLFWmousebuttonfun)(GLFWwindow* window, int button, int action, int mods);
 
-/*! @brief The function pointer type for cursor position_ callbacks.
+/*! @brief The function pointer type for cursor chunk_position_ callbacks.
  *
- *  This is the function pointer type for cursor position_ callbacks.  A cursor
- *  position_ callback function has the following signature:
+ *  This is the function pointer type for cursor chunk_position_ callbacks.  A cursor
+ *  chunk_position_ callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window_, double xpos, double ypos);
  *  @endcode
@@ -2050,13 +2050,13 @@ GLFWAPI GLFWmonitor** glfwGetMonitors(int* count);
  */
 GLFWAPI GLFWmonitor* glfwGetPrimaryMonitor(void);
 
-/*! @brief Returns the position_ of the monitor's viewport on the virtual screen.
+/*! @brief Returns the chunk_position_ of the monitor's viewport on the virtual screen.
  *
- *  This function returns the position_, in screen coordinates, of the upper-left
+ *  This function returns the chunk_position_, in screen coordinates, of the upper-left
  *  corner of the specified monitor.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the chunk_position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` chunk_position_ arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2077,15 +2077,15 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
 
 /*! @brief Retrieves the work area of the monitor.
  *
- *  This function returns the position_, in screen coordinates, of the upper-left
+ *  This function returns the chunk_position_, in screen coordinates, of the upper-left
  *  corner of the work area of the specified monitor along with the work area
  *  size in screen coordinates. The work area is defined as the area of the
  *  monitor not occluded by the operating system task bar where present. If no
  *  task bar exists then the work area is the monitor resolution in screen
  *  coordinates.
  *
- *  Any or all of the position_ and size arguments may be `NULL`.  If an error
- *  occurs, all non-`NULL` position_ and size arguments will be set to zero.
+ *  Any or all of the chunk_position_ and size arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` chunk_position_ and size arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2572,9 +2572,9 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  OpenGL or OpenGL ES context.
  *
  *  By default, newly created windows use the placement recommended by the
- *  window_ system.  To create the window_ at a specific position_, make it
+ *  window_ system.  To create the window_ at a specific chunk_position_, make it
  *  initially invisible using the [GLFW_VISIBLE](@ref GLFW_VISIBLE_hint) window_
- *  hint, set its [position_](@ref window_pos) and then [show](@ref window_hide)
+ *  hint, set its [chunk_position_](@ref window_pos) and then [show](@ref window_hide)
  *  it.
  *
  *  As long as at least one full screen window_ is not iconified, the screensaver
@@ -2647,14 +2647,14 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  @remark @macos When activating frame autosaving with
  *  [GLFW_COCOA_FRAME_NAME](@ref GLFW_COCOA_FRAME_NAME_hint), the specified
- *  window_ size and position_ may be overridden by previously saved values.
+ *  window_ size and chunk_position_ may be overridden by previously saved values.
  *
  *  @remark @x11 Some window_ managers will not respect the placement of
  *  initially hidden windows.
  *
  *  @remark @x11 Due to the asynchronous nature of X11, it may take a moment for
  *  a window_ to reach its requested state.  This means you may not be able to
- *  query the final size, position_ or other attributes directly after window_
+ *  query the final size, chunk_position_ or other attributes directly after window_
  *  creation.
  *
  *  @remark @x11 The class part of the `WM_CLASS` window_ property will by
@@ -2833,13 +2833,13 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
  */
 GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* images);
 
-/*! @brief Retrieves the position_ of the content area of the specified window_.
+/*! @brief Retrieves the chunk_position_ of the content area of the specified window_.
  *
- *  This function retrieves the position_, in screen coordinates, of the
+ *  This function retrieves the chunk_position_, in screen coordinates, of the
  *  upper-left corner of the content area of the specified window_.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the chunk_position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` chunk_position_ arguments will be set to zero.
  *
  *  @param[in] window The window_ to query.
  *  @param[out] xpos Where to store the x-coordinate of the upper-left corner of
@@ -2851,7 +2851,7 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to retrieve the global
- *  position_ of its windows, this function will always emit @ref
+ *  chunk_position_ of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -2865,9 +2865,9 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  */
 GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
 
-/*! @brief Sets the position_ of the content area of the specified window_.
+/*! @brief Sets the chunk_position_ of the content area of the specified window_.
  *
- *  This function sets the position_, in screen coordinates, of the upper-left
+ *  This function sets the chunk_position_, in screen coordinates, of the upper-left
  *  corner of the content area of the specified windowed mode_ window_.  If the
  *  window_ is a full screen window_, this function does nothing.
  *
@@ -2885,7 +2885,7 @@ GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland There is no way for an application to set the global
- *  position_ of its windows, this function will always emit @ref
+ *  chunk_position_ of its windows, this function will always emit @ref
  *  GLFW_PLATFORM_ERROR.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -3441,9 +3441,9 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *
  *  When setting a monitor, this function updates the width_, height_ and refresh
  *  rate of the desired video mode_ and switches to the video mode_ closest to it.
- *  The window_ position_ is ignored when setting a monitor.
+ *  The window_ chunk_position_ is ignored when setting a monitor.
  *
- *  When the monitor is `NULL`, the position_, width_ and height_ are used to
+ *  When the monitor is `NULL`, the chunk_position_, width_ and height_ are used to
  *  place the window_ content area.  The refresh rate is ignored when no monitor
  *  is specified.
  *
@@ -3474,7 +3474,7 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  affected by any resizing or mode_ switching, although you may need to Update
  *  your viewport if the framebuffer size has changed.
  *
- *  @remark @wayland The desired window_ position_ is ignored, as there is no way
+ *  @remark @wayland The desired window_ chunk_position_ is ignored, as there is no way
  *  for an application to set this property.
  *
  *  @remark @wayland Setting the window_ to full screen will not attempt to
@@ -3611,11 +3611,11 @@ GLFWAPI void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);
  */
 GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
 
-/*! @brief Sets the position_ callback for the specified window_.
+/*! @brief Sets the chunk_position_ callback for the specified window_.
  *
- *  This function sets the position_ callback of the specified window_, which is
+ *  This function sets the chunk_position_ callback of the specified window_, which is
  *  called when the window_ is moved.  The callback is provided with the
- *  position_, in screen coordinates, of the upper-left corner of the content
+ *  chunk_position_, in screen coordinates, of the upper-left corner of the content
  *  area of the window_.
  *
  *  @param[in] window The window_ whose callback to set.
@@ -3634,7 +3634,7 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
  *  @remark @wayland This callback will never be called, as there is no way for
- *  an application to know its global position_.
+ *  an application to know its global chunk_position_.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -4341,23 +4341,23 @@ GLFWAPI int glfwGetKey(GLFWwindow* window, int key);
  */
 GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
 
-/*! @brief Retrieves the position_ of the cursor relative to the content area of
+/*! @brief Retrieves the chunk_position_ of the cursor relative to the content area of
  *  the window_.
  *
- *  This function returns the position_ of the cursor, in screen coordinates,
+ *  This function returns the chunk_position_ of the cursor, in screen coordinates,
  *  relative to the upper-left corner of the content area of the specified
  *  window_.
  *
  *  If the cursor is disabled (with `GLFW_CURSOR_DISABLED`) then the cursor
- *  position_ is unbounded and limited only by the minimum and maximum values of
+ *  chunk_position_ is unbounded and limited only by the minimum and maximum values of
  *  a `double`.
  *
  *  The coordinate can be converted to their integer equivalents with the
  *  `floor` function.  Casting directly to an integer type works for positive
  *  coordinates, but fails for negative ones.
  *
- *  Any or all of the position_ arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position_ arguments will be set to zero.
+ *  Any or all of the chunk_position_ arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` chunk_position_ arguments will be set to zero.
  *
  *  @param[in] window The desired window_.
  *  @param[out] xpos Where to store the cursor x-coordinate, relative to the
@@ -4379,10 +4379,10 @@ GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
  */
 GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
 
-/*! @brief Sets the position_ of the cursor, relative to the content area of the
+/*! @brief Sets the chunk_position_ of the cursor, relative to the content area of the
  *  window_.
  *
- *  This function sets the position_, in screen coordinates, of the cursor
+ *  This function sets the chunk_position_, in screen coordinates, of the cursor
  *  relative to the upper-left corner of the content area of the specified
  *  window_.  The window_ must have input focus.  If the window_ does not have
  *  input focus when this function is called, it fails silently.
@@ -4392,7 +4392,7 @@ GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
  *  cursor, transparently re-centers it and provides unconstrained cursor
  *  motion.  See @ref glfwSetInputMode for more information.
  *
- *  If the cursor mode_ is `GLFW_CURSOR_DISABLED` then the cursor position_ is
+ *  If the cursor mode_ is `GLFW_CURSOR_DISABLED` then the cursor chunk_position_ is
  *  unconstrained and limited only by the minimum and maximum values of
  *  a `double`.
  *
@@ -4706,11 +4706,11 @@ GLFWAPI GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmods
  */
 GLFWAPI GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun callback);
 
-/*! @brief Sets the cursor position_ callback.
+/*! @brief Sets the cursor chunk_position_ callback.
  *
- *  This function sets the cursor position_ callback of the specified window_,
+ *  This function sets the cursor chunk_position_ callback of the specified window_,
  *  which is called when the cursor is moved.  The callback is provided with the
- *  position_, in screen coordinates, relative to the upper-left corner of the
+ *  chunk_position_, in screen coordinates, relative to the upper-left corner of the
  *  content area of the window_.
  *
  *  @param[in] window The window_ whose callback to set.

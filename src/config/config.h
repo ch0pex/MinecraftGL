@@ -10,7 +10,7 @@ struct Config {
 
   f32 max_framerate;
 
-  u8 chunk_distance;
+  i8 chunk_distance;
   u8 water_level;
   f32 water_opacity;
 

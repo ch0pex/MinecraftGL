@@ -26,7 +26,8 @@ public:
 
 private:
   World *world_;
-  glm::vec2 position_;
+  glm::vec2 chunk_position_;
+  glm::vec2 world_position_;
   std::vector<Chunklet> chunklets_;
   bool buffered_, built_;
 };

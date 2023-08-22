@@ -6,7 +6,7 @@
     "movement_speed": 10
   },
   "world" : {
-    "chunk_distance" : 48,
+    "chunk_distance" : 24,
     "water_level" : 60,
     "water_opacity" : 0.6
   },
