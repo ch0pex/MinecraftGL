@@ -1,8 +1,10 @@
 #pragma once
 
+#include <unordered_map>
+
 #include "rendering/camera.h"
 #include "player_states/player_state.h"
-#include <unordered_map>
+#include "math/vector_xz.h"
 
 
 class Player {
@@ -31,7 +33,7 @@ private:
   PlayerStateType currentState_;
   std::unordered_map<PlayerStateType, PlayerState *> states_;
 
-  glm::vec3 position_;
+  glm::vec3 world_position_;
   bool controls_enabled_;
   f32 movement_speed_;
 public:

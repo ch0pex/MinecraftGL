@@ -11,7 +11,7 @@ public:
   World();
   ~World();
 
-  void Update(Camera &camera);
+  void Update(Player &player);
   void PrepareRender(RenderEngine &renderer, Camera &camera);
   bool IsActive();
   Block GetBlock(glm::vec3 pos);

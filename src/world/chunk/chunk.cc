@@ -62,3 +62,4 @@ glm::vec2 Chunk::GetPosition() {
 Chunklet *Chunk::GetChunklet(u8 ypos) {
   return &chunklets_.at(ypos / 16);
 }
+

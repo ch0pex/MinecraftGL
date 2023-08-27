@@ -10,6 +10,8 @@ class World;
 
 class Chunk {
 public:
+
+  Chunk() = default;
   Chunk(World &world, glm::vec2 position);
   ~Chunk();
 

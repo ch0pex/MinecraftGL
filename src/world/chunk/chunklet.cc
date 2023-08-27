@@ -162,8 +162,10 @@ Block Chunklet::GetBlock(glm::vec3 absolute_position) {
   int x = absolute_position.x - world_position_.x;
   int y = absolute_position.y - world_position_.y;
   int z = absolute_position.z - world_position_.z;
-  int index = x + z * kChunkSize + y * kChunkSize * kChunkSize;
-  return block_map_[index];
+  int index;
+  index = x + z * kChunkSize + y * kChunkSize * kChunkSize;
+
+  return block_map_.at(index);
 
 }
 

@@ -10,17 +10,17 @@ World::~World(){
   active_ = false;
 }
 
-void World::Update(Camera &camera) {
-  chunks_manager_.UpdateChunks(camera.GetPosition());
+void World::Update(Player &player) {
+  chunks_manager_.UpdateChunks(player.Get);
 }
 
 // Render prepare, load all meshes_ in their respective renderer
 // Currently just solidrenderer
 void World::PrepareRender(RenderEngine &renderer, Camera &camera) {
   // TODO: Render not further than RENDER MAX DISTANCE
-  for (auto& chunk: chunks_manager_.GetChunks()) {
-    if (chunk.IsBuilt() && chunk.IsBuffered()) {
-      chunk.DrawChunklets(renderer, camera); // Pass camera_
+  for (auto& [chunk_pos, chunk]: chunks_manager_.GetChunks()) {
+    if (chunk->IsBuilt() && chunk->IsBuffered()) {
+      chunk->DrawChunklets(renderer, camera); // Pass camera_
     }
   }
 }

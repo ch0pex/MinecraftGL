@@ -1,10 +1,10 @@
 #include "player.h"
 
 Player::Player() :
-    position_(glm::vec3(50.0f, 100.0f,0.0f)),
+    world_position_(glm::vec3(50.0f, 100.0f, 0.0f)),
     controls_enabled_(true),
     movement_speed_(100.0f),
-    camera_(45.0f, 1920, 1080, .1f, 1000.0f, position_),
+    camera_(45.0f, 1920, 1080, .1f, 1000.0f, world_position_),
     currentState_(PlayerStateType::kGround)
 {
 
@@ -28,25 +28,25 @@ void Player::Move(Direction dir, f32 speed_factor) {
 
   switch (dir) {
     case Direction::kFront:
-      position_ += camera_.front_ * speed_factor;
+      world_position_ += camera_.front_ * speed_factor;
       break;
     case Direction::kBack:
-      position_ -= camera_.front_ * speed_factor;
+      world_position_ -= camera_.front_ * speed_factor;
       break;
     case Direction::kRight:
-      position_ += camera_.right_ * speed_factor;
+      world_position_ += camera_.right_ * speed_factor;
       break;
     case Direction::kLeft:
-      position_ -= camera_.right_ * speed_factor;
+      world_position_ -= camera_.right_ * speed_factor;
       break;
     case Direction::kUp:
-      position_ += camera_.world_up_ * speed_factor;
+      world_position_ += camera_.world_up_ * speed_factor;
       break;
     case Direction::kDown:
-      position_ -= camera_.world_up_ * speed_factor;
+      world_position_ -= camera_.world_up_ * speed_factor;
       break;
   }
-  camera_.SetPosition(position_);
+  camera_.SetPosition(world_position_);
 }
 void Player::LookAt(f64 xpos, f64 ypos) {
    if (!controls_enabled_)

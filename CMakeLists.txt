@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 project(CraftGL)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 17)
 
 configure_file(src/helpers/root_dir.h.in src/helpers/root_dir.h)
 
@@ -17,7 +18,9 @@ file(GLOB_RECURSE HEADER_FILES
 
 include_directories("${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE_DIR}/include" "${CMAKE_BINARY_DIR}/src/helpers")
 
-add_executable(CraftGL ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(CraftGL ${SOURCE_FILES} ${HEADER_FILES}
+		src/math/vector_xz.cc
+		src/math/vector_xz.h)
 
 set(OpenGL_GL_PREFERENCE GLVND)
 find_package(OpenGL REQUIRED)
