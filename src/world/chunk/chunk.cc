@@ -34,6 +34,13 @@ void Chunk::BufferChunklets() {
   buffered_ = true;
 }
 
+void Chunk::UnBufferChunklets() {
+  buffered_ = false;
+  for(auto& chunklet: chunklets_) {
+    chunklet.UnBufferMesh(chunklet.GetModel().solid_mesh);
+    chunklet.UnBufferMesh(chunklet.GetModel().water_mesh);
+  }
+}
 bool Chunk::IsBuffered() const {
   return buffered_;
 }

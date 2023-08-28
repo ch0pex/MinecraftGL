@@ -10,7 +10,7 @@ public:
   World();
   ~World();
 
-  void Update();
+  void Update(const glm::vec3 &player_pos);
   void PrepareRender(RenderEngine &renderer, Camera &camera);
   bool IsActive();
   Block GetBlock(glm::vec3 pos);

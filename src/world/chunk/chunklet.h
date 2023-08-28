@@ -20,6 +20,7 @@ public:
 
   void AddBlockMesh(glm::vec3 position, Block block_type);
   void BufferMesh(Mesh &mesh);
+  void UnBufferMesh(Mesh &mesh);
   void BuildMesh();
 
   u32 GetFaces() const;

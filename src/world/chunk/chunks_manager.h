@@ -17,13 +17,14 @@ public:
   ~ChunksManager();
   void LoadChunks();
 
-  void UpdateChunks();
+  void UpdateChunks(const glm::vec3& player_pos);
   std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& GetChunks();
   Block GetBlock(glm::vec3 position) const;
 
 private:
   std::shared_ptr<Chunk> GetChunk(VectorXZ chunk_pos) const;
-  VectorXZ WorldPosToChunkPos(glm::vec3& world_pos) const;
+  VectorXZ WorldPosToChunkPos(const glm::vec3& world_pos) const;
+  bool ChunkInRange(const VectorXZ &player_chunk_pos, const VectorXZ &chunk_pos);
   void BuildChunksMesh();
 
   World *world_;

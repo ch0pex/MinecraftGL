@@ -43,10 +43,14 @@ void ChunksManager::BuildChunksMesh() {
   }
 }
 
-void ChunksManager::UpdateChunks() {
+void ChunksManager::UpdateChunks(const glm::vec3 &player_pos) {
+  const VectorXZ player_chunk_pos = WorldPosToChunkPos(player_pos);
   for (auto& [chunk_pos, chunk] : chunks_) {
-    if (chunk->IsBuilt() && !chunk->IsBuffered())
+    if (ChunkInRange(player_chunk_pos, chunk_pos) && chunk->IsBuilt() && !chunk->IsBuffered())
       chunk->BufferChunklets();
+    else if (!ChunkInRange(player_chunk_pos, chunk_pos) && chunk->IsBuffered()){
+      chunk->UnBufferChunklets();
+    }
   }
 }
 
@@ -61,8 +65,14 @@ Block ChunksManager::GetBlock(glm::vec3 position) const {
   return chunk->GetBlock(position);
 }
 
-VectorXZ ChunksManager::WorldPosToChunkPos(glm::vec3 &world_pos) const {
+VectorXZ ChunksManager::WorldPosToChunkPos(const glm::vec3 &world_pos) const {
   i64 chunkX = world_pos.x >= 0 ? world_pos.x / 16 : (world_pos.x - 15) / 16;
   i64 chunkZ = world_pos.z >= 0 ? world_pos.z / 16 : (world_pos.z - 15) / 16;
   return {chunkX, chunkZ};
+}
+
+bool ChunksManager::ChunkInRange(const VectorXZ& player_chunk_pos, const VectorXZ& chunk_pos) {
+  bool xbool = abs(player_chunk_pos.x - chunk_pos.x) <= kGameConfig.chunk_distance;
+  bool zbool = abs(player_chunk_pos.z - chunk_pos.z) <= kGameConfig.chunk_distance;
+  return zbool || xbool;
 }

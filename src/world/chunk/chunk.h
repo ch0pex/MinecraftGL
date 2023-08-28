@@ -19,6 +19,7 @@ public:
 
   void BuildMesh();
   void BufferChunklets();
+  void UnBufferChunklets();
   void DrawChunklets(RenderEngine &renderer, Camera &camera);
 
   Block GetBlock(glm::vec3 position);

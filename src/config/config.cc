@@ -32,6 +32,7 @@ void Config::SetDefaults() {
   max_framerate = 300.0f;
   //----------------------------------World----------------------------
   chunk_distance = kChunkSize;
+  buffering_range = chunk_distance + 2;
   water_level = 60;
   water_opacity = 0.5f;
 
@@ -60,6 +61,7 @@ void Config::SetConfigJson(Json &config) {
   max_framerate = config["graphics"]["max_framerate"];
   //----------------------------------World----------------------------
   chunk_distance = config["world"]["chunk_distance"];
+  buffering_range = chunk_distance + 2;
   water_level = config["world"]["water_level"];
   water_opacity = config["world"]["water_opacity"];
 

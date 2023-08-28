@@ -10,8 +10,8 @@ World::~World(){
   active_ = false;
 }
 
-void World::Update() {
-  chunks_manager_.UpdateChunks();
+void World::Update(const glm::vec3& player_pos) {
+  chunks_manager_.UpdateChunks(player_pos);
 }
 
 // Render prepare, load all meshes_ in their respective renderer

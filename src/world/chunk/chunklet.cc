@@ -84,6 +84,9 @@ void Chunklet::BufferMesh(Mesh &mesh) {
   */
 }
 
+void Chunklet::UnBufferMesh(Mesh &mesh) {
+
+}
 u32 Chunklet::GetFaces() const {
   return (model_.solid_mesh.render_info.faces + model_.water_mesh.render_info.faces);
 }
