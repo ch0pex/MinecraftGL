@@ -6,18 +6,15 @@
 ChunksManager::ChunksManager(World &world) :
     world_(&world) {
   std::cout << "Chunks Loading... \n";
-  chunk_loaders_.emplace_back([&]() { LoadChunks(); });
+  chunks_loaders_.emplace_back([&]() { LoadChunks(); });
 }
 
 ChunksManager::~ChunksManager() {
-  for (auto &thread: chunk_loaders_)
+  for (auto &thread: chunks_loaders_)
     thread.join();
 }
 
-std::shared_ptr<Chunk> ChunksManager::GetChunk(glm::vec2 xzpos) {
-  i64 chunkX = xzpos.x >= 0 ? xzpos.x / 16 : (xzpos.x - 15) / 16;
-  i64 chunkZ = xzpos.y >= 0 ? xzpos.y / 16 : (xzpos.y - 15) / 16;
-  VectorXZ chunk_pos = {chunkX, chunkZ};
+std::shared_ptr<Chunk> ChunksManager::GetChunk(VectorXZ chunk_pos) const{
   if (chunks_.find(chunk_pos) != chunks_.end())
     return chunks_.at(chunk_pos);
   return nullptr;
@@ -46,10 +43,7 @@ void ChunksManager::BuildChunksMesh() {
   }
 }
 
-void ChunksManager::UpdateChunks(glm::vec3 player_pos) {
-  //TODO: load and unload chunks_ depending on player_/cam chunk_position_
-
-
+void ChunksManager::UpdateChunks() {
   for (auto& [chunk_pos, chunk] : chunks_) {
     if (chunk->IsBuilt() && !chunk->IsBuffered())
       chunk->BufferChunklets();
@@ -60,9 +54,15 @@ std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetChunks()
   return chunks_;
 }
 
-Block ChunksManager::GetBlock(glm::vec3 position) {
-  std::shared_ptr<Chunk> chunk = GetChunk(position);
+Block ChunksManager::GetBlock(glm::vec3 position) const {
+  std::shared_ptr<Chunk> chunk = GetChunk(WorldPosToChunkPos(position));
   if (chunk == nullptr)
     return Block::kAir; //when chunkupdating done change this to kGround
   return chunk->GetBlock(position);
+}
+
+VectorXZ ChunksManager::WorldPosToChunkPos(glm::vec3 &world_pos) const {
+  i64 chunkX = world_pos.x >= 0 ? world_pos.x / 16 : (world_pos.x - 15) / 16;
+  i64 chunkZ = world_pos.z >= 0 ? world_pos.z / 16 : (world_pos.z - 15) / 16;
+  return {chunkX, chunkZ};
 }

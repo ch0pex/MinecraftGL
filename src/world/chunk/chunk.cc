@@ -4,12 +4,11 @@
 
 Chunk::Chunk(World &world, glm::vec2 position) :
     world_(&world),
-    chunk_position_(position)
+    chunk_position_(position),
+    world_position_({position.x * kChunkSize, position.y * kChunkSize}),
+    buffered_(false),
+    built_(false)
   {
-  buffered_ = false;
-  built_ = false;
-  world_position_ = {position.x * kChunkSize, position.y * kChunkSize};
-
   chunklets_.reserve(kChunkSize);
   for (int i = 0; i < kChunkSize; i++)
     chunklets_.emplace_back(*world_, glm::vec3(chunk_position_.x, i, chunk_position_.y));

@@ -11,12 +11,11 @@ class World;
 class Chunk {
 public:
 
-  Chunk() = default;
   Chunk(World &world, glm::vec2 position);
   ~Chunk();
 
-  bool IsBuffered() const;
-  bool IsBuilt() const;
+  [[nodiscard]] bool IsBuffered() const;
+  [[nodiscard]] bool IsBuilt() const;
 
   void BuildMesh();
   void BufferChunklets();

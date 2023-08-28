@@ -21,6 +21,7 @@ public:
   ~Player() = default;
 
   f32 GetSpeed() const;
+  glm::vec3 GetPos();
 
   void Move(Direction dir, f32 speed_factor);
   void LookAt(f64 xpos, f64 ypos);

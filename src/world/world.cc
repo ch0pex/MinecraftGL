@@ -10,8 +10,8 @@ World::~World(){
   active_ = false;
 }
 
-void World::Update(Player &player) {
-  chunks_manager_.UpdateChunks(player.Get);
+void World::Update() {
+  chunks_manager_.UpdateChunks();
 }
 
 // Render prepare, load all meshes_ in their respective renderer

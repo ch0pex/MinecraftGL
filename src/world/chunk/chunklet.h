@@ -31,7 +31,7 @@ public:
 private:
   void AddFace(glm::vec3 position, const Vertex face[], u32 face_texture_index);
   bool TryToAddFace(Block block_type, BlockFace block_face, glm::vec3 block_pos);
-  bool OutOfBounds(glm::vec3 block_pos);
+  bool OutOfBounds(glm::vec3 block_pos) const;
 
   World *world_;
   std::vector<Block> block_map_;

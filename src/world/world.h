@@ -2,8 +2,7 @@
 
 #include "rendering/render_engine.h"
 #include "chunk/chunks_manager.h"
-#include "rendering/camera.h"
-
+#include "player/player.h"
 
 class World {
 
@@ -11,7 +10,7 @@ public:
   World();
   ~World();
 
-  void Update(Player &player);
+  void Update();
   void PrepareRender(RenderEngine &renderer, Camera &camera);
   bool IsActive();
   Block GetBlock(glm::vec3 pos);

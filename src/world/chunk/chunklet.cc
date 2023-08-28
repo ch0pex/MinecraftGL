@@ -76,11 +76,12 @@ void Chunklet::BufferMesh(Mesh &mesh) {
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
-
+ /*
   mesh.vertices.clear();
   mesh.vertices.shrink_to_fit();
   mesh.indices.clear();
   mesh.indices.shrink_to_fit();
+  */
 }
 
 u32 Chunklet::GetFaces() const {
@@ -150,7 +151,7 @@ bool Chunklet::TryToAddFace(Block block_type, BlockFace block_face, glm::vec3 bl
 }
 
 
-bool Chunklet::OutOfBounds(glm::vec3 block_pos) {
+bool Chunklet::OutOfBounds(glm::vec3 block_pos) const {
   bool x = (block_pos.x >= world_position_.x && block_pos.x < world_position_.x + kChunkSize);
   bool y = (block_pos.y >= world_position_.y && block_pos.y < world_position_.y + kChunkSize);
   bool z = (block_pos.z >= world_position_.z && block_pos.z < world_position_.z + kChunkSize);
@@ -162,8 +163,7 @@ Block Chunklet::GetBlock(glm::vec3 absolute_position) {
   int x = absolute_position.x - world_position_.x;
   int y = absolute_position.y - world_position_.y;
   int z = absolute_position.z - world_position_.z;
-  int index;
-  index = x + z * kChunkSize + y * kChunkSize * kChunkSize;
+  int index = x + z * kChunkSize + y * kChunkSize * kChunkSize;
 
   return block_map_.at(index);
 

@@ -57,3 +57,6 @@ f32 Player::GetSpeed() const {
   return movement_speed_;
 }
 
+glm::vec3 Player::GetPos() {
+  return world_position_;
+}
