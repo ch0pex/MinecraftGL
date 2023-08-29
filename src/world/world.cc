@@ -3,9 +3,11 @@
 
 World::World() :
   chunks_manager_(*this),
-  active_(true){
+  active_(true)
+{
 
 }
+
 World::~World(){
   active_ = false;
 }
@@ -34,3 +36,7 @@ Block World::GetBlock(glm::vec3 pos) {
 }
 
 bool World::IsActive() { return active_; }
+
+bool World::IsLoaded() { return loaded_; }
+
+void World::SetLoaded() { loaded_ = true; }

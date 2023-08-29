@@ -13,8 +13,9 @@ class Game;
 enum class GameStateType{
   kStart,
   kLoading,
-  kPlaying,
-  kGameOver,
+  kPlayingSurvival,
+  kPlayingSpectator,
+  kGameOver
 };
 
 class GameState {

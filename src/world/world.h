@@ -12,10 +12,15 @@ public:
 
   void Update(const glm::vec3 &player_pos);
   void PrepareRender(RenderEngine &renderer, Camera &camera);
+
   bool IsActive();
+  bool IsLoaded();
+  void SetLoaded();
+
   Block GetBlock(glm::vec3 pos);
 
 private:
   ChunksManager chunks_manager_;
   std::atomic<bool> active_;
+  std::atomic<bool> loaded_;
 };

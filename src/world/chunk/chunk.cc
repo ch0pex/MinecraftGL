@@ -17,6 +17,7 @@ Chunk::Chunk(World &world, glm::vec2 position) :
 
 Chunk::~Chunk() {
   std::cout << "Destroying chunk\n";
+  UnBufferChunklets();
 }
 
 void Chunk::BuildMesh() {

@@ -24,11 +24,12 @@ Game::Game() :
 {
   //states_[GameStateType::MENU] = new MenuState();
   states_[GameStateType::kLoading] = new LoadingState(*this);
-  states_[GameStateType::kPlaying] = new PlayingState(*this);
+  states_[GameStateType::kPlayingSpectator] = new PlayingSpectatorState(*this);
+  states_[GameStateType::kPlayingSurvival] = new PlayingSurvivalState(*this);
   //states_[GameStateType::PAUSED] = new PausedState();
   states_[GameStateType::kGameOver] = new GameOverState(*this);
   //states_[GameStateType::EXIT] = new ExitState();
-  current_state_ = states_[GameStateType::kPlaying];
+  current_state_ = states_[GameStateType::kLoading];
   glfwSetKeyCallback(render_engine_.GetWindow(), KeyCallback);
   glfwSetCursorPosCallback(render_engine_.GetWindow(), MouseCallback);
 
@@ -39,6 +40,13 @@ Game::~Game() {
   for(auto& state : states_)
     delete(state.second);
   std::cout << "Game destructor called" << std::endl;
+}
+
+void Game::Initialize() {
+  player_.reset();
+  world_.reset();
+  player_.emplace();
+  world_.emplace();
 }
 
 void Game::Loop() {
@@ -66,12 +74,12 @@ void Game::Loop() {
     }
     current_state_->Render();
   }
-  render_engine_.Terminate();
+  RenderEngine::Terminate();
 }
 
 
 void Game::SwitchState(GameStateType next_state){
     current_state_->OnExit();
     current_state_ = states_[next_state];
-
+    current_state_->OnEnter();
 }

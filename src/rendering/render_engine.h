@@ -13,10 +13,19 @@ class RenderEngine {
 public:
   RenderEngine();
   ~RenderEngine();
-  void Terminate();
   void RenderScene(Camera &camera);
+  void RenderLoadingScreen();
   bool ShouldClose();
   void DrawChunklet(Chunklet &chunklet);
+
+  enum class MouseMode {
+    kDisabled,
+    kNormal,
+    kHidden
+  };
+
+  void static Terminate();
+  void SwapMouseMode(MouseMode mode);
   GLFWwindow *GetWindow();
 
 private:

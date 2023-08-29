@@ -2,10 +2,9 @@
 
 Player::Player() :
     world_position_(glm::vec3(50.0f, 100.0f, 0.0f)),
-    controls_enabled_(true),
-    movement_speed_(100.0f),
+    movement_speed_(25.0f),
     camera_(45.0f, 1920, 1080, .1f, 1000.0f, world_position_),
-    currentState_(PlayerStateType::kGround)
+    currentState_(PlayerStateType::kInactive)
 {
 
 }
@@ -14,7 +13,7 @@ void Player::Update() {
 
 }
 
-void Player::ChangeState(PlayerStateType state) {
+void Player::SwitchState(PlayerStateType state) {
   currentState_ = state;
 }
 
@@ -23,7 +22,7 @@ PlayerStateType Player::GetState() {
 }
 
 void Player::Move(Direction dir, f32 speed_factor) {
-  if (!controls_enabled_)
+  if(currentState_ == PlayerStateType::kInactive)
     return;
 
   switch (dir) {
@@ -49,9 +48,9 @@ void Player::Move(Direction dir, f32 speed_factor) {
   camera_.SetPosition(world_position_);
 }
 void Player::LookAt(f64 xpos, f64 ypos) {
-   if (!controls_enabled_)
-     return;
-   camera_.SetFront(xpos, ypos);
+  if(currentState_ == PlayerStateType::kInactive)
+    return;
+  camera_.SetFront(xpos, ypos);
 }
 f32 Player::GetSpeed() const {
   return movement_speed_;

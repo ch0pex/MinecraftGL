@@ -2,7 +2,8 @@
 
 enum class PlayerStateType {
   kGround,
-  kAir,
+  kInactive,
+  kInAir,
   kDead,
 };
 

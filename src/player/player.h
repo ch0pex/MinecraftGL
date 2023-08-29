@@ -27,7 +27,8 @@ public:
   void LookAt(f64 xpos, f64 ypos);
   void Update();
 
-  void ChangeState(PlayerStateType state);
+
+  void SwitchState(PlayerStateType state);
   PlayerStateType GetState();
 
 private:
@@ -35,7 +36,6 @@ private:
   std::unordered_map<PlayerStateType, PlayerState *> states_;
 
   glm::vec3 world_position_;
-  bool controls_enabled_;
   f32 movement_speed_;
 public:
   Camera camera_;

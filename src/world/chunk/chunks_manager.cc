@@ -32,6 +32,7 @@ void ChunksManager::LoadChunks() {
 
   std::cout << "Chunks generated: " << chunks_.size() << "\n";
   BuildChunksMesh();
+  world_->SetLoaded();
   std::cout << "Chunks loaded: " << chunks_.size() << "\n";
 }
 
@@ -74,5 +75,5 @@ VectorXZ ChunksManager::WorldPosToChunkPos(const glm::vec3 &world_pos) const {
 bool ChunksManager::ChunkInRange(const VectorXZ& player_chunk_pos, const VectorXZ& chunk_pos) {
   bool xbool = abs(player_chunk_pos.x - chunk_pos.x) <= kGameConfig.chunk_distance;
   bool zbool = abs(player_chunk_pos.z - chunk_pos.z) <= kGameConfig.chunk_distance;
-  return zbool || xbool;
+  return zbool && xbool;
 }

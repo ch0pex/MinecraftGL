@@ -1,35 +1,21 @@
-#include "playing_state.h"
-
+#include "playing_spectator_state.h"
 #include "game.h"
 
-PlayingState::PlayingState(Game &game) : GameState(game) {}
+PlayingSpectatorState::PlayingSpectatorState(Game &game) : PlayingState(game) {}
 
-void PlayingState::OnEnter() {
-
+void PlayingSpectatorState::OnEnter() {
+  PlayingState::OnEnter();
+  game_.GetPlayer().SwitchState(PlayerStateType::kInAir);
 }
 
-void PlayingState::OnExit() {
-
-}
-
-void PlayingState::Update() {
-  game_.GetPlayer().Update();
-  game_.GetWorld().Update(game_.GetPlayer().GetPos());
-}
-
-void PlayingState::Render() {
-  game_.GetWorld().PrepareRender(game_.GetRenderEngine(), game_.GetPlayer().camera_);
-  game_.GetRenderEngine().RenderScene(game_.GetPlayer().camera_);
-}
-
-void PlayingState::HandleInput() {
-  f32 movement_speed = game_.GetPlayer().GetSpeed();
+void PlayingSpectatorState::HandleInput() {
+  f32 movement_speed = game_.GetPlayer().GetSpeed() * 4.0f;
   f32 factor = game_.GetInput().frame_time * movement_speed;
 
   if (game_.GetInput().PressedKeysAreDiag())
     factor *= 0.707f;
 
-  // Keys for GetPlayer() movement
+  // Keys for spectator mode movement
   if (game_.GetInput().keys[GLFW_KEY_W])
     game_.GetPlayer().Move(Player::Direction::kFront, factor);
   if (game_.GetInput().keys[GLFW_KEY_S])
@@ -44,8 +30,9 @@ void PlayingState::HandleInput() {
     game_.GetPlayer().Move(Player::Direction::kUp, factor);
   if (game_.GetInput().keys[GLFW_KEY_ESCAPE])
     glfwSetWindowShouldClose(game_.GetRenderEngine().GetWindow(), true);
+  if(game_.GetInput().keys[GLFW_KEY_L])
+    game_.SwitchState(GameStateType::kLoading);
 }
-
-void PlayingState::HandleMouse() {
-  game_.GetPlayer().LookAt(game_.GetInput().mouse_pos->x, game_.GetInput().mouse_pos->y);
+void PlayingSpectatorState::Update() {
+  PlayingState::Update();
 }

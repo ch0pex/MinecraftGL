@@ -85,7 +85,9 @@ void Chunklet::BufferMesh(Mesh &mesh) {
 }
 
 void Chunklet::UnBufferMesh(Mesh &mesh) {
-
+  glDeleteBuffers(1, &mesh.vbo);
+  glDeleteBuffers(1, &mesh.ebo);
+  glDeleteVertexArrays(1, &mesh.render_info.vao);
 }
 u32 Chunklet::GetFaces() const {
   return (model_.solid_mesh.render_info.faces + model_.water_mesh.render_info.faces);

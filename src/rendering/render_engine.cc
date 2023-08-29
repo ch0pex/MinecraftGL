@@ -27,13 +27,10 @@ RenderEngine::RenderEngine() {
     std::terminate();
   }
 
-  //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glEnable(GL_DEPTH_TEST);
 
   InitializeRenderers();
-  glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
 }
 
 RenderEngine::~RenderEngine() = default;
@@ -60,8 +57,6 @@ void RenderEngine::InitializeRenderers() {
 
   water_renderer_.SetTexture(atlas);
   water_renderer_.SetShader(water_shader);
-
-  glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 }
 
 void RenderEngine::RenderScene(Camera &camera) {
@@ -75,6 +70,14 @@ void RenderEngine::RenderScene(Camera &camera) {
   // floraRenderer.Render(camera_);
   //sky_renderer_.Render(camera);
 
+  glfwSwapBuffers(window_);
+}
+
+void RenderEngine::RenderLoadingScreen() {
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  //Render here some loading screen
   glfwSwapBuffers(window_);
 }
 
@@ -94,6 +97,20 @@ GLFWwindow *RenderEngine::GetWindow() {
   return window_;
 }
 
-void RenderEngine::Terminate(){
+void  RenderEngine::Terminate(){
   glfwTerminate();
+}
+
+void RenderEngine::SwapMouseMode(MouseMode mode) {
+  switch (mode) {
+    case MouseMode::kDisabled:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+      break;
+    case MouseMode::kNormal:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+      break;
+    case MouseMode::kHidden:
+      glfwSetInputMode(window_, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+      break;
+  }
 }
