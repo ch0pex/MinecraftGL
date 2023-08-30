@@ -20,7 +20,12 @@ public:
   Block GetBlock(glm::vec3 pos);
 
 private:
+  void LoadChunks();
+  void UpdateChunks();
+
   ChunksManager chunks_manager_;
   std::atomic<bool> active_;
   std::atomic<bool> loaded_;
+  std::vector<std::thread> world_loaders_;
+  std::mutex mutex_;
 };

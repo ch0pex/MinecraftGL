@@ -38,7 +38,7 @@
   "shading" : {
     "solid_vertex_shader_path" : "res/shaders/solidShader.vs",
     "solid_fragment_shader_path" : "res/shaders/solidShader.fs",
-    "water_vertex_shader_path" : "res/shaders/solidShader.vs",
+    "water_vertex_shader_path" : "res/shaders/waterShader.vs",
     "water_fragment_shader_path" : "res/shaders/waterShader.fs",
     "sky_vertex_shader_path" : "res/shaders/skyShader.vs",
     "sky_fragment_shader_path" : "res/shaders/skyShader.fs",

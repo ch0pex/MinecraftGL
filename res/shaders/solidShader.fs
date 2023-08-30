@@ -3,7 +3,6 @@
 
 in vec2 passTexCoords; 
 in vec3 passNormal;
-in vec3 passFragPos;
 
 out vec4 color; 
 

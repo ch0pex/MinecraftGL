@@ -1,11 +1,12 @@
 #version 450 core 
 
-in vec2 passTexCoords; 
+in vec2 passTexCoords;
+in vec3 passNormal;
 
 out vec4 color;
 
-uniform float opacity; 
 uniform sampler2D Texture;
+uniform float opacity;
 
 void main()
 {

@@ -4,14 +4,11 @@
 
 
 ChunksManager::ChunksManager(World &world) :
-    world_(&world) {
-  std::cout << "Chunks Loading... \n";
-  chunks_loaders_.emplace_back([&]() { LoadChunks(); });
+    world_(&world)
+{
 }
 
 ChunksManager::~ChunksManager() {
-  for (auto &thread: chunks_loaders_)
-    thread.join();
 }
 
 std::shared_ptr<Chunk> ChunksManager::GetChunk(VectorXZ chunk_pos) const{
@@ -20,31 +17,18 @@ std::shared_ptr<Chunk> ChunksManager::GetChunk(VectorXZ chunk_pos) const{
   return nullptr;
 }
 
-void ChunksManager::LoadChunks() {
-  for (i8 x = -kGameConfig.chunk_distance; x < kGameConfig.chunk_distance; x++) {
-    for (i8 z = -kGameConfig.chunk_distance; z < kGameConfig.chunk_distance; z++) {
-      if (!world_->IsActive())
-        return;
-      std::unique_lock<std::mutex> lock(mutex_);
-      chunks_[{x, z}] = std::make_shared<Chunk>(*world_, glm::vec2(x, z));
-    }
-  }
-
-  std::cout << "Chunks generated: " << chunks_.size() << "\n";
-  BuildChunksMesh();
-  world_->SetLoaded();
-  std::cout << "Chunks loaded: " << chunks_.size() << "\n";
-}
 
 void ChunksManager::BuildChunksMesh() {
   std::cout << chunks_.size() << "\n";
   for (auto& [chunk_pos, chunk] : chunks_) {
-    if (!world_->IsActive()) return;
-    chunk->BuildMesh();
+    if (!world_->IsActive())
+      return;
+    if(!chunk->IsBuilt())
+      chunk->BuildMesh();
   }
 }
 
-void ChunksManager::UpdateChunks(const glm::vec3 &player_pos) {
+void ChunksManager::UpdateBufferedChunks(const glm::vec3 &player_pos) {
   const VectorXZ player_chunk_pos = WorldPosToChunkPos(player_pos);
   for (auto& [chunk_pos, chunk] : chunks_) {
     if (ChunkInRange(player_chunk_pos, chunk_pos) && chunk->IsBuilt() && !chunk->IsBuffered())
@@ -55,8 +39,13 @@ void ChunksManager::UpdateChunks(const glm::vec3 &player_pos) {
   }
 }
 
-std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetChunks() {
+const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetChunks() {
   return chunks_;
+}
+
+void ChunksManager::AddChunk(VectorXZ pos) {
+  chunks_[{pos.x, pos.z}] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
+  //build mesh?
 }
 
 Block ChunksManager::GetBlock(glm::vec3 position) const {
@@ -76,4 +65,8 @@ bool ChunksManager::ChunkInRange(const VectorXZ& player_chunk_pos, const VectorX
   bool xbool = abs(player_chunk_pos.x - chunk_pos.x) <= kGameConfig.chunk_distance;
   bool zbool = abs(player_chunk_pos.z - chunk_pos.z) <= kGameConfig.chunk_distance;
   return zbool && xbool;
+}
+void ChunksManager::RemoveChunks(VectorXZ pos) {
+  chunks_[pos]->UnBufferChunklets();
+  chunks_.erase(pos);
 }

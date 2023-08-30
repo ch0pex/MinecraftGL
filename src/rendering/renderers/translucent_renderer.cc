@@ -1,5 +1,9 @@
 #include "translucent_renderer.h"
+
+#include <ctime>
+
 #include "config/config.h"
+
 
 void TranslucentRenderer::Render(Camera &camera) {
   glDisable(GL_CULL_FACE);
