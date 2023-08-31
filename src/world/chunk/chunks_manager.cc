@@ -30,12 +30,13 @@ void ChunksManager::BuildChunksMesh() {
 
 void ChunksManager::UpdateBufferedChunks(const glm::vec3 &player_pos) {
   const VectorXZ player_chunk_pos = WorldPosToChunkPos(player_pos);
+  f32 distance;
   for (auto& [chunk_pos, chunk] : chunks_) {
-    if (ChunkInRange(player_chunk_pos, chunk_pos) && chunk->IsBuilt() && !chunk->IsBuffered())
+    distance = DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
+    if (distance <= kGameConfig.render_distance && chunk->IsBuilt() && !chunk->IsBuffered())
       chunk->BufferChunklets();
-    else if (!ChunkInRange(player_chunk_pos, chunk_pos) && chunk->IsBuffered()){
+    else if (distance > kGameConfig.render_distance && distance <= kGameConfig.chunk_distance && chunk->IsBuffered())
       chunk->UnBufferChunklets();
-    }
   }
 }
 
@@ -44,14 +45,13 @@ const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetCh
 }
 
 void ChunksManager::AddChunk(VectorXZ pos) {
-  chunks_[{pos.x, pos.z}] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
-  //build mesh?
+  chunks_[pos] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
 }
 
 Block ChunksManager::GetBlock(glm::vec3 position) const {
   std::shared_ptr<Chunk> chunk = GetChunk(WorldPosToChunkPos(position));
   if (chunk == nullptr)
-    return Block::kAir; //when chunkupdating done change this to kGround
+    return Block::kDirt; //when chunkupdating done change this to kGround
   return chunk->GetBlock(position);
 }
 
@@ -61,12 +61,13 @@ VectorXZ ChunksManager::WorldPosToChunkPos(const glm::vec3 &world_pos) const {
   return {chunkX, chunkZ};
 }
 
-bool ChunksManager::ChunkInRange(const VectorXZ& player_chunk_pos, const VectorXZ& chunk_pos) {
-  bool xbool = abs(player_chunk_pos.x - chunk_pos.x) <= kGameConfig.chunk_distance;
-  bool zbool = abs(player_chunk_pos.z - chunk_pos.z) <= kGameConfig.chunk_distance;
-  return zbool && xbool;
+f32 ChunksManager::DistanceFromChunkToPlayer(const VectorXZ &chunk_pos, const VectorXZ &player_chunk_pos) const {
+  f64 x = abs(player_chunk_pos.x - chunk_pos.x);
+  f64 z = abs(player_chunk_pos.z - chunk_pos.z);
+
+  return sqrt(pow(x,2) + pow(z, 2));
 }
-void ChunksManager::RemoveChunks(VectorXZ pos) {
+void ChunksManager::RemoveChunk(VectorXZ pos) {
   chunks_[pos]->UnBufferChunklets();
   chunks_.erase(pos);
 }

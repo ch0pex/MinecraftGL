@@ -7,10 +7,10 @@
 class World {
 
 public:
-  World();
+  World(Player& player);
   ~World();
 
-  void Update(const glm::vec3 &player_pos);
+  void Update();
   void PrepareRender(RenderEngine &renderer, Camera &camera);
 
   bool IsActive();
@@ -20,9 +20,12 @@ public:
   Block GetBlock(glm::vec3 pos);
 
 private:
-  void LoadChunks();
+  void InitChunks();
+  void LoadChunks(VectorXZ offset);
+  void UnloadChunks();
   void UpdateChunks();
 
+  Player& player_;
   ChunksManager chunks_manager_;
   std::atomic<bool> active_;
   std::atomic<bool> loaded_;

@@ -11,7 +11,7 @@ struct Config {
   f32 max_framerate;
 
   i8 chunk_distance;
-  i8 buffering_range;
+  i8 render_distance;
   u8 water_level;
   f32 water_opacity;
 

@@ -41,6 +41,7 @@ void Chunk::UnBufferChunklets() {
     chunklet.UnBufferMesh(chunklet.GetModel().solid_mesh);
     chunklet.UnBufferMesh(chunklet.GetModel().water_mesh);
   }
+  std::cout << "Unbuffering Chunklet\n";
 }
 bool Chunk::IsBuffered() const {
   return buffered_;

@@ -46,7 +46,7 @@ void Game::Initialize() {
   player_.reset();
   world_.reset();
   player_.emplace();
-  world_.emplace();
+  world_.emplace(player_.value());
 }
 
 void Game::Loop() {

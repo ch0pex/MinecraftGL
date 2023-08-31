@@ -14,7 +14,7 @@ void PlayingState::OnExit() {
 
 void PlayingState::Update() {
   game_.GetPlayer().Update();
-  game_.GetWorld().Update(game_.GetPlayer().GetPos());
+  game_.GetWorld().Update();
 }
 
 void PlayingState::Render() {
