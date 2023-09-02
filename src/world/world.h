@@ -21,8 +21,7 @@ public:
 
 private:
   void InitChunks();
-  void LoadChunks(VectorXZ offset);
-  void UnloadChunks();
+  void LoadChunks();
   void UpdateChunks();
 
   Player& player_;
@@ -30,5 +29,4 @@ private:
   std::atomic<bool> active_;
   std::atomic<bool> loaded_;
   std::vector<std::thread> world_loaders_;
-  std::mutex mutex_;
 };

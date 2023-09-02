@@ -44,12 +44,20 @@ const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetCh
   return chunks_;
 }
 
-void ChunksManager::AddChunk(VectorXZ pos) {
+void ChunksManager::AddChunk(const VectorXZ& pos) {
+  std::unique_lock<std::mutex> lock(mutex_);
   chunks_[pos] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
 }
 
-Block ChunksManager::GetBlock(glm::vec3 position) const {
-  std::shared_ptr<Chunk> chunk = GetChunk(WorldPosToChunkPos(position));
+ChunkMap::const_iterator ChunksManager::RemoveChunk(ChunkMap::const_iterator itr) {
+  chunks_[itr->first]->UnBufferChunklets();
+  std::unique_lock<std::mutex> lock(mutex_);
+  return chunks_.erase(itr);
+}
+
+Block ChunksManager::GetBlock(const glm::vec3& position) const {
+  VectorXZ chunk_pos = WorldPosToChunkPos(position);
+  std::shared_ptr<Chunk> chunk = GetChunk(chunk_pos);
   if (chunk == nullptr)
     return Block::kDirt; //when chunkupdating done change this to kGround
   return chunk->GetBlock(position);
@@ -66,8 +74,4 @@ f32 ChunksManager::DistanceFromChunkToPlayer(const VectorXZ &chunk_pos, const Ve
   f64 z = abs(player_chunk_pos.z - chunk_pos.z);
 
   return sqrt(pow(x,2) + pow(z, 2));
-}
-void ChunksManager::RemoveChunk(VectorXZ pos) {
-  chunks_[pos]->UnBufferChunklets();
-  chunks_.erase(pos);
 }

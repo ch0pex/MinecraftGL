@@ -32,7 +32,7 @@ void Config::SetDefaults() {
   max_framerate = 300.0f;
   //----------------------------------World----------------------------
   chunk_distance = kChunkSize;
-  render_distance = chunk_distance + 2;
+  render_distance = chunk_distance - 2;
   water_level = 60;
   water_opacity = 0.5f;
 

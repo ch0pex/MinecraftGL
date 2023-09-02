@@ -9,7 +9,6 @@ World::World(Player& player) :
 {
   std::cout << "Loading world\n";
   world_loaders_.emplace_back([&]() { InitChunks();});
-  world_loaders_.emplace_back([&]() {UpdateChunks();});
 }
 
 World::~World(){
@@ -27,7 +26,6 @@ void World::InitChunks() {
     for (i8 z = -kGameConfig.chunk_distance; z < kGameConfig.chunk_distance; z++) {
       if (!IsActive())
         return;
-      std::unique_lock<std::mutex> lock(mutex_);
       chunks_manager_.AddChunk({x,z});
     }
   }
@@ -35,47 +33,37 @@ void World::InitChunks() {
   std::cout << "Chunks generated \n";
   chunks_manager_.BuildChunksMesh();
   SetLoaded();
+  LoadChunks();
   std::cout << "Chunks loaded \n";
 }
 
-void World::UpdateChunks() {
+void World::LoadChunks() { // If player moves out its current chunk, updates chunks
   VectorXZ old_player_chunks_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
   VectorXZ current_player_chunk_pos = {};
   while(IsActive()){
-    if(!IsLoaded())
-      continue;
    current_player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
     if (old_player_chunks_pos == current_player_chunk_pos)
       continue;
-    UnloadChunks();
-    LoadChunks(old_player_chunks_pos);
+    UpdateChunks();
     old_player_chunks_pos = current_player_chunk_pos;
   }
-  /*
-  while(active_){
-    //Determine if it was x or z or -x or -z
-
-    //Load new in range chunks
-    //Delete out of range chunks
-    old_player_chunks_pos = current_player_chunk_pos;
-  }
-   */
-}
-void World::LoadChunks(VectorXZ offset) {
-
 }
 
-void World::UnloadChunks() {
+
+void World::UpdateChunks() {
   const VectorXZ player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
   std::vector<VectorXZ> remove_chunks;
   f32 distance;
-  for (auto& [chunk_pos, chunk] : chunks_manager_.GetChunks()) {
-    distance = chunks_manager_.DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
-    if (distance >= kGameConfig.chunk_distance && !chunk->IsBuffered())
-      remove_chunks.push_back(chunk_pos);
+  const ChunkMap& chunks = chunks_manager_.GetChunks();
+  for (auto itr = chunks.begin(); itr != chunks.end();){
+    distance = chunks_manager_.DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
+    if (distance > kGameConfig.chunk_distance && !itr->second->IsBuffered())
+    {
+      itr = chunks_manager_.RemoveChunk(itr);
+      continue;
+    }
+    itr++;
   }
-  for(auto &chunk : remove_chunks)
-    chunks_manager_.RemoveChunk(chunk);
 }
 
 

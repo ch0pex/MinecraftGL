@@ -17,7 +17,6 @@ Chunk::Chunk(World &world, glm::vec2 position) :
 
 Chunk::~Chunk() {
   std::cout << "Destroying chunk\n";
-  UnBufferChunklets();
 }
 
 void Chunk::BuildMesh() {
@@ -36,11 +35,11 @@ void Chunk::BufferChunklets() {
 }
 
 void Chunk::UnBufferChunklets() {
-  buffered_ = false;
   for(auto& chunklet: chunklets_) {
     chunklet.UnBufferMesh(chunklet.GetModel().solid_mesh);
     chunklet.UnBufferMesh(chunklet.GetModel().water_mesh);
   }
+  buffered_ = false;
   std::cout << "Unbuffering Chunklet\n";
 }
 bool Chunk::IsBuffered() const {

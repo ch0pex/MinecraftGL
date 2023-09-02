@@ -10,6 +10,7 @@
 #include "block.h"
 
 class World;
+using ChunkMap = std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>;
 
 class ChunksManager {
 public:
@@ -18,16 +19,17 @@ public:
 
   void UpdateBufferedChunks(const glm::vec3& player_pos);
   void BuildChunksMesh();
-  Block GetBlock(glm::vec3 position) const;
+  Block GetBlock(const glm::vec3& position) const;
   VectorXZ WorldPosToChunkPos(const glm::vec3& world_pos) const;
-  const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& GetChunks();
-  void AddChunk(VectorXZ pos);
-  void RemoveChunk(VectorXZ pos);
+  const ChunkMap& GetChunks();
+  void AddChunk(const VectorXZ& pos);
+  ChunkMap::const_iterator RemoveChunk(ChunkMap::const_iterator itr);
   f32 DistanceFromChunkToPlayer(const VectorXZ& chunk_pos, const VectorXZ& player_chunk_pos) const;
 
 private:
   std::shared_ptr<Chunk> GetChunk(VectorXZ chunk_pos) const;
 
-  std::unordered_map<VectorXZ, std::shared_ptr<Chunk>> chunks_;
+  std::mutex mutex_;
+  ChunkMap chunks_;
   World *world_;
 };
