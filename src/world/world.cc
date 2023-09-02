@@ -52,17 +52,12 @@ void World::LoadChunks() { // If player moves out its current chunk, updates chu
 
 void World::UpdateChunks() {
   const VectorXZ player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
-  std::vector<VectorXZ> remove_chunks;
-  f32 distance;
   const ChunkMap& chunks = chunks_manager_.GetChunks();
-  for (auto itr = chunks.begin(); itr != chunks.end();){
-    distance = chunks_manager_.DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
-    if (distance > kGameConfig.chunk_distance && !itr->second->IsBuffered())
-    {
-      itr = chunks_manager_.RemoveChunk(itr);
-      continue;
-    }
-    itr++;
+  f32 distance;
+  for (auto &[chunk_pos, chunk] : chunks_manager_.GetChunks()){
+    distance = chunks_manager_.DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
+    if (distance > kGameConfig.render_distance + 1 && distance < kGameConfig.chunk_distance)
+      chunk->BuildMesh();
   }
 }
 

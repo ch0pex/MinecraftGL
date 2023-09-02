@@ -19,10 +19,10 @@ public:
 
   void UpdateBufferedChunks(const glm::vec3& player_pos);
   void BuildChunksMesh();
-  Block GetBlock(const glm::vec3& position) const;
+  Block GetBlock(const glm::vec3& position);
   VectorXZ WorldPosToChunkPos(const glm::vec3& world_pos) const;
   const ChunkMap& GetChunks();
-  void AddChunk(const VectorXZ& pos);
+  std::shared_ptr<Chunk>& AddChunk(const VectorXZ& pos);
   ChunkMap::const_iterator RemoveChunk(ChunkMap::const_iterator itr);
   f32 DistanceFromChunkToPlayer(const VectorXZ& chunk_pos, const VectorXZ& player_chunk_pos) const;
 

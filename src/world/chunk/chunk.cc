@@ -16,6 +16,8 @@ Chunk::Chunk(World &world, glm::vec2 position) :
 }
 
 Chunk::~Chunk() {
+  if(buffered_)
+    UnBufferChunklets();
   std::cout << "Destroying chunk\n";
 }
 

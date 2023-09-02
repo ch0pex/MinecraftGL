@@ -31,12 +31,15 @@ void ChunksManager::BuildChunksMesh() {
 void ChunksManager::UpdateBufferedChunks(const glm::vec3 &player_pos) {
   const VectorXZ player_chunk_pos = WorldPosToChunkPos(player_pos);
   f32 distance;
-  for (auto& [chunk_pos, chunk] : chunks_) {
-    distance = DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
-    if (distance <= kGameConfig.render_distance && chunk->IsBuilt() && !chunk->IsBuffered())
-      chunk->BufferChunklets();
-    else if (distance > kGameConfig.render_distance && distance <= kGameConfig.chunk_distance && chunk->IsBuffered())
-      chunk->UnBufferChunklets();
+  for (ChunkMap::const_iterator itr = chunks_.begin(); itr != chunks_.end();) {
+    distance = DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
+    if (distance <= kGameConfig.render_distance && itr->second->IsBuilt() && !itr->second->IsBuffered())
+      itr->second->BufferChunklets();
+    else if (distance > kGameConfig.chunk_distance){
+      itr = RemoveChunk(itr);
+      continue;
+    }
+    itr++;
   }
 }
 
@@ -44,22 +47,22 @@ const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetCh
   return chunks_;
 }
 
-void ChunksManager::AddChunk(const VectorXZ& pos) {
+std::shared_ptr<Chunk>& ChunksManager::AddChunk(const VectorXZ& pos) {
   std::unique_lock<std::mutex> lock(mutex_);
   chunks_[pos] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
+  return chunks_[pos];
 }
 
 ChunkMap::const_iterator ChunksManager::RemoveChunk(ChunkMap::const_iterator itr) {
-  chunks_[itr->first]->UnBufferChunklets();
   std::unique_lock<std::mutex> lock(mutex_);
   return chunks_.erase(itr);
 }
 
-Block ChunksManager::GetBlock(const glm::vec3& position) const {
+Block ChunksManager::GetBlock(const glm::vec3& position){
   VectorXZ chunk_pos = WorldPosToChunkPos(position);
   std::shared_ptr<Chunk> chunk = GetChunk(chunk_pos);
   if (chunk == nullptr)
-    return Block::kDirt; //when chunkupdating done change this to kGround
+    chunk = AddChunk(chunk_pos);
   return chunk->GetBlock(position);
 }
 
