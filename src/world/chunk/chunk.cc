@@ -2,23 +2,22 @@
 #include "world/world.h"
 #include "world/generators/basic_gen.h"
 
-Chunk::Chunk(World &world, glm::vec2 position) :
+Chunk::Chunk(World &world, const VectorXZ &position) :
     world_(&world),
     chunk_position_(position),
-    world_position_({position.x * kChunkSize, position.y * kChunkSize}),
+    world_position_({position.x * kChunkSize, position.z * kChunkSize}),
     buffered_(false),
     built_(false)
   {
   chunklets_.reserve(kChunkSize);
   for (int i = 0; i < kChunkSize; i++)
-    chunklets_.emplace_back(*world_, glm::vec3(chunk_position_.x, i, chunk_position_.y));
-  BasicGen::GenChunk(*this);
+    chunklets_.emplace_back(*world_, glm::vec3(chunk_position_.x, i, chunk_position_.z));
+  BasicGen::FlatGen(*this);
+  //std::cout << "Generating chunk\n";
 }
 
 Chunk::~Chunk() {
-  if(buffered_)
-    UnBufferChunklets();
-  std::cout << "Destroying chunk\n";
+  //std::cout << "Destroying chunk\n";
 }
 
 void Chunk::BuildMesh() {
@@ -42,7 +41,7 @@ void Chunk::UnBufferChunklets() {
     chunklet.UnBufferMesh(chunklet.GetModel().water_mesh);
   }
   buffered_ = false;
-  std::cout << "Unbuffering Chunklet\n";
+  //std::cout << "Unbuffering Chunklet\n";
 }
 bool Chunk::IsBuffered() const {
   return buffered_;
@@ -58,13 +57,13 @@ void Chunk::DrawChunklets(RenderEngine &renderer, Camera &camera) {
       renderer.DrawChunklet(chunklet);
 }
 
-Block Chunk::GetBlock(glm::vec3 position) {
+Block Chunk::GetBlock(const glm::vec3 &position) {
   int index = static_cast<int>(position.y / 16);
   //std::cout << index << ", " << chunklets_.size() << std::endl;
   return chunklets_.at(index).GetBlock(position);
 }
 
-glm::vec2 Chunk::GetPosition() {
+VectorXZ Chunk::GetPosition() {
   return chunk_position_;
 }
 

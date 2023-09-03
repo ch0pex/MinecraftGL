@@ -3,6 +3,24 @@
 #include <cstdlib>
 #include <ctime>
 
+void BasicGen::FlatGen(Chunk &chunk) {
+  int x = 0;
+  int y = 0;
+  int z = 0;
+  Block block;
+
+  for (u32 i = 0; i < kChunkVolume; i++) {
+    x = i % kChunkSize;
+    y = i / (kChunkSize * kChunkSize);
+    z = i / kChunkSize % kChunkSize;
+    if(y < 70)
+     chunk.GetChunklet(y)->SetBlock(Block::kStone);
+    else if (y >= 70 && y <= 90)
+      chunk.GetChunklet(y)->SetBlock(Block::kWater);
+    else
+      chunk.GetChunklet(y)->SetBlock(Block::kAir);
+  }
+}
 
 void BasicGen::GenChunk(Chunk &chunk) {
   int x = 0;
@@ -19,7 +37,7 @@ void BasicGen::GenChunk(Chunk &chunk) {
     x = x + chunk.GetPosition().x * kChunkSize;
     x = (cos((x / 12.0)) * 8.0) + 60;
 
-    z = z + chunk.GetPosition().y * kChunkSize;
+    z = z + chunk.GetPosition().z * kChunkSize;
     z = cos((z / 12.0)) * 12.0 + 60;
 
 

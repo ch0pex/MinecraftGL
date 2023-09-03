@@ -29,7 +29,6 @@ public:
 private:
   std::shared_ptr<Chunk> GetChunk(VectorXZ chunk_pos) const;
 
-  std::mutex mutex_;
   ChunkMap chunks_;
   World *world_;
 };

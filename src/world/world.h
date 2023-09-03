@@ -28,5 +28,6 @@ private:
   ChunksManager chunks_manager_;
   std::atomic<bool> active_;
   std::atomic<bool> loaded_;
+  std::mutex mutex_;
   std::vector<std::thread> world_loaders_;
 };

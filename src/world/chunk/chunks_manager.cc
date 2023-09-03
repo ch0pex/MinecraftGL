@@ -1,4 +1,6 @@
 #include "chunks_manager.h"
+
+#include <utility>
 #include "world/world.h"
 #include "config/config.h"
 
@@ -23,7 +25,7 @@ void ChunksManager::BuildChunksMesh() {
   for (auto& [chunk_pos, chunk] : chunks_) {
     if (!world_->IsActive())
       return;
-    if(!chunk->IsBuilt())
+    if(!chunk->IsBuilt() && DistanceFromChunkToPlayer(chunk_pos, {0,0}) < kGameConfig.chunk_distance)
       chunk->BuildMesh();
   }
 }
@@ -31,15 +33,12 @@ void ChunksManager::BuildChunksMesh() {
 void ChunksManager::UpdateBufferedChunks(const glm::vec3 &player_pos) {
   const VectorXZ player_chunk_pos = WorldPosToChunkPos(player_pos);
   f32 distance;
-  for (ChunkMap::const_iterator itr = chunks_.begin(); itr != chunks_.end();) {
-    distance = DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
-    if (distance <= kGameConfig.render_distance && itr->second->IsBuilt() && !itr->second->IsBuffered())
-      itr->second->BufferChunklets();
-    else if (distance > kGameConfig.chunk_distance){
-      itr = RemoveChunk(itr);
-      continue;
-    }
-    itr++;
+  for (auto &[chunk_pos, chunk] : chunks_) {
+    distance = DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
+    if (chunk->IsBuilt() && !chunk->IsBuffered() && distance <= kGameConfig.render_distance)
+      chunk->BufferChunklets();
+    else if (distance > kGameConfig.render_distance && chunk->IsBuffered())
+      chunk->UnBufferChunklets();
   }
 }
 
@@ -48,14 +47,12 @@ const std::unordered_map<VectorXZ, std::shared_ptr<Chunk>>& ChunksManager::GetCh
 }
 
 std::shared_ptr<Chunk>& ChunksManager::AddChunk(const VectorXZ& pos) {
-  std::unique_lock<std::mutex> lock(mutex_);
-  chunks_[pos] = std::make_shared<Chunk>(*world_, glm::vec2(pos.x, pos.z));
+  chunks_[pos] = std::make_shared<Chunk>(*world_, pos);
   return chunks_[pos];
 }
 
 ChunkMap::const_iterator ChunksManager::RemoveChunk(ChunkMap::const_iterator itr) {
-  std::unique_lock<std::mutex> lock(mutex_);
-  return chunks_.erase(itr);
+  return chunks_.erase(std::move(itr));
 }
 
 Block ChunksManager::GetBlock(const glm::vec3& position){
@@ -76,5 +73,6 @@ f32 ChunksManager::DistanceFromChunkToPlayer(const VectorXZ &chunk_pos, const Ve
   f64 x = abs(player_chunk_pos.x - chunk_pos.x);
   f64 z = abs(player_chunk_pos.z - chunk_pos.z);
 
-  return sqrt(pow(x,2) + pow(z, 2));
+  return x > z ? x : z;
+  //return sqrt(pow(x,2) + pow(z, 2));
 }

@@ -18,14 +18,16 @@ World::~World(){
 }
 
 void World::Update() {
+  std::unique_lock<std::mutex> lock(mutex_);
   chunks_manager_.UpdateBufferedChunks(player_.GetPos());
 }
 
 void World::InitChunks() {
-  for (i8 x = -kGameConfig.chunk_distance; x < kGameConfig.chunk_distance; x++) {
-    for (i8 z = -kGameConfig.chunk_distance; z < kGameConfig.chunk_distance; z++) {
+  for (i8 x = -kGameConfig.chunk_distance; x <= kGameConfig.chunk_distance; x++) {
+    for (i8 z = -kGameConfig.chunk_distance; z <= kGameConfig.chunk_distance; z++) {
       if (!IsActive())
         return;
+      std::unique_lock<std::mutex> lock(mutex_);
       chunks_manager_.AddChunk({x,z});
     }
   }
@@ -38,14 +40,14 @@ void World::InitChunks() {
 }
 
 void World::LoadChunks() { // If player moves out its current chunk, updates chunks
-  VectorXZ old_player_chunks_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
-  VectorXZ current_player_chunk_pos = {};
+  //VectorXZ old_player_chunks_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
+  //VectorXZ current_player_chunk_pos = {};
   while(IsActive()){
-   current_player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
-    if (old_player_chunks_pos == current_player_chunk_pos)
-      continue;
+    //current_player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
+    //if (old_player_chunks_pos == current_player_chunk_pos)
+      //continue;
     UpdateChunks();
-    old_player_chunks_pos = current_player_chunk_pos;
+    //old_player_chunks_pos = current_player_chunk_pos;
   }
 }
 
@@ -54,10 +56,21 @@ void World::UpdateChunks() {
   const VectorXZ player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
   const ChunkMap& chunks = chunks_manager_.GetChunks();
   f32 distance;
-  for (auto &[chunk_pos, chunk] : chunks_manager_.GetChunks()){
-    distance = chunks_manager_.DistanceFromChunkToPlayer(chunk_pos, player_chunk_pos);
-    if (distance > kGameConfig.render_distance + 1 && distance < kGameConfig.chunk_distance)
-      chunk->BuildMesh();
+  for (ChunkMap::const_iterator itr = chunks.begin(); itr != chunks.end();){
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    distance = chunks_manager_.DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
+    if (!itr->second->IsBuilt() && distance < kGameConfig.chunk_distance)
+    {
+      std::unique_lock<std::mutex> lock(mutex_);
+      itr->second->BuildMesh();
+    }
+    else if (!itr->second->IsBuffered() && distance > kGameConfig.chunk_distance)
+    {
+      std::unique_lock<std::mutex> lock(mutex_);
+      itr = chunks_manager_.RemoveChunk(itr);
+      continue;
+    }
+    itr++;
   }
 }
 
@@ -66,6 +79,7 @@ void World::UpdateChunks() {
 // Currently just solidrenderer
 void World::PrepareRender(RenderEngine &renderer, Camera &camera) {
   // TODO: Render not further than RENDER MAX DISTANCE
+  std::unique_lock<std::mutex> lock(mutex_);
   for (auto& [chunk_pos, chunk]: chunks_manager_.GetChunks()) {
     if (chunk->IsBuilt() && chunk->IsBuffered()) {
       chunk->DrawChunklets(renderer, camera); // Pass camera_

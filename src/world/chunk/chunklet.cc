@@ -2,7 +2,7 @@
 #include "world/world.h"
 
 
-Chunklet::Chunklet(World &world, glm::vec3 chunklet_position) :
+Chunklet::Chunklet(World &world, glm::vec3 &chunklet_position) :
     world_(&world),
     chunklet_position_(chunklet_position)
 {
@@ -17,19 +17,23 @@ Chunklet::Chunklet(World &world, glm::vec3 chunklet_position) :
 Chunklet::~Chunklet() = default;
 
 void Chunklet::BuildMesh() {
+  glm::vec3 block_pos;
   for (int i = 0; i < kChunkletVolume; i++) {
     int x = i % kChunkSize;
     int y = i / (kChunkSize * kChunkSize);
     int z = (i / kChunkSize) % kChunkSize;
     //std::cout << "Block: " << x << ", " << y << ", " << z << std::endl;
     if (block_map_[i] != Block::kAir)
-      AddBlockMesh(glm::vec3(world_position_.x + x, world_position_.y + y, world_position_.z + z), block_map_[i]);
+    {
+      block_pos = glm::vec3(world_position_.x + x, world_position_.y + y, world_position_.z + z) ;
+      AddBlockMesh(block_pos, block_map_[i]);
+    }
   }
 
 }
 
 
-void Chunklet::AddBlockMesh(glm::vec3 position, Block block_type) {
+void Chunklet::AddBlockMesh(glm::vec3 &position, Block block_type) {
 
   if (TryToAddFace(block_type, BlockFace::kFront, position))
     AddFace(position, kFaceFront, kBlockAtlasIds[block_type].front);
@@ -93,7 +97,7 @@ u32 Chunklet::GetFaces() const {
   return (model_.solid_mesh.render_info.faces + model_.water_mesh.render_info.faces);
 }
 
-void Chunklet::AddFace(glm::vec3 position, const Vertex face[], u32 face_texture_index) {
+void Chunklet::AddFace(glm::vec3 &position, const Vertex face[], u32 face_texture_index) {
   Mesh *mesh_pointer;
 
   if (face_texture_index == 8) mesh_pointer = &model_.water_mesh;
@@ -114,7 +118,7 @@ void Chunklet::AddFace(glm::vec3 position, const Vertex face[], u32 face_texture
   }
 }
 
-bool Chunklet::TryToAddFace(Block block_type, BlockFace block_face, glm::vec3 block_pos) {
+bool Chunklet::TryToAddFace(Block block_type, BlockFace block_face, glm::vec3 &block_pos) {
   glm::vec3 offset = glm::vec3(0, 0, 0);
   switch (block_face) {
     case BlockFace::kFront:
@@ -156,7 +160,7 @@ bool Chunklet::TryToAddFace(Block block_type, BlockFace block_face, glm::vec3 bl
 }
 
 
-bool Chunklet::OutOfBounds(glm::vec3 block_pos) const {
+bool Chunklet::OutOfBounds(glm::vec3 &block_pos) const {
   bool x = (block_pos.x >= world_position_.x && block_pos.x < world_position_.x + kChunkSize);
   bool y = (block_pos.y >= world_position_.y && block_pos.y < world_position_.y + kChunkSize);
   bool z = (block_pos.z >= world_position_.z && block_pos.z < world_position_.z + kChunkSize);
@@ -164,7 +168,7 @@ bool Chunklet::OutOfBounds(glm::vec3 block_pos) const {
 }
 
 
-Block Chunklet::GetBlock(glm::vec3 absolute_position) {
+Block Chunklet::GetBlock(const glm::vec3 &absolute_position) {
   int x = absolute_position.x - world_position_.x;
   int y = absolute_position.y - world_position_.y;
   int z = absolute_position.z - world_position_.z;
