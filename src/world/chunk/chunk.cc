@@ -12,7 +12,7 @@ Chunk::Chunk(World &world, const VectorXZ &position) :
   chunklets_.reserve(kChunkSize);
   for (int i = 0; i < kChunkSize; i++)
     chunklets_.emplace_back(*world_, glm::vec3(chunk_position_.x, i, chunk_position_.z));
-  BasicGen::FlatGen(*this);
+  BasicGen::GenChunk(*this);
   //std::cout << "Generating chunk\n";
 }
 

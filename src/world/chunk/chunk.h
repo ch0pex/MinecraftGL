@@ -15,8 +15,8 @@ public:
   Chunk(World &world, const VectorXZ &position);
   ~Chunk();
 
-  [[nodiscard]] bool IsBuffered() const;
-  [[nodiscard]] bool IsBuilt() const;
+  bool IsBuffered() const;
+  bool IsBuilt() const;
 
   void BuildMesh();
   void BufferChunklets();
@@ -32,5 +32,5 @@ private:
   VectorXZ chunk_position_;
   glm::vec2 world_position_;
   std::vector<Chunklet> chunklets_;
-  bool buffered_, built_;
+  std::atomic<bool> buffered_, built_;
 };

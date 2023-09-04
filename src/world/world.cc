@@ -18,7 +18,6 @@ World::~World(){
 }
 
 void World::Update() {
-  std::unique_lock<std::mutex> lock(mutex_);
   chunks_manager_.UpdateBufferedChunks(player_.GetPos());
 }
 
@@ -57,7 +56,6 @@ void World::UpdateChunks() {
   const ChunkMap& chunks = chunks_manager_.GetChunks();
   f32 distance;
   for (ChunkMap::const_iterator itr = chunks.begin(); itr != chunks.end();){
-    std::this_thread::sleep_for(std::chrono::milliseconds(1));
     distance = chunks_manager_.DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
     if (!itr->second->IsBuilt() && distance < kGameConfig.chunk_distance)
     {
@@ -79,7 +77,6 @@ void World::UpdateChunks() {
 // Currently just solidrenderer
 void World::PrepareRender(RenderEngine &renderer, Camera &camera) {
   // TODO: Render not further than RENDER MAX DISTANCE
-  std::unique_lock<std::mutex> lock(mutex_);
   for (auto& [chunk_pos, chunk]: chunks_manager_.GetChunks()) {
     if (chunk->IsBuilt() && chunk->IsBuffered()) {
       chunk->DrawChunklets(renderer, camera); // Pass camera_
