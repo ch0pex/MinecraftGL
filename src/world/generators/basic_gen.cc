@@ -22,23 +22,24 @@ void BasicGen::FlatGen(Chunk &chunk) {
   }
 }
 
-void BasicGen::GenChunk(Chunk &chunk) {
-  int x = 0;
-  int y = 0;
-  int z = 0;
+void BasicGen::GenChunk(ChunksManager &chunks_manager, u32 chunk_index) {
+  int x;
+  int y;
+  int z;
   Block block;
+  u32 chunk_blocks_index = chunk_index * 65536;
 
   for (u32 i = 0; i < kChunkVolume; i++) {
-    x = i % kChunkSize;
-    y = i / (kChunkSize * kChunkSize);
-    z = i / kChunkSize % kChunkSize;
+    x = round(i % kChunkSize);
+    y = round(i / (kChunkSize * kChunkSize));
+    z = round(i / kChunkSize % kChunkSize);
 
 
-    x = x + chunk.GetPosition().x * kChunkSize;
-    x = (cos((x / 12.0)) * 8.0) + 60;
+    x = x +  chunks_manager.chunks_position_[chunk_index] * kChunkSize;
+    x = round((cos((x / 12.0)) * 8.0) + 60);
 
-    z = z + chunk.GetPosition().z * kChunkSize;
-    z = cos((z / 12.0)) * 12.0 + 60;
+    z = z + chunks_manager.chunks_position_[chunk_index + 1] * kChunkSize;
+    z = round(cos((z / 12.0)) * 12.0 + 60);
 
 
     if (y < x && y < z) {
@@ -52,8 +53,7 @@ void BasicGen::GenChunk(Chunk &chunk) {
 
     if (block == Block::kAir && y < 55)
       block = Block::kWater;
-
-    chunk.GetChunklet(y)->SetBlock(block);
+    chunks_manager.blocks_[chunk_blocks_index + i] = block;
   }
 }
 

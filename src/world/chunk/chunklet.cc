@@ -32,9 +32,7 @@ void Chunklet::BuildMesh() {
 
 }
 
-
 void Chunklet::AddBlockMesh(glm::vec3 &position, Block block_type) {
-
   if (TryToAddFace(block_type, BlockFace::kFront, position))
     AddFace(position, kFaceFront, kBlockAtlasIds[block_type].front);
 
@@ -52,7 +50,6 @@ void Chunklet::AddBlockMesh(glm::vec3 &position, Block block_type) {
 
   if (TryToAddFace(block_type, BlockFace::kBottom, position))
     AddFace(position, kFaceBottom, kBlockAtlasIds[block_type].bottom);
-
 }
 
 void Chunklet::BufferMesh(Mesh &mesh) {

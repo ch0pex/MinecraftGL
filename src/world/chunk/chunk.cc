@@ -5,7 +5,6 @@
 Chunk::Chunk(World &world, const VectorXZ &position) :
     world_(&world),
     chunk_position_(position),
-    world_position_({position.x * kChunkSize, position.z * kChunkSize}),
     buffered_(false),
     built_(false)
   {

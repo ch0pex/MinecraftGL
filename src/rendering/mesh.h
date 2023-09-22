@@ -21,6 +21,13 @@ struct Mesh {
   u32 vbo, ebo;
   std::vector<Vertex> vertices;
   std::vector<u32> indices;
+  void Reset() {
+    render_info.vao = 0;
+    render_info.faces = 0;
+    vbo = 0;
+    ebo = 0;
+    vertices.clear();
+  }
 };
 
 

@@ -30,7 +30,6 @@ public:
 private:
   World *world_;
   VectorXZ chunk_position_;
-  glm::vec2 world_position_;
   std::vector<Chunklet> chunklets_;
   std::atomic<bool> buffered_, built_;
 };

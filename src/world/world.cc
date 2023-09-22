@@ -22,12 +22,12 @@ void World::Update() {
 }
 
 void World::InitChunks() {
-  for (i8 x = -kGameConfig.chunk_distance; x <= kGameConfig.chunk_distance; x++) {
-    for (i8 z = -kGameConfig.chunk_distance; z <= kGameConfig.chunk_distance; z++) {
+  for (i32 x = -kGameConfig.chunk_distance; x < kGameConfig.chunk_distance; x++) {
+    for (i32 z = -kGameConfig.chunk_distance; z < kGameConfig.chunk_distance; z++) {
       if (!IsActive())
         return;
       std::unique_lock<std::mutex> lock(mutex_);
-      chunks_manager_.AddChunk({x,z});
+      chunks_manager_.AddChunk(x,z);
     }
   }
 
@@ -55,7 +55,7 @@ void World::UpdateChunks() {
   const VectorXZ player_chunk_pos = chunks_manager_.WorldPosToChunkPos(player_.GetPos());
   const ChunkMap& chunks = chunks_manager_.GetChunks();
   f32 distance;
-  for (ChunkMap::const_iterator itr = chunks.begin(); itr != chunks.end();){
+  for (auto itr = chunks.begin(); itr != chunks.end();){
     distance = chunks_manager_.DistanceFromChunkToPlayer(itr->first, player_chunk_pos);
     if (!itr->second->IsBuilt() && distance < kGameConfig.chunk_distance)
     {

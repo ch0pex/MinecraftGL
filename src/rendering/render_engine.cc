@@ -20,7 +20,7 @@ RenderEngine::RenderEngine() {
 
   // Hace que la ventana sea el contexto actual
   glfwMakeContextCurrent(window_);
-
+  glfwSwapInterval(0);
   // Inicializa GLEW
   if (glewInit() != GLEW_OK) {
     glfwTerminate();
